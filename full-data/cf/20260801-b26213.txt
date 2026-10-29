@@ -1,0 +1,86 @@
+* Fourfit control file for b26213
+
+*==========================================================
+*basic setup
+*==========================================================
+
+sb_win -256.0 256.0
+mb_win -2.0 2.0
+dr_win -5.e-4  5.e-4
+pc_mode multitone
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+ref_freq 6000.0
+weak_channel 0.1
+pc_amp_hcode .001
+* general ionosphere search parameters:
+ion_npts 45
+ion_win  -88.0 88.0
+
+
+*==========================================================
+* sampler delays and pc_tonemask
+*==========================================================
+
+if station S
+  pc_tonemask l 4
+
+if station T
+  pc_tonemask dzE 16 16 2
+
+if station I
+  sampler_delay_x   40   30   15   55 
+  sampler_delay_y   35   20   15    5 
+
+if station S
+  sampler_delay_x  100  105   95   85 
+  sampler_delay_y   95   95   90   80 
+
+if station T
+  sampler_delay_x  -15  -10  -20  -35 
+  sampler_delay_y  -25  -25  -30  -40 
+
+
+*==========================================================
+*station pc_phases
+*==========================================================
+if baseline ST
+  skip true
+
+if station I
+  freqs a b c d e f g h i j k l m n o p q r s t u v w x y z A B C D E F 
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0 
+* pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF -170.0 -145.0 -160.0 -160.0 -125.0 -180.0 -140.0 -125.0 -120.0 -105.0 -105.0 -110.0 -120.0 -110.0 -130.0 -135.0 -100.0 -120.0 -105.0 -125.0 -110.0  -90.0 -120.0 -120.0   -5.0  -40.0  -25.0  -65.0  -80.0  -65.0  -40.0  -65.0
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF -166.3 -158.3 -156.7 -147.0 -122.5 -158.1 -133.9 -152.9 -118.3 -130.0 -101.8 -115.4 -111.6 -115.0 -129.2 -126.3 -111.5 -113.5 -106.3 -119.3 -107.3  -93.9 -122.5 -101.1  -40.8  -46.6  -40.4  -48.2  -68.5  -56.2  -46.4  -52.4
+
+if station S
+  freqs a b c d e f g h i j k l m n o p q r s t u v w x y z A B C D E F 
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  -89.2  -84.8  -81.2 -102.5 -101.9 -152.3 -109.3 -101.1 -118.8  -89.3 -105.3  -95.7 -116.6 -116.9 -120.1 -127.0  -70.3  -90.7  -87.8  -91.1  -95.5  -82.3  -95.2 -103.4  -69.0  -92.8  -96.2 -105.4 -142.0 -114.5  -90.8 -131.0
+* pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  175.0  160.0  160.0  150.0  165.0  155.0  150.0  125.0   50.0   35.0   45.0   45.0   55.0   50.0   45.0   40.0    5.0    5.0   10.0   -5.0    5.0  -15.0  -15.0   -5.0 -165.0 -170.0 -145.0 -135.0 -165.0 -165.0 -145.0 -175.0
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  175.6  159.8  161.6  147.7  166.8  155.0  146.6  124.2   47.3   35.5   45.1   45.5   56.6   47.2   45.1   42.4    6.9    4.4   11.1   -5.6    3.9  -13.4  -12.7   -8.5 -163.7 -169.7 -142.7 -138.1 -163.3 -168.6 -143.0 -174.8
+
+if station T
+  freqs a b c d e f g h i j k l m n o p q r s t u v w x y z A B C D E F 
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  127.7  133.1  118.8  176.3   39.5  173.8  123.1  129.9  104.2  118.9  121.6  118.9  122.7  134.1  144.1  139.7  145.6  127.4  130.2  144.9  108.0  120.6  141.5  145.6  122.0  133.9  104.4  142.5  140.2  139.5  169.6   86.4
+* pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF   95.0  135.0  150.0 -180.0  165.0  150.0  150.0  140.0  -15.0  -20.0  -35.0   -5.0   -5.0    5.0   20.0   20.0   90.0   95.0  115.0  130.0  125.0  130.0  155.0  160.0   20.0   35.0   40.0   80.0   90.0   40.0   55.0   35.0
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF   95.6  133.3  154.2  178.9  163.4  147.7  150.5  142.3  -16.2  -24.3  -32.5   -9.0   -4.9    5.6   20.6   21.2   89.7   98.7  111.4  126.8  128.1  131.7  157.7  162.3   23.9   32.9   40.6   76.5   90.0   35.1   57.0   34.4
+
+if station I
+  pc_delay_x  0.0
+  pc_delay_y 0.0 * (ns) estimated error is +/- 0.000
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y 0.0* (deg) estimated error is +/- 0.0
+
+if station S
+  pc_delay_x  0.0
+  pc_delay_y 0.0 * (ns) estimated error is +/- 0.000
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y 0.0* (deg) estimated error is +/- 0.0
+
+if station T
+  pc_delay_x  0.0
+  pc_delay_y 0.0 * (ns) estimated error is +/- 0.000
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y 0.0* (deg) estimated error is +/- 0.0

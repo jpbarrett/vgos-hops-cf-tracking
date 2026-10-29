@@ -1,0 +1,86 @@
+* Fourfit control file for b26205
+
+*==========================================================
+*basic setup
+*==========================================================
+
+sb_win -256.0 256.0
+mb_win -2.0 2.0
+dr_win -5.e-4  5.e-4
+pc_mode multitone
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+ref_freq 6000.0
+weak_channel 0.1
+pc_amp_hcode .001
+* general ionosphere search parameters:
+ion_npts 45
+ion_win  -88.0 88.0
+
+
+*==========================================================
+* sampler delays and pc_tonemask
+*==========================================================
+
+if station S
+  pc_tonemask l 4
+
+if station T
+  pc_tonemask dzE 16 16 2
+
+if station I
+  sampler_delay_x  115  110  100   90 
+  sampler_delay_y  110  105   95   80 
+
+if station S
+  sampler_delay_x  100  105   95   85 
+  sampler_delay_y   95   95   90   80 
+
+if station T
+  sampler_delay_x  -15  -15  -20  -30 
+  sampler_delay_y    5  -25  -30  -45 
+
+
+*==========================================================
+*station pc_phases
+*==========================================================
+if baseline ST
+  skip true
+
+if station I
+  freqs a b c d e f g h i j k l m n o p q r s t u v w x y z A B C D E F 
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0 
+* pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF -160.0 -150.0 -150.0 -145.0 -130.0 -140.0 -155.0 -140.0 -115.0 -120.0 -110.0 -115.0 -110.0 -110.0 -115.0 -110.0 -110.0 -105.0 -110.0 -100.0 -100.0 -100.0  -95.0  -90.0  -65.0  -65.0  -55.0  -60.0  -50.0  -55.0  -60.0  -50.0
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF -157.4 -151.4 -153.1 -145.6 -130.6 -136.6 -144.9 -144.9 -111.3 -128.3 -105.0 -116.9 -111.1 -111.7 -115.4 -107.5 -107.5 -105.7 -105.6 -100.2 -102.9 -101.1  -97.9  -90.2  -61.6  -57.9  -62.5  -61.2  -48.8  -54.0  -65.0  -48.4
+
+if station S
+  freqs a b c d e f g h i j k l m n o p q r s t u v w x y z A B C D E F 
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  -43.3  -46.7  -44.7  -50.8  -57.1  -70.5  -79.0  -67.9  -61.5  -62.2  -52.2  -52.6  -59.6  -67.8  -63.5  -68.5  -50.1  -47.9  -32.0  -50.6  -52.7  -40.5  -44.4  -49.1  -62.3  -71.7  -60.8  -54.5  -47.0  -53.8  -61.9  -56.2
+* pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  100.0   95.0   85.0   85.0   95.0   95.0   85.0   75.0   75.0   55.0   80.0   75.0   70.0   60.0   55.0   55.0   70.0   70.0   75.0   75.0   55.0   60.0   65.0   65.0   -5.0    0.0   -5.0   10.0   25.0   15.0   -5.0   10.0
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  100.3   93.7   87.1   83.9   95.5   95.3   81.8   76.9   71.9   52.4   81.4   75.5   74.4   59.0   53.4   53.4   70.0   70.4   74.1   75.1   59.3   57.1   65.6   68.2   -2.4   -2.9   -5.3   11.8   23.4   13.3   -5.6   10.2
+
+if station T
+  freqs a b c d e f g h i j k l m n o p q r s t u v w x y z A B C D E F 
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF -129.8 -141.6 -151.5 -161.7  148.6  -97.9 -112.2 -110.4 -154.4 -155.9 -156.5 -145.3 -156.4 -155.2 -140.2 -146.7 -121.5 -128.6 -129.2 -125.7 -141.8 -125.7 -115.4 -122.1 -175.3 -176.5 -154.7 -137.3 -128.4 -125.7 -123.6 -124.3
+* pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF -130.0  -90.0 -110.0  -65.0  -75.0 -100.0 -105.0 -110.0  -60.0  -70.0  -85.0  -65.0  -70.0  -70.0  -60.0  -65.0  -50.0  -55.0  -45.0  -35.0  -40.0  -40.0  -25.0  -25.0 -110.0 -110.0 -110.0  -55.0  -20.0 -110.0 -140.0 -155.0
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF -127.2  -92.9 -109.2  -63.2  -76.2 -102.1 -105.4 -110.6  -58.8  -73.3  -82.3  -67.8  -72.1  -70.1  -59.0  -63.5  -54.5  -54.9  -44.6  -32.2  -41.8  -38.3  -22.7  -21.2 -110.4 -112.9 -106.0  -56.5  -23.3 -107.1 -140.2 -154.8
+
+if station I
+  pc_delay_x  0.0
+  pc_delay_y  0.0 * (ns) 
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y  0.0 * (deg) 
+
+if station S
+  pc_delay_x  0.0
+  pc_delay_y -0.08 * (ns) 
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y 15.0 * (deg) 
+
+if station T
+  pc_delay_x  0.0
+  pc_delay_y  0.24 * (ns) 
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y -153.0 * (deg) 

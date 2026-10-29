@@ -1,0 +1,284 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fourfit control file parameter export, schema version 2",
+  "description": "Validate each file against its $defs entry: manifest.json -> manifest, sessions.json -> sessions, stations.json -> stations, catalogue.json -> catalogue, series/**/*.json -> series_file. See EXPORT_SCHEMA.md.",
+  "$defs": {
+    "schema_version": { "const": 2 },
+    "epoch": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"
+    },
+    "session_id": { "type": "string", "pattern": "^[0-9]{8}-[a-z0-9]+$" },
+    "station_code": { "type": "string", "pattern": "^[A-Za-z0-9]{2}$" },
+    "path": { "type": "string", "pattern": "^[A-Za-z0-9_./-]+\\.json$" },
+    "nullable_string": { "type": ["string", "null"] },
+    "nullable_number": { "type": ["number", "null"] },
+
+    "manifest": {
+      "type": "object",
+      "required": ["schema_version", "name", "generated_at", "data_hash", "source",
+                   "coverage", "excluded", "files"],
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": { "$ref": "#/$defs/schema_version" },
+        "name": { "$ref": "#/$defs/nullable_string" },
+        "generated_at": { "$ref": "#/$defs/epoch" },
+        "data_hash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "source": {
+          "type": "object",
+          "required": ["commit", "dirty"],
+          "additionalProperties": false,
+          "properties": {
+            "commit": { "type": ["string", "null"], "pattern": "^[0-9a-f]{40}$" },
+            "dirty": { "type": ["boolean", "null"] }
+          }
+        },
+        "coverage": {
+          "type": "object",
+          "required": ["first_epoch", "last_epoch", "n_sessions", "n_stations",
+                       "n_series", "n_points", "n_control_files", "n_sessions_by_type",
+                       "n_offsets_not_set"],
+          "additionalProperties": false,
+          "properties": {
+            "first_epoch": { "$ref": "#/$defs/epoch" },
+            "last_epoch": { "$ref": "#/$defs/epoch" },
+            "n_sessions": { "type": "integer", "minimum": 0 },
+            "n_stations": { "type": "integer", "minimum": 0 },
+            "n_series": { "type": "integer", "minimum": 0 },
+            "n_points": { "type": "integer", "minimum": 0 },
+            "n_control_files": { "type": "integer", "minimum": 0 },
+            "n_sessions_by_type": {
+              "type": "object",
+              "additionalProperties": { "type": "integer", "minimum": 1 }
+            },
+            "n_offsets_not_set": {
+              "type": "object",
+              "required": ["station", "session"],
+              "additionalProperties": false,
+              "properties": {
+                "station": { "type": "integer", "minimum": 0 },
+                "session": { "type": "integer", "minimum": 0 }
+              }
+            }
+          }
+        },
+        "excluded": {
+          "type": "object",
+          "required": ["keywords", "string_valued_keywords", "overridden_rows", "per_baseline_rows",
+                       "off_plan_sessions"],
+          "additionalProperties": false,
+          "properties": {
+            "keywords": { "type": "array", "items": { "type": "string" } },
+            "string_valued_keywords": { "type": "array", "items": { "type": "string" } },
+            "overridden_rows": { "type": "integer", "minimum": 0 },
+            "per_baseline_rows": { "type": "integer", "minimum": 0 },
+            "off_plan_sessions": { "type": "array", "items": { "$ref": "#/$defs/session_id" },
+                                   "uniqueItems": true }
+          }
+        },
+        "files": {
+          "type": "object",
+          "required": ["schema", "sessions", "stations", "catalogue", "series"],
+          "additionalProperties": false,
+          "properties": {
+            "schema": { "const": "schema.json" },
+            "sessions": { "const": "sessions.json" },
+            "stations": { "const": "stations.json" },
+            "catalogue": { "const": "catalogue.json" },
+            "series": {
+              "type": "array",
+              "items": { "type": "string", "pattern": "^series/(station/[A-Za-z0-9]{2}|global)\\.json$" },
+              "uniqueItems": true
+            }
+          }
+        }
+      }
+    },
+
+    "sessions": {
+      "type": "object",
+      "required": ["schema_version", "sessions"],
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": { "$ref": "#/$defs/schema_version" },
+        "sessions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "code", "epoch", "type", "correlator", "report_format", "stations",
+                         "correlated", "offsets_not_set", "cf"],
+            "additionalProperties": false,
+            "properties": {
+              "id": { "$ref": "#/$defs/session_id" },
+              "code": { "type": "string" },
+              "epoch": { "$ref": "#/$defs/epoch" },
+              "type": { "$ref": "#/$defs/nullable_string" },
+              "correlator": { "$ref": "#/$defs/nullable_string" },
+              "report_format": { "enum": ["3", "legacy", null] },
+              "stations": { "type": "array", "items": { "$ref": "#/$defs/station_code" } },
+              "cf": { "type": ["string", "null"], "pattern": "^cf/[0-9]{8}-[a-z0-9]+\\.txt$" },
+              "correlated": {
+                "type": "object",
+                "propertyNames": { "$ref": "#/$defs/station_code" },
+                "additionalProperties": { "type": "integer", "minimum": 1 }
+              },
+              "offsets_not_set": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["station", "kind", "keywords", "uncorrelated_ids"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "station": { "$ref": "#/$defs/station_code" },
+                    "kind": { "enum": ["station", "session"] },
+                    "keywords": {
+                      "type": "array", "minItems": 2, "uniqueItems": true,
+                      "items": { "enum": ["pc_phase_offset_x", "pc_phase_offset_y",
+                                          "pc_delay_x", "pc_delay_y"] }
+                    },
+                    "uncorrelated_ids": {
+                      "type": "array", "uniqueItems": true,
+                      "items": { "type": "string", "pattern": "^[A-Za-z0-9]$" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "stations": {
+      "type": "object",
+      "required": ["schema_version", "stations", "global"],
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": { "$ref": "#/$defs/schema_version" },
+        "stations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["code", "name", "file", "n_series", "n_sessions",
+                         "first_epoch", "last_epoch"],
+            "additionalProperties": false,
+            "properties": {
+              "code": { "$ref": "#/$defs/station_code" },
+              "name": { "$ref": "#/$defs/nullable_string" },
+              "file": { "type": ["string", "null"], "pattern": "^series/station/[A-Za-z0-9]{2}\\.json$" },
+              "n_series": { "type": "integer", "minimum": 0 },
+              "n_sessions": { "type": "integer", "minimum": 0 },
+              "first_epoch": { "$ref": "#/$defs/epoch" },
+              "last_epoch": { "$ref": "#/$defs/epoch" }
+            }
+          }
+        },
+        "global": {
+          "type": "object",
+          "required": ["file", "n_series"],
+          "additionalProperties": false,
+          "properties": {
+            "file": { "enum": ["series/global.json", null] },
+            "n_series": { "type": "integer", "minimum": 0 }
+          }
+        }
+      }
+    },
+
+    "catalogue": {
+      "type": "object",
+      "required": ["schema_version", "series"],
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": { "$ref": "#/$defs/schema_version" },
+        "series": { "type": "array", "items": { "$ref": "#/$defs/catalogue_entry" } }
+      }
+    },
+
+    "catalogue_entry": {
+      "type": "object",
+      "required": ["key", "label", "file", "scope", "station", "station_name",
+                   "keyword", "pol", "index_kind", "index", "channel", "freq_mhz", "band",
+                   "field", "circular", "unit", "circ_median", "n", "n_sessions", "first_epoch",
+                   "last_epoch", "vmin", "vmax", "vmed", "vlast", "n_distinct", "constant",
+                   "n_changes", "by_type"],
+      "additionalProperties": false,
+      "properties": {
+        "key": { "type": "string", "pattern": "^[^:]+:[^:]+(:[^:]+)?$" },
+        "label": { "type": "string" },
+        "file": { "$ref": "#/$defs/path" },
+        "scope": { "enum": ["station", "global", "other"] },
+        "station": { "type": ["string", "null"] },
+        "station_name": { "$ref": "#/$defs/nullable_string" },
+        "keyword": { "type": "string" },
+        "pol": { "enum": ["x", "y", "l", "r", null] },
+        "index_kind": { "enum": ["channel", "sampler", "vector", "field", "none"] },
+        "index": { "type": ["integer", "null"], "minimum": 0 },
+        "channel": { "type": ["string", "null"], "minLength": 1, "maxLength": 1 },
+        "freq_mhz": { "$ref": "#/$defs/nullable_number" },
+        "band": { "enum": ["A", "B", "C", "D", null] },
+        "field": { "$ref": "#/$defs/nullable_string" },
+        "circular": { "type": "boolean" },
+        "unit": { "enum": ["deg", null] },
+        "circ_median": { "type": ["number", "null"], "minimum": -180, "exclusiveMaximum": 180 },
+        "n": { "type": "integer", "minimum": 1 },
+        "n_sessions": { "type": "integer", "minimum": 1 },
+        "first_epoch": { "$ref": "#/$defs/epoch" },
+        "last_epoch": { "$ref": "#/$defs/epoch" },
+        "vmin": { "type": "number" },
+        "vmax": { "type": "number" },
+        "vmed": { "type": "number" },
+        "vlast": { "type": "number" },
+        "n_distinct": { "type": "integer", "minimum": 1 },
+        "constant": { "type": "boolean" },
+        "n_changes": { "type": "integer", "minimum": 0 },
+        "by_type": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/type_counts" }
+        }
+      }
+    },
+
+    "type_counts": {
+      "type": "object",
+      "required": ["n", "n_changes"],
+      "additionalProperties": false,
+      "properties": {
+        "n": { "type": "integer", "minimum": 1 },
+        "n_changes": { "type": "integer", "minimum": 0 }
+      }
+    },
+
+    "series_file": {
+      "type": "object",
+      "required": ["schema_version", "where", "series"],
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": { "$ref": "#/$defs/schema_version" },
+        "where": { "type": "string" },
+        "series": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/series" }
+        }
+      }
+    },
+
+    "series": {
+      "type": "object",
+      "required": ["s", "v", "l", "c"],
+      "additionalProperties": false,
+      "properties": {
+        "s": { "type": "array", "items": { "type": "string", "pattern": "^[0-9]{8}-[a-z0-9]+$" }, "minItems": 1 },
+        "v": { "type": "array", "items": { "type": "number" }, "minItems": 1 },
+        "l": { "type": "array", "items": { "type": ["integer", "null"] } },
+        "c": { "type": "array", "items": { "type": "string" } },
+        "r": {
+          "type": "object",
+          "propertyNames": { "pattern": "^(0|[1-9][0-9]*)$" },
+          "additionalProperties": { "type": "number" }
+        },
+        "d": { "type": "array", "items": { "type": "number", "minimum": -180, "exclusiveMaximum": 180 } }
+      }
+    }
+  }
+}

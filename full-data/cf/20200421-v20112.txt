@@ -1,0 +1,70 @@
+* Fourfit control file for V20112  <112>
+
+*==========================================================
+*basic setup
+*==========================================================
+
+dr_win -5.e-6  5.e-6
+pc_mode multitone
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+ref_freq 6000.0
+weak_channel 0.1
+pc_amp_hcode .001
+* general ionosphere search parameters:
+ion_npts 45
+ion_win  -88.0 88.0
+* set tone mask for n*100 MHz and 3090 MHz:
+pc_tonemask cdejnprwBC 2 16 16 1 16 16 16 2 16 16
+
+*==========================================================
+*==========================================================
+* start of if-statement blocks
+*==========================================================
+*==========================================================
+
+*==========================================================
+*station sampler delays
+*==========================================================
+
+if station V
+  sampler_delay_x   20   -10   20   20
+  sampler_delay_y   20   -10   20   20
+
+if station H
+  sampler_delay_x -150 130 130 130
+  sampler_delay_y -150 130 130 130
+
+*==========================================================
+*station pc_phases
+*==========================================================
+
+if station H
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  -10.1  -9.6  -6.7  -2.7  -5.4  -2.0  -0.3  2.2  -2.7  1.2  0.9  4.3  11.9  12.6  8.5  9.0  1.4  -1.0  0.7  3.5  -0.7  -1.2  0.7  -2.9  -16.8  -12.6  -8.8  -3.6  -0.1  0.5  5.6  7.9 
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -11.2  -13.0  -7.3  -1.0  -7.4  -5.4  0.2  3.7  4.6  7.9  4.8  7.9  16.6  16.4  8.7  9.2  4.7  2.2  1.6  1.6  -0.5  1.7  1.0  0.3  -13.0  -11.6  -9.3  -0.9  -1.4  -2.7  4.6  3.8 
+
+if station V
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  -45.2  -36.0  -25.5  5.0  27.4  34.7  34.1  30.5  -2.2  0.2  -0.9  3.0  9.0  17.7  25.8  23.9  -8.9  -9.8  -8.9  -11.6  -13.0  -22.4  -21.6  -24.6  -0.3  4.4  8.4  4.1  -10.1  -3.9  10.4  13.7 
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -43.1  -31.0  -20.6  8.6  30.3  41.0  36.9  31.8  -10.6  -3.8  -9.8  -6.8  0.3  7.9  15.3  18.4  -2.4  -1.9  -5.1  -6.9  -12.2  -17.1  -18.6  -24.4  -6.9  -5.8  -4.1  -2.9  -0.8  7.4  16.1  14.4 
+
+if station H
+  pc_delay_x  0.0
+  pc_delay_y 0.147 * (ns) estimated error is +/- 0.002
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y -52.6 * (deg) estimated error is +/- 3.6
+
+if station V
+  pc_delay_x  0.0
+  pc_delay_y -0.059 * (ns) estimated error is +/- 0.002
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y -134.4 * (deg) estimated error is +/- 3.6
+
+*==========================================================
+* This control file was generated with the script vgoscf_generate.py
+* on Jun-16-0144PM-2020 using the following arguments: 
+* args: Namespace(averaging_scan_limit=10, begin_scan_limit='000-0000', control_file='./cf_3722_secondpass', data_directory='./', dtec_thresh=1.0, end_scan_limit='999-9999', network_reference_station='G', num_proc=12, output_filename='', quality_lower_limit=6, sigma_cut_factor=3.0, snr_min=30, stations='EHIMSTVY', toggle_dump_info=True, use_progress_ticker=True, use_scratch=True, verbosity=2)
+*========================================================== 
+
+*Mike/John

@@ -1,0 +1,54 @@
+dr_win -5e-06 5e-06
+sb_win -2.0 2.0
+pc_mode multitone
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+ref_freq 6000.0
+weak_channel 0.1
+pc_amp_hcode 0.001
+ion_npts 75
+ion_win -100.0 100.0
+
+if station I
+  sampler_delay_x 50 40 35 30
+  sampler_delay_y 50 35 35 20
+
+if station N
+  sampler_delay_x -35 -45 -60 -60
+  sampler_delay_y -40 -50 -60 -70
+
+if station V
+  sampler_delay_x -25 -65 -30 -45
+  sampler_delay_y -40 -85 -35 -75
+
+if station I
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF 21.4 16.8 4.3 -8.3 -19.3 -12.1 -8.2 11.4 1.7 0.1 12.0 2.0 -8.2 -13.4 -11.8 -13.5 -0.2 -1.6 -0.0 5.1 5.2 15.7 19.2 23.9 -9.4 8.9 6.0 -6.6 -7.7 -8.3 -6.3 -20.0
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF 32.1 22.3 8.2 -8.5 -20.8 -20.3 -15.5 -8.1 4.6 8.1 6.4 -2.7 -4.7 -4.5 -14.0 -9.6 -0.3 -3.1 2.2 6.9 3.7 9.9 16.8 22.0 2.3 0.7 5.4 -6.3 4.1 -10.3 -13.1 -12.2
+
+if station N
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF 10.8 23.2 17.4 -22.4 -31.8 -8.5 -6.1 9.7 5.8 6.5 9.7 -2.0 -7.1 -14.5 -26.1 -25.9 19.1 14.5 16.7 9.6 -0.0 0.8 -3.0 3.5 -39.3 -39.4 -29.7 12.3 22.1 21.7 27.7 18.1
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF 49.9 -0.1 34.5 -5.1 -9.0 -16.1 -17.5 -19.3 7.7 16.7 11.0 -19.3 -5.5 -4.7 -24.7 -24.1 15.8 13.9 10.4 5.8 0.7 -0.4 3.4 -2.4 -46.1 -39.6 -28.1 7.9 16.2 19.9 27.5 21.0
+
+if station V
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+
+if station I
+  pc_delay_x 0.0
+  pc_delay_y 0.03
+  pc_phase_offset_x 0.0
+  pc_phase_offset_y -107.2
+
+if station N
+  pc_delay_x 0.0
+  pc_delay_y -0.084
+  pc_phase_offset_x 0.0
+  pc_phase_offset_y -31.7
+
+if station V
+  pc_delay_x 0.0
+  pc_delay_y 0.087
+  pc_phase_offset_x 0.0
+  pc_phase_offset_y -3.7

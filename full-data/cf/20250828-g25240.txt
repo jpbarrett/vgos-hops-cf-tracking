@@ -1,0 +1,90 @@
+*vgos control file
+
+*==========================================================
+*basic setup
+*==========================================================
+
+sb_win -120.0 120.0
+dr_win -5.e-6  5.e-6
+pc_mode multitone
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+ref_freq 10680.4
+weak_channel 0.1
+pc_amp_hcode .001
+* general ionosphere search parameters:
+ion_npts 75
+ion_win  -100.0 100.0
+
+*==========================================================
+*==========================================================
+* start of if-statement blocks
+
+if station X
+  freqs a b c d i j k l m n o p q r s t u v w z A B C D E F
+
+*if station I
+*  freqs a b c d e f g h q r s t u v w x y z A B C D E F
+
+*==========================================================
+*station sampler delays
+*==========================================================
+if station I
+* (ref: g25205)
+   sampler_delay_x 50 -50 35 30
+   sampler_delay_y 50 -50 35 20
+
+if station X
+  sampler_delay_x 105 0 0 -20
+  sampler_delay_y 85 0 0 -20
+
+if station Y
+  sampler_delay_x 95 65 70 175
+  sampler_delay_y 95 90 90 95
+
+if station I
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+
+if station X
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  2.6  10.9  0.8  -1.0  0.0  0.0  0.0  0.0  -2.7  -13.2  -3.9  -5.3  -10.0  -4.0  -10.7  -6.5  3.9  0.1  4.5  1.5  21.6  15.9  9.1  0.0  0.0  9.9  7.3  -0.4  3.3  -2.9  -9.0  -21.9
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -23.9  25.5  38.2  -40.4  0.0  0.0  0.0  0.0  7.2  31.6  -30.8  14.1  68.3  6.4  -0.1  -11.0  0.7  -0.0  -20.3  1.4  12.1  -11.6  -31.1  0.0  0.0  15.8  23.6  -3.3  7.1  1.0  -13.6  -41.2
+
+if station Y
+*  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  -4.7  -4.7  1.0  -0.3  10.7  3.2  4.1  -1.7  9.3  -1.4  -0.3  -8.3  -12.9  -15.6  -27.1  -18.0  -3.8  8.4  13.8  15.2  13.5  18.5  9.0  11.9  -0.6  -3.2  -6.0  13.0  -10.2  -6.1  9.6  -5.2
+pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  -4.9  -1.5  -1.7  1.1  11.5  4.5  3.4  -2.5  10.1  -2.8  -1.8  -9.5  -12.7  -16.3  -28.9  -22.0  -2.4  8.1  12.0  16.2  14.3  14.4  11.9  11.2  -2.9  -2.1  3.0  5.7  -10.8  -7.7  0.9  -6.3
+
+*  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  1.6  1.0  -0.1  -1.5  6.9  3.5  0.3  -0.8  14.5  3.1  -5.3  -12.0  -7.9  -14.3  -33.4  -24.7  8.5  7.3  17.2  12.6  8.4  16.1  4.4  11.5  -7.9  2.8  -17.0  7.4  5.0  -0.6  4.8  -21.8
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  2.1  3.7  0.8  -1.7  7.2  3.7  0.0  -7.2  16.9  2.1  -5.5  -15.3  -12.5  -16.8  -23.9  -29.0  11.6  8.3  15.6  14.4  2.1  16.1  7.0  14.9  -0.8  4.2  -8.5  7.0  6.6  -0.9  -9.9  -18.3
+
+*==========================================================
+* This control file was generated with the script ffres2pcp.py
+* on Nov-19-1139AM-2025 using the following arguments:
+* args: Namespace(control_file='cf_1111', network_reference_station='I', stations='YX', data_directory='1112/', verbosity=2, num_proc=26, snr_min=10.0, quality_lower_limit=6, dtec_thresh=10.0, begin_scan_limit='000-0000', end_scan_limit='999-9999', sigma_cut_factor=3.0, use_scratch=True, use_progress_ticker=True, output_filename='', averaging_scan_limit=20, toggle_dump_info=True, nchannel_discard_threshold=5, channel_discard_tolerance=15.0)
+*==========================================================
+
+if station I
+  pc_delay_x  0.0
+  pc_delay_y 0.036 * (ns) estimated error is +/- 0.001
+  pc_phase_offset_x  0.0
+  pc_phase_offset_y -43.2 * (deg) estimated error is +/- 0.8
+
+if station X
+  pc_delay_x  0.0
+  pc_delay_y -4.21 * (ns) estimated error is +/- 0.098
+  pc_phase_offset_x  0.0
+  pc_phase_offset_y -119.1 * (deg) estimated error is +/- 16.4
+
+if station Y
+  pc_delay_x  0.0
+  pc_delay_y -0.033 * (ns) estimated error is +/- 0.001
+  pc_phase_offset_x  0.0
+  pc_phase_offset_y -132.4 * (deg) estimated error is +/- 13.5
+
+*==========================================================
+* This control file was generated with the script fourphase.py
+* on Nov-19-0318PM-2025 using the following arguments:
+* args: Namespace(control_file='cf_1113', network_reference_station='I', stations='XY', data_directory='1113/', verbosity=2, num_proc=30, snr_min=12.0, quality_lower_limit=6, dtec_thresh=10.0, begin_scan_limit='000-0000', end_scan_limit='999-9999', sigma_cut_factor=5.0, use_scratch=True, use_progress_ticker=True, output_filename='', averaging_scan_limit=10, toggle_dump_info=True)
+*==========================================================

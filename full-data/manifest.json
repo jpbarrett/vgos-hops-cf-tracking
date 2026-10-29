@@ -1,0 +1,91 @@
+{
+  "schema_version": 2,
+  "name": "VGOS",
+  "generated_at": "2026-10-29T18:59:56Z",
+  "data_hash": "sha256:4a909c3e83de378718f6c19f692e7346f6a9c01de97e88b54498977b26b1782b",
+  "source": {
+    "commit": "742c022bdfecc5925477e1c5f234917f21651c2a",
+    "dirty": false
+  },
+  "coverage": {
+    "first_epoch": "2020-01-07T18:30:00Z",
+    "last_epoch": "2026-10-25T11:30:00Z",
+    "n_sessions": 2107,
+    "n_stations": 22,
+    "n_series": 2019,
+    "n_points": 529686,
+    "n_control_files": 2107,
+    "n_sessions_by_type": {
+      "VGOS-24INT-S": 13,
+      "VGOS-INT-A": 1102,
+      "VGOS-INT-B": 191,
+      "VGOS-INT-C": 201,
+      "VGOS-INT-D": 14,
+      "VGOS-INT-G": 106,
+      "VGOS-INT-M": 117,
+      "VGOS-INT-S": 131,
+      "VGOS-INT-TST": 1,
+      "VGOS-OPS": 202,
+      "VGOS-RD": 29
+    },
+    "n_offsets_not_set": {
+      "station": 33,
+      "session": 46
+    }
+  },
+  "excluded": {
+    "keywords": [
+      "notches"
+    ],
+    "string_valued_keywords": [
+      "freqs",
+      "ion_smooth",
+      "mbd_anchor",
+      "pc_mode",
+      "samplers",
+      "skip"
+    ],
+    "overridden_rows": 7098,
+    "per_baseline_rows": 7651,
+    "off_plan_sessions": [
+      "20220317-vr2202",
+      "20231116-vr2304",
+      "20240207-vr2401",
+      "20240612-vr2402",
+      "20260520-vr2603",
+      "20260624-vr2604",
+      "20260805-vr2605"
+    ]
+  },
+  "files": {
+    "schema": "schema.json",
+    "sessions": "sessions.json",
+    "stations": "stations.json",
+    "catalogue": "catalogue.json",
+    "series": [
+      "series/global.json",
+      "series/station/Gs.json",
+      "series/station/Hb.json",
+      "series/station/Hv.json",
+      "series/station/Is.json",
+      "series/station/K2.json",
+      "series/station/Ke.json",
+      "series/station/Mb.json",
+      "series/station/Mg.json",
+      "series/station/Nn.json",
+      "series/station/Ns.json",
+      "series/station/Oe.json",
+      "series/station/Ow.json",
+      "series/station/S6.json",
+      "series/station/Sa.json",
+      "series/station/T1.json",
+      "series/station/Um.json",
+      "series/station/Wd.json",
+      "series/station/Wf.json",
+      "series/station/Wn.json",
+      "series/station/Ws.json",
+      "series/station/Yg.json",
+      "series/station/Yj.json"
+    ]
+  }
+}

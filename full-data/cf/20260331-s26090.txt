@@ -1,0 +1,45 @@
+sb_win -1. 1.
+*dr_win -5.e-6  5.e-6
+
+pc_mode multitone
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+ref_freq 10680.4
+weak_channel 0.1
+pc_amp_hcode 0.001
+ion_npts 75
+ion_win -100.0 100.0
+
+if station M
+  sampler_delay_x 50 215 215 215
+  sampler_delay_y 50 215 215 215
+
+if station V
+   sampler_delay_x 15  15  15  10
+   sampler_delay_y 10  10  10   5
+
+if station M
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  2.5  1.1  -2.7  0.0  0.8  -2.1  -1.4  -3.2  -7.2  -6.9  -6.2  -9.8  -7.7  -11.6  -6.4  -8.0  -7.8  -6.2  -7.2  -6.5  -3.7  -1.7  1.1  -9.8  5.9  8.9  11.6  12.8  11.4  7.8  6.5  8.9
+
+if station V
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  -37.8  -21.3  -31.4  0.1  27.1  25.9  18.7  -4.3  -9.2  -15.1  -1.0  -13.8  -8.6  4.9  1.7  13.2  -14.4  -17.7  -26.6  -8.7  -2.6  -10.6  -12.8  -8.8  41.8  45.6  50.7  22.3  32.4  20.1  26.1  26.1
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -43.7  -26.7  -20.3  0.4  28.7  25.1  27.3  22.8  2.9  4.2  -0.1  20.8  9.6  17.4  18.7  14.5  -7.8  -10.6  -18.3  8.0  9.0  -3.3  -25.2  -27.0  -26.8  -19.9  -26.7  -39.4  -50.4  -66.4  -57.1  -56.7
+
+* Copied from session s26083 because of errors:
+* Warning: this control file was generated expecting input for station: M but no good data for pc_delay_x/y or pc_phase_offset_x/y generation was found.
+* Warning: this control file was generated expecting input for station: V but no good data for pc_delay_x/y or pc_phase_offset_x/y generation was found.
+
+if station M
+  pc_delay_x  0.0
+  pc_delay_y -1.026 * (ns) estimated error is +/- 0.004
+  pc_phase_offset_x  0.0
+  pc_phase_offset_y 26.9 * (deg) estimated error is +/- 9.0
+
+if station V
+  pc_delay_x  0.0
+  pc_delay_y 0.085 * (ns) estimated error is +/- 0.004
+  pc_phase_offset_x  0.0
+  pc_phase_offset_y -101.8 * (deg) estimated error is +/- 9.3

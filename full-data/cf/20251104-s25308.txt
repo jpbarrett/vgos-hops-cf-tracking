@@ -1,0 +1,49 @@
+sb_win -0.1 0.1
+dr_win -5e-6  5e-6
+
+pc_mode multitone
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+ref_freq 10680.4
+weak_channel 0.1
+pc_amp_hcode 0.001
+ion_npts 75
+ion_win  -100.0 100.0
+
+if station M
+  sampler_delay_x 50 215 215 215
+  sampler_delay_y 50 215 215 215
+
+if station V
+   sampler_delay_x 15  10  15  10
+   sampler_delay_y 10  10  10  10
+
+*==========================================================
+
+if station M
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  -7.1  -9.3  -7.9  -11.9  -11.3  -12.0  -11.7  -8.2  -1.2  -3.8  -1.9  -4.3  -6.1  -3.4  -0.4  -7.1  8.4  6.8  9.5  11.0  7.6  8.6  4.2  13.5
+
+if station V
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  -26.4  -22.7  -17.3  8.9  19.4  24.0  12.0  5.0  -4.1  -5.8  -10.2  -12.1  -2.5  5.3  6.7  2.9  -14.0  -18.5  -15.0  -11.6  -2.8  -11.9  -17.7  -16.1  48.7  52.1  51.1  21.3  24.2  23.0  38.6  40.7
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -38.7  -16.5  -32.9  12.4  26.5  22.8  30.2  13.9  5.6  3.1  6.3  18.7  13.8  11.7  11.0  13.9  -7.2  -13.1  -12.3  12.5  2.1  -13.8  -19.9  -31.3  -22.4  -23.2  -18.2  -48.9  -49.7  -67.1  -61.9  -56.8
+
+if station M
+  pc_delay_x  0.0
+  pc_delay_y -1.029 * (ns) estimated error is +/- 0.002
+  pc_phase_offset_x  0.0
+  pc_phase_offset_y 16.1 * (deg) estimated error is +/- 2.1
+
+if station V
+  pc_delay_x  0.0
+  pc_delay_y 0.088 * (ns) estimated error is +/- 0.002
+  pc_phase_offset_x  0.0
+  pc_phase_offset_y -97.8 * (deg) estimated error is +/- 3.7
+
+*==========================================================
+* This control file was generated with the script vgoscf_generate.py
+* on Nov-05-1110AM-2025 using the following arguments:
+* args: Namespace(control_file='./cf_1234_MV_init', network_reference_station='M', stations='V', data_directory='./1234/', verbosity=3, num_proc=22, snr_min=12.0, quality_lower_limit=6, dtec_thresh=1.0, begin_scan_limit='000-0000', end_scan_limit='999-9999', sigma_cut_factor=1.5, use_scratch=True, use_progress_ticker=True, output_filename='', averaging_scan_limit=30, toggle_dump_info=True, nchannel_discard_threshold=5, channel_discard_tolerance=15.0)
+*==========================================================

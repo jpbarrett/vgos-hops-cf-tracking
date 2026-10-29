@@ -1,0 +1,196 @@
+* Fourfit control file for VO0303  <303-304>
+
+*==========================================================
+*basic setup
+*==========================================================
+
+dr_win -5.e-6  5.e-6
+pc_mode multitone
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+ref_freq 6000.0
+weak_channel 0.1
+pc_amp_hcode .001
+* general ionosphere search parameters:
+ion_npts 45
+ion_win  -88.0 88.0
+
+*==========================================================
+*==========================================================
+* start of if-statement blocks
+*==========================================================
+*==========================================================
+
+*July 2020 -- try BEC's new tonemasks
+
+if station G
+  pc_tonemask cf    2 16
+if station H
+  pc_tonemask abde 16 16 16 16
+* use BEC's new tone mask for Oe to eliminate problems at 6410 and 6430MHz 
+if station S
+  pc_tonemask lrs   4 4 32 
+if station T
+  pc_tonemask dzE  16 16  2
+if station E
+  pc_tonemask def  16 16 17
+
+*for the time being we do not try to make use of the Oe-Ow baseline
+if baseline ST
+   skip true
+
+*remove channel 'A' at Wf due to p-cal problems
+if station E
+freqs a b c d e f g h i j k l m n o p q r s t u v w x y z B C D E F
+
+*remove several channels in band-A as they exhibit jumps in mean-channel phase 
+if station Y
+   freqs c d f g h i j k o p q r s t u v w x y z A B C D E F
+
+*==========================================================
+* compensating for low pcal amp for stations Mg,  Yj and Ow
+*==========================================================
+if station Y or station T or station M
+  pc_amp_hcode 0.0001
+
+*==========================================================
+*station sampler delays
+*==========================================================
+if station G
+  sampler_delay_x -160  160  160  160
+  sampler_delay_y -160  160  160  160
+
+if station V
+  sampler_delay_x   70   55  105   70
+  sampler_delay_y   70   35   80   40
+
+if station Y
+*  sampler_delay_x   13   16   17   23
+*  sampler_delay_y   16   15   16   23
+sampler_delay_x -30 16 17 23
+sampler_delay_y -30 15 16 23
+
+if station S
+  sampler_delay_x   85   90   85   70
+  sampler_delay_y   85   90   85   70
+
+if station T
+  sampler_delay_x  -40  -30  -40  -50
+  sampler_delay_y  -40  -30  -40  -50
+
+if station E
+  sampler_delay_x  -75  -50  -50  -50
+  sampler_delay_y  -75  -50  -50  -50
+
+if station H
+  sampler_delay_x -210  100  100  100
+  sampler_delay_y -210  100  100  100
+
+if station M
+  sampler_delay_x   20  120  150  120
+  sampler_delay_y   20  120  150  120
+
+if station I
+  sampler_delay_x   15  -15  -45  -50
+  sampler_delay_y   15  -15  -45  -50
+
+*==========================================================
+*station pc_phases
+*==========================================================
+
+
+if station E
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  -7.4  -4.2  -1.3  -9.8  -4.7  5.1  15.1  18.6  11.3  16.5  14.5  13.9  13.2  6.9  3.1  5.6  -13.6  -20.2  -21.4  -16.6  -14.2  -8.9  -5.6  -3.7  5.5  8.9  12.0  -3.9  -3.5  0.7  6.4  9.8 
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -8.3  -9.4  -1.7  -51.6  1.0  8.4  22.1  29.1  6.5  7.3  21.1  24.5  22.9  22.0  17.7  9.9  -18.0  -30.0  -25.8  -30.8  -21.6  -21.9  -11.2  -14.6  6.7  0.9  -6.9  6.2  -3.5  23.2  12.6  10.3 
+
+if station G
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0 
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -0.8  -2.6  -0.4  -1.3  -1.8  -0.4  1.0  -0.9  -0.1  2.7  2.2  -0.5  0.2  -0.6  -2.0  -3.8  -1.8  -0.9  -0.9  -0.5  -0.0  0.1  0.5  -0.8  -2.5  -5.7  -3.6  -1.3  -1.3  0.1  2.5  2.0 
+
+if station H
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  -10.3  -12.8  -8.8  -2.5  -2.4  5.4  8.2  8.3  -0.6  3.9  3.7  3.3  9.8  11.0  6.9  6.8  -1.8  -3.6  -3.5  0.4  -3.9  -2.1  -1.2  -2.4  -16.8  -17.3  -12.2  -5.9  -0.4  3.1  9.6  12.4 
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -6.4  -7.1  -2.5  -1.9  -8.3  -2.0  5.4  7.7  1.5  3.8  2.8  7.0  11.4  12.8  5.8  4.7  4.2  3.1  2.7  2.2  -0.3  0.2  0.1  0.1  -16.7  -13.8  -11.8  -6.0  1.6  1.3  5.7  10.2 
+
+if station M
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  -1.4  -1.9  2.3  0.4  1.7  5.0  8.9  7.9  -2.2  -12.6  -14.0  -8.4  -10.1  -11.8  -5.4  -6.2  -16.0  -16.5  -15.4  -14.4  -15.9  -10.7  -4.5  0.9  7.1  -1.7  -3.7  13.4  24.8  32.7  29.0  24.1 
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -12.5  -13.5  -13.1  -3.7  -1.8  1.0  8.2  9.8  9.0  4.8  -3.0  4.0  3.3  0.6  5.9  8.5  -6.5  -5.0  -7.3  -6.9  -5.9  -0.6  7.2  8.9  -10.8  -18.0  -21.0  -1.6  10.9  20.3  16.8  13.3 
+
+if station S
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  -111.4  -132.7  -137.6  -139.0  -150.4  -152.4  -149.4  -152.3  116.9  117.7  120.4  112.5  113.6  104.6  96.4  99.2  91.7  83.8  91.2  80.0  71.6  78.0  74.0  58.7  -79.5  -86.4  -86.0  -97.9  -104.6  -110.3  -104.4  -103.2 
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -55.9  -70.0  -74.0  -68.9  -60.9  -47.2  -49.3  -50.2  -40.6  -35.7  -28.9  -53.3  -44.6  -29.0  2.2  23.0  57.3  78.3  38.4  58.2  63.1  60.5  65.3  60.5  141.4  140.0  144.1  158.3  169.5  164.9  177.7  169.7 
+
+if station T
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  55.0  41.7  37.7  15.1  -3.8  -14.0  -17.1  -26.0  79.8  89.2  78.0  52.3  50.9  46.0  42.0  40.9  -7.4  -14.4  -23.9  -23.4  -36.2  -36.0  -40.7  -42.5  -4.7  -4.3  -17.0  -2.9  -1.2  5.2  6.8  -1.6 
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  38.3  22.4  23.3  6.3  -2.6  -19.4  -26.3  -27.8  86.0  96.5  37.6  26.7  38.0  44.4  40.5  35.4  0.2  -17.0  -15.9  -19.3  -21.2  -14.9  -19.9  -20.0  -2.1  5.8  9.2  13.0  19.0  22.5  31.3  33.5 
+
+if station V
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  -39.7  -32.3  -22.4  4.4  27.0  37.1  34.4  27.0  -1.6  -0.4  0.8  4.6  7.7  16.4  21.5  18.5  -11.9  -11.4  -11.8  -12.9  -15.6  -23.0  -25.7  -32.8  2.6  3.4  8.2  5.0  -7.9  0.0  12.1  19.5 
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -39.7  -34.1  -24.5  5.4  31.3  37.9  36.5  27.2  -6.1  -1.8  -4.3  -3.5  1.9  8.9  14.8  11.0  -2.3  -1.5  -4.6  -6.6  -9.5  -16.0  -19.1  -25.1  -7.4  -8.8  -9.1  -6.0  -3.9  7.4  18.5  20.7 
+
+if station E
+  pc_delay_x  0.0
+  pc_delay_y 1.466 * (ns) estimated error is +/- 0.003
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y -81.5 * (deg) estimated error is +/- 4.8
+
+if station G
+  pc_delay_x  0.0
+  pc_delay_y 1.683 * (ns) estimated error is +/- 0.002
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y 37.4 * (deg) estimated error is +/- 2.9
+
+if station H
+  pc_delay_x  0.0
+  pc_delay_y 0.138 * (ns) estimated error is +/- 0.002
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y -42.2 * (deg) estimated error is +/- 3.3
+
+if station M
+  pc_delay_x  0.0
+  pc_delay_y -1.01 * (ns) estimated error is +/- 0.002
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y -34.8 * (deg) estimated error is +/- 2.9
+
+if station S
+  pc_delay_x  0.0
+  pc_delay_y -0.319 * (ns) estimated error is +/- 0.003
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y -158.6 * (deg) estimated error is +/- 5.8
+
+if station T
+  pc_delay_x  0.0
+  pc_delay_y 0.207 * (ns) estimated error is +/- 0.002
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y -75.3 * (deg) estimated error is +/- 4.3
+
+if station V
+  pc_delay_x  0.0
+  pc_delay_y -0.058 * (ns) estimated error is +/- 0.003
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y -130.7 * (deg) estimated error is +/- 4.0
+
+*==========================================================
+* This control file was generated with the script vgoscf_generate.py
+* on Nov-03-0359PM-2021 using the following arguments: 
+* args: Namespace(averaging_scan_limit=10, begin_scan_limit='000-0000', channel_discard_tolerance=15.0, control_file='./cf_3754_firstpass', data_directory='./', dtec_thresh=1.0, end_scan_limit='999-9999', nchannel_discard_threshold=5, network_reference_station='G', num_proc=16, output_filename='', quality_lower_limit=6, sigma_cut_factor=3.0, snr_min=30, stations='EHMSTVY', toggle_dump_info=True, use_progress_ticker=True, use_scratch=True, verbosity=2)
+*========================================================== 
+
+if station Y
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  55.2  13.8  43.6  87.0  8.1  31.9  34.6  37.8  11.1  12.2  13.2  14.9  15.2  16.2  16.7  17.7  19.1  16.9  14.8  3.1  -13.7  -23.3  -39.3  -45.1  10.5  9.3  6.1  -15.4  -9.6  0.2  11.7  15.8 
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  7.4  -294.2  37.0  42.9  -235.3  24.9  26.4  32.5  1.2  4.2  8.1  8.7  12.4  10.6  12.9  15.6  20.3  13.7  12.5  1.1  -16.8  -26.1  -39.1  -44.4  12.8  13.0  9.9  -12.1  -6.4  3.4  15.2  18.9 
+
+if station Y
+  pc_delay_x  0.0
+  pc_delay_y -0.086 * (ns) estimated error is +/- 0.003
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y -176.7 * (deg) estimated error is +/- 5.2
+
+*==========================================================
+* This control file was generated with the script vgoscf_generate.py
+* on Nov-10-0200PM-2021 using the following arguments: 
+* args: Namespace(averaging_scan_limit=10, begin_scan_limit='000-0000', channel_discard_tolerance=15.0, control_file='./cf_3754_Yj_secondpass', data_directory='./', dtec_thresh=1.0, end_scan_limit='999-9999', nchannel_discard_threshold=5, network_reference_station='G', num_proc=16, output_filename='', quality_lower_limit=6, sigma_cut_factor=3.0, snr_min=30, stations='Y', toggle_dump_info=True, use_progress_ticker=True, use_scratch=True, verbosity=2)
+*========================================================== 
+
+*Mike/John/Brian

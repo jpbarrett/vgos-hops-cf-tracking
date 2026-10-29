@@ -1,0 +1,76 @@
+* Fourfit control file for C22148
+
+*==========================================================
+*basic setup
+*==========================================================
+
+dr_win -5.e-6  5.e-6
+pc_mode multitone
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+ref_freq 6000.0
+weak_channel 0.1
+pc_amp_hcode .001
+* general ionosphere search parameters:
+ion_npts 45
+ion_win  -88.0 88.0
+
+*==========================================================
+* sampler delays and pc_tonemask
+*==========================================================
+
+if station S
+  pc_tonemask l 4
+
+if station T
+  pc_tonemask dzE 16 16 2
+
+if station S
+  sampler_delay_x 85 90 85 70
+  sampler_delay_y 85 90 85 70
+
+if station T
+  sampler_delay_x -40 -30 -40 -50
+  sampler_delay_y -40 -30 -40 -50
+
+if station I
+  sampler_delay_x   15  -15  -45  -50
+  sampler_delay_y   15  -15  -45  -50
+
+if station I
+  freqs i j k l m n o p q r s t u v w x y z A B C D E F
+
+*==========================================================
+*station pc_phases
+*==========================================================
+
+
+
+
+
+if station I
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  -4.6  0.7  0.3  -10.5  -9.5  -7.8  -4.2  3.9  6.0  4.3  1.5  4.3  -1.1  0.5  1.0  5.7  -5.2  -4.4  -4.7  0.2  -0.7  1.5  10.9  11.3 
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  -6.5  -0.7  -0.4  -9.4  -6.1  -4.6  0.5  4.8  8.5  4.1  4.3  -0.6  -1.7  -1.6  -0.7  0.4  3.0  1.9  0.3  3.4  4.2  5.5  10.4  15.4 
+
+if station T
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  34.6  39.8  23.6  23.7  23.2  18.8  20.6  38.2  -20.8  -22.2  -22.0  -21.1  -44.3  -36.3  -39.5  -40.8  11.3  8.1  -5.6  22.4  4.3  4.8  20.0  3.1 
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  17.8  20.1  10.7  15.9  8.5  6.1  14.2  16.1  -16.3  -3.4  -22.5  -18.6  -21.7  -21.1  -18.0  -1.5  7.6  13.2  3.7  7.6  4.9  1.5  1.7  -4.1 
+
+
+if station I
+  pc_delay_x  0.0
+  pc_delay_y -0.042 * (ns) 
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y 91.7 * (deg) 
+
+if station T
+  pc_delay_x  0.0
+  pc_delay_y 0.23 * (ns) 
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y -73.1 * (deg) 
+
+*TIMETAG 2025/07/23 05:07:55 UTC
+*This vgosDB was renamed from '22MAY28VC' to '20220528-c22148'
+*by Christopher Dieck <christopher.a.dieck.civ@us.navy.mil>.

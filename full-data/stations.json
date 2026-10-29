@@ -1,0 +1,207 @@
+{
+  "schema_version": 2,
+  "stations": [
+    {
+      "code": "Gs",
+      "name": "GGAO12M",
+      "file": "series/station/Gs.json",
+      "n_series": 79,
+      "n_sessions": 207,
+      "first_epoch": "2020-01-09T18:00:00Z",
+      "last_epoch": "2026-10-23T17:30:00Z"
+    },
+    {
+      "code": "Hb",
+      "name": "HOBART12",
+      "file": "series/station/Hb.json",
+      "n_series": 89,
+      "n_sessions": 86,
+      "first_epoch": "2022-01-20T18:00:00Z",
+      "last_epoch": "2026-10-07T00:00:00Z"
+    },
+    {
+      "code": "Hv",
+      "name": "HARTVGS",
+      "file": "series/station/Hv.json",
+      "n_series": 76,
+      "n_sessions": 66,
+      "first_epoch": "2024-11-06T12:00:00Z",
+      "last_epoch": "2026-10-07T00:00:00Z"
+    },
+    {
+      "code": "Is",
+      "name": "ISHIOKA",
+      "file": "series/station/Is.json",
+      "n_series": 111,
+      "n_sessions": 725,
+      "first_epoch": "2020-01-07T18:30:00Z",
+      "last_epoch": "2026-10-25T11:30:00Z"
+    },
+    {
+      "code": "K2",
+      "name": "KOKEE12M",
+      "file": "series/station/K2.json",
+      "n_series": 83,
+      "n_sessions": 1324,
+      "first_epoch": "2020-01-21T18:00:00Z",
+      "last_epoch": "2026-09-04T17:30:00Z"
+    },
+    {
+      "code": "Ke",
+      "name": "KATH12M",
+      "file": "series/station/Ke.json",
+      "n_series": 87,
+      "n_sessions": 79,
+      "first_epoch": "2022-12-14T18:00:00Z",
+      "last_epoch": "2026-10-07T00:00:00Z"
+    },
+    {
+      "code": "Mb",
+      "name": "MATVGOS",
+      "file": "series/station/Mb.json",
+      "n_series": 76,
+      "n_sessions": 6,
+      "first_epoch": "2025-06-11T00:00:00Z",
+      "last_epoch": "2026-08-05T00:00:00Z"
+    },
+    {
+      "code": "Mg",
+      "name": "MACGO12M",
+      "file": "series/station/Mg.json",
+      "n_series": 78,
+      "n_sessions": 331,
+      "first_epoch": "2020-01-21T18:00:00Z",
+      "last_epoch": "2026-10-07T00:00:00Z"
+    },
+    {
+      "code": "Nn",
+      "name": "NYALE13N",
+      "file": "series/station/Nn.json",
+      "n_series": 78,
+      "n_sessions": 187,
+      "first_epoch": "2022-08-18T18:00:00Z",
+      "last_epoch": "2026-10-19T05:30:00Z"
+    },
+    {
+      "code": "Ns",
+      "name": "NYALE13S",
+      "file": "series/station/Ns.json",
+      "n_series": 76,
+      "n_sessions": 12,
+      "first_epoch": "2025-06-18T00:00:00Z",
+      "last_epoch": "2026-09-10T00:00:00Z"
+    },
+    {
+      "code": "Oe",
+      "name": "ONSA13NE",
+      "file": "series/station/Oe.json",
+      "n_series": 81,
+      "n_sessions": 635,
+      "first_epoch": "2020-01-07T18:30:00Z",
+      "last_epoch": "2026-10-25T11:30:00Z"
+    },
+    {
+      "code": "Ow",
+      "name": "ONSA13SW",
+      "file": "series/station/Ow.json",
+      "n_series": 92,
+      "n_sessions": 539,
+      "first_epoch": "2020-01-07T18:30:00Z",
+      "last_epoch": "2026-10-25T11:30:00Z"
+    },
+    {
+      "code": "S6",
+      "name": "SESHAN13",
+      "file": "series/station/S6.json",
+      "n_series": 141,
+      "n_sessions": 95,
+      "first_epoch": "2024-02-15T17:30:00Z",
+      "last_epoch": "2026-10-08T17:30:00Z"
+    },
+    {
+      "code": "Sa",
+      "name": "RAEGSMAR",
+      "file": "series/station/Sa.json",
+      "n_series": 77,
+      "n_sessions": 133,
+      "first_epoch": "2023-01-25T18:00:00Z",
+      "last_epoch": "2026-10-22T17:30:00Z"
+    },
+    {
+      "code": "T1",
+      "name": "TIANMA13",
+      "file": "series/station/T1.json",
+      "n_series": 77,
+      "n_sessions": 12,
+      "first_epoch": "2025-03-05T00:00:00Z",
+      "last_epoch": "2026-03-19T00:00:00Z"
+    },
+    {
+      "code": "Um",
+      "name": "URUMQI13",
+      "file": "series/station/Um.json",
+      "n_series": 141,
+      "n_sessions": 12,
+      "first_epoch": "2024-08-21T12:00:00Z",
+      "last_epoch": "2026-09-10T00:00:00Z"
+    },
+    {
+      "code": "Wd",
+      "name": "WETTDBBC",
+      "file": "series/station/Wd.json",
+      "n_series": 76,
+      "n_sessions": 1,
+      "first_epoch": "2024-05-06T05:30:00Z",
+      "last_epoch": "2024-05-06T05:30:00Z"
+    },
+    {
+      "code": "Wf",
+      "name": "WESTFORD",
+      "file": "series/station/Wf.json",
+      "n_series": 82,
+      "n_sessions": 207,
+      "first_epoch": "2020-01-09T18:00:00Z",
+      "last_epoch": "2026-10-07T00:00:00Z"
+    },
+    {
+      "code": "Wn",
+      "name": "WETTZ13N",
+      "file": "series/station/Wn.json",
+      "n_series": 87,
+      "n_sessions": 161,
+      "first_epoch": "2024-09-18T12:00:00Z",
+      "last_epoch": "2026-10-09T17:30:00Z"
+    },
+    {
+      "code": "Ws",
+      "name": "WETTZ13S",
+      "file": "series/station/Ws.json",
+      "n_series": 113,
+      "n_sessions": 1485,
+      "first_epoch": "2020-01-09T18:00:00Z",
+      "last_epoch": "2026-10-23T17:30:00Z"
+    },
+    {
+      "code": "Yg",
+      "name": "YARRA12M",
+      "file": "series/station/Yg.json",
+      "n_series": 78,
+      "n_sessions": 45,
+      "first_epoch": "2024-12-04T12:00:00Z",
+      "last_epoch": "2026-10-07T00:00:00Z"
+    },
+    {
+      "code": "Yj",
+      "name": "RAEGYEB",
+      "file": "series/station/Yj.json",
+      "n_series": 117,
+      "n_sessions": 218,
+      "first_epoch": "2020-02-20T18:00:00Z",
+      "last_epoch": "2026-10-22T17:30:00Z"
+    }
+  ],
+  "global": {
+    "file": "series/global.json",
+    "n_series": 24
+  }
+}

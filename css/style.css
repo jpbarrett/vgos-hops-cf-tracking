@@ -1,0 +1,241 @@
+/* Tokens by role; dark values are their own steps, not an inversion. */
+:root {
+  color-scheme: light;
+  --page:           #f9f9f7;
+  --surface:        #fcfcfb;
+  --text-primary:   #0b0b0b;
+  --text-secondary: #52514e;
+  --text-muted:     #898781;
+  --grid:           #e1e0d9;
+  --axis:           #c3c2b7;
+  --border:         rgba(11, 11, 11, 0.10);
+  --series:         #2a78d6;
+  /* session type groups (categorical slots 1-3, validated all-pairs, plus
+     VGOS-RD in ink); which group uses which is in js/legend.js */
+  --type-1:         #2a78d6;
+  --type-2:         #eb6834;
+  --type-3:         #1baf7a;
+  --type-rd:        #0b0b0b;
+  --accent:         #d03b3b;   /* status critical: the offsets-missed cross only */
+  --link:           #1c5cab;
+  --div-low:        #184f95;
+  --div-mid:        #f0efec;
+  --div-high:       #b03030;
+  --seq-low:        #cde2fb;
+  --seq-high:       #0d366b;
+  --cf-block:       rgba(42, 120, 214, 0.07);
+  --cf-hit:         rgba(42, 120, 214, 0.18);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page:           #0d0d0d;
+    --surface:        #1a1a19;
+    --text-primary:   #f0efec;
+    --text-secondary: #c3c2b7;
+    --text-muted:     #898781;
+    --grid:           #2c2c2a;
+    --axis:           #383835;
+    --border:         rgba(255, 255, 255, 0.10);
+    --series:         #3987e5;
+    --type-1:         #3987e5;
+    --type-2:         #d95926;
+    --type-3:         #199e70;
+    --type-rd:        #f0efec;
+    --accent:         #d03b3b;
+    --link:           #86b6ef;
+    --div-low:        #3987e5;
+    --div-mid:        #383835;
+    --div-high:       #e66767;
+    --seq-low:        #1a2a40;
+    --seq-high:       #86b6ef;
+    --cf-block:       rgba(57, 135, 229, 0.12);
+    --cf-hit:         rgba(57, 135, 229, 0.30);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page:           #0d0d0d;
+  --surface:        #1a1a19;
+  --text-primary:   #f0efec;
+  --text-secondary: #c3c2b7;
+  --text-muted:     #898781;
+  --grid:           #2c2c2a;
+  --axis:           #383835;
+  --border:         rgba(255, 255, 255, 0.10);
+  --series:         #3987e5;
+  --type-1:         #3987e5;
+  --type-2:         #d95926;
+  --type-3:         #199e70;
+  --type-rd:        #f0efec;
+  --accent:         #d03b3b;
+  --link:           #86b6ef;
+  --div-low:        #3987e5;
+  --div-mid:        #383835;
+  --div-high:       #e66767;
+  --seq-low:        #1a2a40;
+  --seq-high:       #86b6ef;
+  --cf-block:       rgba(57, 135, 229, 0.12);
+  --cf-hit:         rgba(57, 135, 229, 0.30);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--page);
+  color: var(--text-primary);
+  font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+header.site, footer.site, main { max-width: 1400px; margin: 0 auto; padding: 0 16px; }
+header.site {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 16px;
+  padding-top: 16px; padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.brand { font-weight: 600; font-size: 16px; color: var(--text-primary); }
+.dataset { color: var(--text-secondary); font-size: 13px; }
+footer.site { color: var(--text-muted); font-size: 12px; padding-top: 24px; padding-bottom: 24px; }
+
+h1 { font-size: 22px; font-weight: 600; margin: 20px 0 4px; }
+h2 { font-size: 16px; font-weight: 600; margin: 28px 0 8px; }
+.sub { color: var(--text-secondary); margin: 0 0 12px; }
+.status { color: var(--text-secondary); padding: 24px 0; }
+.error { color: var(--accent); padding: 24px 0; white-space: pre-wrap; }
+.crumbs { margin-top: 16px; font-size: 13px; color: var(--text-secondary); }
+
+/* one row of filters above everything it scopes */
+.filters {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px;
+  padding: 10px 0; margin-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.filters label { color: var(--text-secondary); font-size: 13px; display: inline-flex; align-items: center; gap: 6px; }
+.filters select, .filters input[type="date"] {
+  font: inherit; font-size: 13px; color: var(--text-primary);
+  background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 3px 6px;
+}
+.seg { display: inline-flex; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+.seg button {
+  font: inherit; font-size: 13px; padding: 3px 10px; border: 0; cursor: pointer;
+  background: var(--surface); color: var(--text-secondary);
+}
+.seg button + button { border-left: 1px solid var(--border); }
+.seg button[aria-pressed="true"] { color: var(--text-primary); font-weight: 600; background: var(--page); }
+
+.tabs { display: flex; gap: 4px; margin: 12px 0 4px; border-bottom: 1px solid var(--border); }
+.tabs a {
+  padding: 6px 12px; color: var(--text-secondary); border-bottom: 2px solid transparent; margin-bottom: -1px;
+}
+.tabs a[aria-current="page"] { color: var(--text-primary); border-bottom-color: var(--series); font-weight: 600; }
+.tabs a:hover { text-decoration: none; color: var(--text-primary); }
+
+.note { color: var(--text-muted); font-size: 12px; margin: 4px 0 8px; }
+
+.panels { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr)); gap: 12px; }
+.card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+  padding: 10px 10px 4px; min-width: 0;
+}
+.card h3 { font-size: 13px; font-weight: 600; margin: 0 0 2px; }
+.card h3 a { color: var(--text-primary); }
+.card .meta { font-size: 12px; color: var(--text-muted); }
+/* the hovered point is described here, never over the plot; one reserved
+   line, so the plot does not jump as the text changes */
+.info {
+  font-size: 12px; color: var(--text-muted); min-height: 1.45em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.info.active { color: var(--text-primary); font-variant-numeric: tabular-nums; }
+.wide > .info { font-size: 13px; padding: 0 2px 6px; }
+.plot { width: 100%; height: 210px; }
+.plot.big { height: 420px; }
+.plot.heat { height: 620px; }
+
+.wide { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px; }
+
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { text-align: left; padding: 5px 10px 5px 0; border-bottom: 1px solid var(--grid); white-space: nowrap; }
+th { color: var(--text-secondary); font-weight: 600; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+td.wrap { white-space: normal; }
+/* a session the value was not set in, among the points */
+tr.not-set td { color: var(--text-secondary); }
+td svg { vertical-align: -1px; }
+.tag { font-size: 11px; color: var(--text-secondary); border: 1px solid var(--border); border-radius: 4px; padding: 0 4px; }
+
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr)); gap: 0 32px; }
+
+/* session-type filter: a dropdown of checkboxes, and the colour key that
+   doubles as the legend for every plot on the page */
+.types { position: relative; }
+.types > summary {
+  list-style: none; cursor: pointer; font-size: 13px; color: var(--text-primary);
+  background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 3px 8px;
+}
+.types > summary::-webkit-details-marker { display: none; }
+.types > summary::after { content: " ▾"; color: var(--text-muted); }
+.types-menu {
+  position: absolute; z-index: 10; top: calc(100% + 4px); left: 0; min-width: 240px;
+  max-width: calc(100vw - 32px);
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+  padding: 8px 10px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+.types-menu label { display: flex; align-items: center; gap: 6px; padding: 2px 0; color: var(--text-primary); }
+.types-menu .count { margin-left: auto; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.types-menu .seg { margin-bottom: 6px; }
+.key { display: inline-flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; color: var(--text-secondary); }
+.key span { display: inline-flex; align-items: center; gap: 5px; }
+.key svg { flex: none; }
+
+/* the control file panel, over the right of the page; full width on a phone.
+   --cf-width is set when the reader drags the left edge */
+.cf-panel {
+  position: fixed; z-index: 1100; top: 0; right: 0; bottom: 0;
+  width: min(var(--cf-width, min(1100px, 80vw)), 100vw); min-width: min(360px, 100vw);
+  display: flex; flex-direction: column;
+  background: var(--surface); border-left: 1px solid var(--border);
+  box-shadow: -6px 0 24px rgba(0, 0, 0, 0.14);
+}
+.cf-panel[hidden] { display: none; }
+@media (max-width: 700px) { .cf-panel { width: 100vw; } .cf-panel .grip { display: none; } }
+.cf-panel .grip {
+  position: absolute; left: -4px; top: 0; bottom: 0; width: 8px; cursor: ew-resize; touch-action: none;
+}
+.cf-panel .grip:hover, .cf-panel.resizing .grip { background: var(--axis); }
+.cf-panel.resizing { user-select: none; }
+.cf-panel > header {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+  padding: 12px 16px 8px; border-bottom: 1px solid var(--border);
+}
+.cf-panel .note { margin: 2px 0 0; }
+.cf-panel .cf-sub { padding: 6px 16px; margin: 0; border-bottom: 1px solid var(--border); }
+.cf-panel .status, .cf-panel .error { padding: 16px; }
+.cf-panel .close {
+  font: inherit; font-size: 20px; line-height: 1; padding: 2px 8px; cursor: pointer;
+  background: none; border: 1px solid var(--border); border-radius: 6px; color: var(--text-secondary);
+}
+.cf-text {
+  flex: 1; overflow: auto; padding: 6px 0 24px;
+  font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+.cf-text > div { display: flex; padding-right: 16px; }
+/* long lines (pc_phases runs to 300 characters) wrap, continuing indented
+   under the code column, so nothing is cut off at any width */
+.cf-text .code {
+  flex: 1; min-width: 0; white-space: pre-wrap; overflow-wrap: anywhere;
+  padding-left: 4ch; text-indent: -4ch;
+}
+.cf-text .ln {
+  flex: none; width: 4.5em; padding-right: 12px; text-align: right;
+  color: var(--text-muted); user-select: none; font-variant-numeric: tabular-nums;
+}
+.cf-text .block { background: var(--cf-block); }
+.cf-text .hit { background: var(--cf-hit); box-shadow: inset 3px 0 0 var(--series); }
+button.linkish {
+  font: inherit; padding: 0; border: 0; background: none; color: var(--link); cursor: pointer;
+}
+button.linkish:hover { text-decoration: underline; }

@@ -1,0 +1,89 @@
+* Fourfit control file for c25180
+
+*==========================================================
+*basic setup
+*==========================================================
+
+sb_win -256.0 256.0
+mb_win -2.0 2.0
+dr_win -5.e-4  5.e-4
+pc_mode multitone
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+ref_freq 6000.0
+weak_channel 0.1
+pc_amp_hcode .001
+* general ionosphere search parameters:
+ion_npts 45
+ion_win  -88.0 88.0
+
+
+*==========================================================
+* sampler delays and pc_tonemask
+*==========================================================
+
+if station S
+  pc_tonemask l 4
+
+if station T
+  pc_tonemask dzE 16 16 2
+
+if station I
+  sampler_delay_x   80   80   70   60 
+  sampler_delay_y   80   75   70   60 
+
+if station S
+  sampler_delay_x   95  -75   95   80 
+  sampler_delay_y   95  100   95   60 
+
+if station T
+  sampler_delay_x  -15  -10  -20  -30 
+  sampler_delay_y  -15  -20  -30  -40 
+
+
+*==========================================================
+*station pc_phases
+*==========================================================
+if baseline ST
+  skip true
+
+
+if station I
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0 
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  9.6  -3.3  -4.2  6.8  9.0  6.8  0.9  0.2  -4.7  -5.7  0.2  -5.2  -1.7  1.2  6.3  -0.6  -3.9  -1.5  2.0  2.6  -4.2  5.0  2.6  3.2  7.7  7.0  8.4  -2.6  -8.3  -2.7  -19.3  -13.3 
+
+if station S
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  29.4  23.5  14.8  14.0  -2.1  -14.3  -16.1  -12.4  23.8  -131.4  -49.5  -179.0  11.7  204.9  21.5  91.3  4.2  10.9  -1.7  11.9  5.7  1.5  -6.8  -1.4  8.1  6.2  -1.1  12.2  -6.4  4.5  -6.2  -2.0 
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  17.0  5.7  2.7  3.1  6.9  7.9  -3.7  -21.2  -12.4  -12.9  -11.8  -13.8  -12.3  -18.3  -12.5  -8.0  23.4  17.8  17.2  19.5  8.5  11.8  3.2  5.5  -7.1  -13.5  -3.0  -0.0  -12.9  -1.2  21.1  -9.0 
+
+if station T
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  -20.1  -47.3  -3.6  45.2  13.3  -9.6  10.1  -3.3  23.3  27.1  25.3  16.1  15.0  5.3  21.7  26.3  -19.7  -21.1  -29.2  -23.8  -36.8  -31.6  -33.0  -31.9  13.4  19.8  15.4  13.4  -0.5  4.4  -5.9  -15.9 
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -24.5  -11.0  -38.6  26.9  31.5  -16.7  12.6  -4.8  34.4  25.3  10.0  20.2  21.3  10.5  29.8  51.2  -21.6  -24.9  -14.9  -10.5  -34.6  -28.3  -23.5  -27.0  -4.3  2.3  3.2  -4.9  -18.5  8.5  9.3  11.2 
+
+
+
+if station I
+  pc_delay_x  0.0
+  pc_delay_y 0.033 * (ns) estimated error is +/- 0.002
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y -103.5 * (deg) estimated error is +/- 5.0
+
+if station S
+  pc_delay_x  0.0
+  pc_delay_y -0.111 * (ns) estimated error is +/- 0.003
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y 125.1 * (deg) estimated error is +/- 6.8
+
+if station T
+  pc_delay_x  0.0
+  pc_delay_y 0.237 * (ns) estimated error is +/- 0.006
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y -59.1 * (deg) estimated error is +/- 17.4
+
+*==========================================================
+* This control file was generated with the script vgoscf_generate.py
+* on Jun-30-0520PM-2025 using the following arguments: 
+* args: Namespace(averaging_scan_limit=10, begin_scan_limit='000-0000', channel_discard_tolerance=15.0, control_file='./c25180.cf', data_directory='./0300/', dtec_thresh=1.0, end_scan_limit='999-9999', nchannel_discard_threshold=5, network_reference_station='I', num_proc=10, output_filename='', quality_lower_limit=5, sigma_cut_factor=3.0, snr_min=30.0, stations='ST', toggle_dump_info=True, use_progress_ticker=True, use_scratch=False, verbosity=2)
+*========================================================== 

@@ -1,0 +1,44 @@
+sb_win -256.0 256.0
+mb_win -2.0 2.0
+dr_win -5e-06 5e-06
+pc_mode multitone
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+ref_freq 6000.0
+weak_channel 0.1
+pc_amp_hcode 0.001
+ion_npts 45
+ion_win -88.0 88.0
+
+if station S
+  pc_tonemask l 4
+
+if station S
+  sampler_delay_x 85 90 85 70
+  sampler_delay_y 85 90 85 70
+
+if station I
+  sampler_delay_x 105 95 120 120
+  sampler_delay_y 105 95 120 120
+
+if station I
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF -4.5 -3.3 15.8 3.0 9.0 -7.5 7.2 -1.4 -13.0 3.6 -6.6 -6.8 -0.2 3.8 -9.1 -0.9 5.0 -1.6 5.6 3.4 4.8 -7.1 4.6 8.2 14.2 6.0 5.1 -9.9 -2.8 0.8 -17.5 -9.9
+
+if station S
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF 19.2 5.0 15.7 -2.8 4.1 -4.7 6.5 -2.6 -14.2 -12.5 -5.7 -11.1 -9.8 -22.5 -15.1 -32.3 24.4 7.6 25.7 11.9 -3.1 -2.1 1.3 -7.6 10.3 11.7 1.1 4.5 -9.6 6.5 -13.8 9.1
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF 6.3 4.1 7.4 1.5 5.4 1.4 -3.1 -9.2 -12.7 -9.0 -9.0 -4.0 -17.1 -27.6 -26.2 -14.1 16.5 14.1 17.2 10.8 14.8 16.2 14.1 13.8 -3.3 -1.4 -14.2 5.5 -6.8 2.6 1.6 -1.2
+
+if station I
+  pc_delay_x 0.0
+  pc_delay_y 0.032
+  pc_phase_offset_x 0.0
+  pc_phase_offset_y -110.0
+
+if station S
+  pc_delay_x 0.0
+  pc_delay_y -0.108
+  pc_phase_offset_x 0.0
+  pc_phase_offset_y 126.3

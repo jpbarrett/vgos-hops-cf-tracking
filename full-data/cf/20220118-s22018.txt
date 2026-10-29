@@ -1,0 +1,43 @@
+dr_win -5.e-6  5.e-6
+pc_mode multitone
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+ref_freq 6000.0
+weak_channel 0.1
+pc_amp_hcode .001
+* general ionosphere search parameters:
+ion_npts 45
+ion_win  -88.0 88.0
+
+if station M
+  sampler_delay_x   20  120  150  120
+  sampler_delay_y   20  120  150  120
+
+if station V
+  sampler_delay_x    0 -50 -15 -40
+  sampler_delay_y  -20 -70 -30 -70
+
+if station M
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0 
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -1.6  4.6  -2.8  0.5  -0.9  -1.7  -4.2  -6.2  -5.8  -3.1  4.4  1.6  0.1  1.4  2.3  4.0  1.8  3.8  4.8  0.6  2.3  6.4  4.3  7.5  -3.1  -5.2  -2.2  -3.6  -3.0  -1.2  0.2  -1.2 
+
+if station V
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  -14.2  -7.6  -11.5  11.1  27.1  27.1  15.6  0.9  -31.0  -11.0  -11.0  -7.2  2.0  10.3  12.9  10.7  10.6  14.7  11.3  8.6  -4.1  -20.7  -25.5  -19.0  14.1  14.0  17.4  -0.2  -11.0  -13.8  -15.2  -7.6 
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -9.3  -7.4  -6.3  14.4  28.1  38.6  25.4  12.3  -29.5  -17.2  -15.2  -12.9  -2.5  7.8  2.6  7.4  10.2  12.1  -0.2  4.4  -0.1  -15.2  -23.3  -30.9  17.5  21.0  19.7  -12.7  -30.0  -29.8  -5.5  16.6 
+
+if station M
+  pc_delay_x  0.0
+  pc_delay_y -1.012 * (ns) estimated error is +/- 0.002
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y -44.3 * (deg) estimated error is +/- 3.7
+
+if station V
+  pc_delay_x  0.0
+  pc_delay_y 0.068 * (ns) estimated error is +/- 0.001
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y 140.3 * (deg) estimated error is +/- 3.4
+
+*Regards,
+* Christian 

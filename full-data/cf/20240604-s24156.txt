@@ -1,0 +1,49 @@
+*sb_win -512.0 512.0
+dr_win -5e-6  5e-6
+pc_mode multitone
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+ref_freq 6000.0
+weak_channel 0.1
+pc_amp_hcode 0.001
+ion_npts 75
+ion_win  -100.0 100.0
+
+if station M
+  pc_amp_hcode 0.0001
+
+if station M
+  sampler_delay_x -44.5 122.5 123.0 122.9
+  sampler_delay_y -43.8 122.0 121.8 121.8
+
+if station V
+  sampler_delay_x -172.3 -210.4 -157.4 -169.6
+  sampler_delay_y -188.9 -220.9 -118.5 -182.2
+
+if station M
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -4.7  -5.0  -2.3  -10.1  -11.1  -1.9  -9.7  -7.4  -9.0  -2.7  -7.4  0.1  -3.3  -6.4  2.2  -0.8  -1.0  4.2  0.4  1.8  -2.4  -2.6  1.0  3.8  -0.8  -1.7  3.2  -3.2  1.1  5.5  6.0  18.0
+
+if station V
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  -26.2  -16.0  -8.1  7.3  21.2  27.1  19.6  12.1  -29.6  -15.6  -16.8  -6.8  -5.3  -3.3  -0.5  1.2  4.2  2.9  2.7  1.1  -0.9  -11.9  -15.3  -19.3  14.5  21.3  30.0  10.0  -5.2  -9.9  3.9  8.4
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -17.0  -9.0  -15.7  23.4  28.7  28.7  32.9  33.3  -25.0  -17.2  -2.1  11.0  -5.2  -9.4  15.0  24.6  -0.7  -5.4  -4.7  22.5  -1.1  -22.4  -29.5  -37.1  7.6  10.0  9.1  -12.4  -13.1  -18.2  -16.5  -19.4
+
+if station M
+  pc_delay_x  0.0
+  pc_delay_y -1.024 * (ns) estimated error is +/- 0.001
+  pc_phase_offset_x  0.0
+  pc_phase_offset_y -51.5 * (deg) estimated error is +/- 2.6
+
+if station V
+  pc_delay_x  0.0
+  pc_delay_y 0.091 * (ns) estimated error is +/- 0.006
+  pc_phase_offset_x  0.0
+  pc_phase_offset_y -3.9 * (deg) estimated error is +/- 4.6
+
+*==========================================================
+* This control file was generated with the script vgoscf_generate.py
+* on Jun-05-0141PM-2024 using the following arguments:
+* args: Namespace(averaging_scan_limit=30, begin_scan_limit='000-0000', channel_discard_tolerance=15.0, control_file='./cf_1234_MV_final', data_directory='./1234/', dtec_thresh=1.0, end_scan_limit='999-9999', nchannel_discard_threshold=5, network_reference_station='M', num_proc=22, output_filename='', quality_lower_limit=6, sigma_cut_factor=1.5, snr_min=12.0, stations='V', toggle_dump_info=True, use_progress_ticker=True, use_scratch=True, verbosity=3)
+*==========================================================

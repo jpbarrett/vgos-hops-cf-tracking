@@ -1,0 +1,72 @@
+*vgos control file
+
+*==========================================================
+*basic setup
+*==========================================================
+
+*sb_win -512.0 512.0
+dr_win -5.e-6  5.e-6
+sb_win -2.0 2.0
+pc_mode multitone
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+*ref_freq 6000.0
+ref_freq 10680.4
+weak_channel 0.1
+pc_amp_hcode 0.001
+* general ionosphere search parameters:
+ion_npts 75
+ion_win  -100.0 100.0
+
+*==========================================================
+* start of if-statement blocks
+*==========================================================
+
+*==========================================================
+*station sampler delays
+*==========================================================
+if station I *new
+  sampler_delay_x 20 10 0 -10
+  sampler_delay_y 20 10 0 -10
+
+if station N *ok
+  sampler_delay_x -35 -45 -50 -60
+  sampler_delay_y -35 -45 -55 -70
+
+if station V *ok
+  sampler_delay_x  10  10  15   5
+  sampler_delay_y  10   0   5   5
+
+if station I
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -4.4  0.5  -2.3  5.0  4.0  4.7  -1.8  -4.1  -2.7  -5.8  -6.4  -5.3  -1.1  1.2  1.7  5.9  -1.7  -3.8  0.6  1.9  3.6  4.1  -0.4  5.8  13.6  -11.0  -3.6  7.9  9.9  -0.7  -11.8  -4.9
+
+if station N
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  5.9  -24.2  -3.3  -13.6  15.1  -10.3  11.8  15.1  -1.4  -0.6  0.3  7.3  -0.0  -11.3  -10.9  -7.9  12.2  12.3  17.4  12.6  -3.7  -1.0  -11.6  -6.8  -38.0  -46.9  -48.2  14.0  28.4  22.8  19.9  32.7
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  22.3  9.9  -22.4  3.4  7.2  7.0  -9.2  -8.1  1.5  -8.0  4.6  0.4  -2.6  4.3  -13.0  -8.4  18.4  12.3  13.7  16.4  -2.0  -3.9  -10.3  -13.8  -42.0  -48.0  -55.5  18.7  7.9  18.4  34.0  45.1
+
+*==========================================================
+* This control file was generated with the script ffres2pcp.py
+* on Jul-15-0153PM-2025 using the following arguments:
+* args: Namespace(averaging_scan_limit=30, begin_scan_limit='000-0000', channel_discard_tolerance=15.0, control_file='cf_initial', data_directory='.', dtec_thresh=5.0, end_scan_limit='999-9999', nchannel_discard_threshold=5, network_reference_station='I', num_proc=20, output_filename='', quality_lower_limit=5, sigma_cut_factor=3.0, snr_min=12.0, stations='N', toggle_dump_info=True, use_progress_ticker=True, use_scratch=True, verbosity=2)
+*==========================================================
+
+if station I
+  pc_delay_x  0.0
+  pc_delay_y 0.031 * (ns) estimated error is +/- 0.003
+  pc_phase_offset_x  0.0
+  pc_phase_offset_y -56.8 * (deg) estimated error is +/- 13.7
+
+if station N
+  pc_delay_x  0.0
+  pc_delay_y -0.095 * (ns) estimated error is +/- 0.003
+  pc_phase_offset_x  0.0
+  pc_phase_offset_y 162.2 * (deg) estimated error is +/- 15.1
+
+*==========================================================
+* This control file was generated with the script fourphase.py
+* on Jul-15-0222PM-2025 using the following arguments:
+* args: Namespace(averaging_scan_limit=30, begin_scan_limit='000-0000', control_file='cf_6013_IN_pcphases', data_directory='.', dtec_thresh=5.0, end_scan_limit='999-9999', network_reference_station='I', num_proc=20, output_filename='', quality_lower_limit=5, sigma_cut_factor=3.0, snr_min=12.0, stations='N', toggle_dump_info=True, use_progress_ticker=True, use_scratch=True, verbosity=2)
+*==========================================================

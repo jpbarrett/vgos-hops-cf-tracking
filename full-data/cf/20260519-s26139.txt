@@ -1,0 +1,47 @@
+sb_win -1. 1.
+*dr_win -5.e-6  5.e-6
+
+pc_mode multitone
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+ref_freq 10680.4
+weak_channel 0.1
+pc_amp_hcode 0.001
+ion_npts 75
+ion_win -100.0 100.0
+
+if station M
+  sampler_delay_x 50 215 215 215
+  sampler_delay_y 50 215 215 215
+
+if station V
+   sampler_delay_x 15  10  -5   -5
+   sampler_delay_y 10   5  -5  -10
+
+if station M
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  2.5  1.1  -2.7  0.0  0.8  -2.1  -1.4  -3.2  -7.2  -6.9  -6.2  -9.8  -7.7  -11.6  -6.4  -8.0  -7.8  -6.2  -7.2  -6.5  -3.7  -1.7  1.1  -9.8  5.9  8.9  11.6  12.8  11.4  7.8  6.5  8.9
+
+if station V
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  -42.1  -25.7  -18.1  0.5  15.0  39.7  10.9  7.9  -10.5  -6.2  -9.2  -18.9  -2.7  -4.4  12.1  11.4  -8.1  -16.4  -18.9  -8.7  -9.2  -14.6  -21.1  -10.9  55.5  58.4  51.5  18.5  17.6  7.0  20.0  32.9
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -39.7  -23.5  -26.8  4.1  19.3  27.6  25.0  23.4  4.2  0.5  2.4  15.3  11.9  16.0  14.3  25.7  -14.0  -10.3  -16.9  7.5  8.3  -7.7  -16.2  -25.6  -30.0  -21.0  -19.6  -30.8  -52.2  -60.6  -67.6  -60.6
+
+if station M
+  pc_delay_x  0.0
+  pc_delay_y -1.023 * (ns) estimated error is +/- 0.003
+  pc_phase_offset_x  0.0
+  pc_phase_offset_y 32.0 * (deg) estimated error is +/- 6.1
+
+if station V
+  pc_delay_x  0.0
+  pc_delay_y 0.085 * (ns) estimated error is +/- 0.004
+  pc_phase_offset_x  0.0
+  pc_phase_offset_y -100.8 * (deg) estimated error is +/- 7.1
+
+*==========================================================
+* This control file was generated with the script vgoscf_generate.py
+* on May-20-0141PM-2026 using the following arguments:
+* args: Namespace(control_file='cf_1234_start', network_reference_station='M', stations='V', data_directory='1234/', verbosity=3, num_proc=22, snr_min=15.0, quality_lower_limit=6, dtec_thresh=3.0, begin_scan_limit='000-0000', end_scan_limit='999-9999', sigma_cut_factor=3.0, use_scratch=True, use_progress_ticker=True, output_filename='', averaging_scan_limit=10, toggle_dump_info=True, nchannel_discard_threshold=5, channel_discard_tolerance=15.0)
+*==========================================================

@@ -1,0 +1,58 @@
+dr_win -5.e-6  5.e-6
+sb_win -2.0 2.0
+pc_mode manual
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+ref_freq 6000.0
+weak_channel 0.01
+pc_amp_hcode .001
+ion_npts 75
+ion_win -100 100 
+
+if station X
+   freqs a b c d   i j k l m n o p   q r s t u v w x   y z A B C D E F
+
+if station I
+  sampler_delay_x -39.32 -37.53 -49.18 -46.01
+  sampler_delay_y -39.38 -37.88 -49.05 -46.30
+
+if station X
+  sampler_delay_x 72.31 65.48 67.67 67.73
+  sampler_delay_y 71.93 65.79 67.46 68.19
+
+if station I
+   delay_offs_y abcdefgh  -2.121 -2.121 -2.121 -2.121 -2.121 -2.121 -2.121 -2.121
+   delay_offs_y ijklmnop  1.814 1.814 1.814 1.814 1.814 1.814 1.814 1.814
+   delay_offs_y qrstuvwx 7.273 7.273 7.273 7.273 7.273 7.273 7.273 7.273
+   delay_offs_y yzABCDEF  5.615 5.615 5.615 5.615 5.615 5.615 5.615 5.615
+if station X
+   delay_offs_x abcdefgh  -51.179 -51.179 -51.179 -51.179 -51.179 -51.179 -51.179 -51.179 
+   delay_offs_y abcdefgh  -52.531 -52.531 -52.531 -52.531 -52.531 -52.531 -52.531 -52.531
+   delay_offs_x ijklmnop  -51.678 -51.678 -51.678 -51.678 -51.678 -51.678 -51.678 -51.678
+   delay_offs_y ijklmnop  -54.922 -54.922 -54.922 -54.922 -54.922 -54.922 -54.922 -54.922
+   delay_offs_x qrstuvwx  -64.081 -64.081 -64.081 -64.081 -64.081 -64.081 -64.081 -64.081
+   delay_offs_y qrstuvwx  -64.190 -64.190 -64.190 -64.190 -64.190 -64.190 -64.190 -64.190
+   delay_offs_x yzABCDEF  -78.286 -78.286 -78.286 -78.286 -78.286 -78.286 -78.286 -78.286
+   delay_offs_y yzABCDEF  -81.156 -81.156 -81.156 -81.156 -81.156 -81.156 -81.156 -81.156
+
+if station I
+
+   pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  -0.3  -0.3  -0.3  -0.2  -0.2  -0.3  -0.2  -0.2  -0.1  -0.0  0.0  0.1  0.0  0.1  0.1  0.1  0.1  -0.0  0.1  0.1  0.1  -0.0  0.2  0.1  0.1  0.2  0.1  0.0  0.1  0.2  0.2  0.0
+   pc_phases_y abcdijklmnopqrstuvwxyzABCDEF -261.9 -175.4  -49.8   -8.0 -211.4 -133.3  -39.5 -187.7  -15.3 -259.7 -125.9  -51.0  307.8  346.9   40.5  279.8   88.7  180.7  315.7   26.6  275.9  311.2  313.1  346.2  260.8  152.2   49.3   79.9
+if station X
+   pc_phases_x abcdijklmnopqrstuvwxyzABCDEF 218.8 250.3 283.0  77.9  28.0 309.2 232.6  37.0 273.6 208.3 125.5  68.3  -100.3  -305.0  -159.0  -176.6  -356.1  -346.1  -357.7  -197.8  -138.5  -130.9   -59.7  -286.9   -78.7  -339.4  -232.8  -226.8
+   pc_phases_y abcdijklmnopqrstuvwxyzABCDEF 294.1 332.4  61.1  25.7 275.7 243.9 237.0 156.6 155.9 140.6 126.1 108.5   -86.3  -283.3   -78.3  -278.7  -347.7  -267.7  -190.7  -336.3  -143.8   -47.5  -333.8   -18.5   -90.1  -198.1  -324.8  -296.5
+
+if station X
+  pc_delay_x  0.0
+  pc_delay_y -3.553 
+  pc_phase_offset_x  0.0
+  pc_phase_offset_y 23.5 
+
+if station I
+  pc_delay_x  0.0
+  pc_delay_y -1.215 
+  pc_phase_offset_x  0.0
+  pc_phase_offset_y 12.2 

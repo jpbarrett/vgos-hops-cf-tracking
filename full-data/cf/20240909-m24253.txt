@@ -1,0 +1,54 @@
+dr_win -5e-06 5e-06
+sb_win -2.0 2.0
+pc_mode multitone
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+ref_freq 6000.0
+weak_channel 0.1
+pc_amp_hcode 0.001
+ion_npts 75
+ion_win -100.0 100.0
+
+if station I
+  sampler_delay_x 80 70 70 60
+  sampler_delay_y 80 70 60 50
+
+if station N
+  sampler_delay_x -40 -50 -50 -60
+  sampler_delay_y -40 -50 -60 -70
+
+if station V
+  sampler_delay_x -30 -10 -10 30
+  sampler_delay_y -30 -70 -10 -40
+
+if station I
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF 27.8 13.7 2.0 -9.1 -21.3 -21.5 -9.6 3.0 16.2 23.9 18.0 14.4 0.9 0.0 -8.5 -3.1 -3.8 -5.3 -11.3 -2.9 -10.1 -7.1 1.1 -1.3 9.3 0.6 4.8 0.8 5.3 -6.1 4.4 -20.4
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF 21.8 23.2 6.2 -11.6 -20.9 -13.4 -11.5 -4.8 5.7 12.9 14.1 5.6 3.2 -4.5 -7.2 -10.9 -9.8 -6.2 -3.2 3.0 -3.0 1.7 7.7 16.8 7.8 5.7 3.7 -9.8 4.0 -6.1 -7.5 -8.4
+
+if station N
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF 30.1 34.8 9.9 -22.9 -25.3 -20.0 3.1 -8.8 6.1 6.9 10.3 0.9 -8.4 -14.8 -21.3 -27.0 22.1 23.6 14.9 11.5 0.1 2.4 0.2 1.8 -42.3 -42.7 -28.1 -3.8 16.0 24.3 25.0 19.2
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF 53.2 10.0 20.7 -20.6 -11.2 -16.8 3.6 5.1 10.0 13.9 7.2 7.2 -0.3 -5.9 -26.2 -8.8 16.6 8.1 8.3 12.0 -2.2 -4.7 -12.5 -12.6 -33.7 -36.3 -27.9 5.7 15.8 12.6 30.9 21.8
+
+if station V
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+
+if station I
+  pc_delay_x 0.0
+  pc_delay_y 0.032
+  pc_phase_offset_x 0.0
+  pc_phase_offset_y -107.2
+
+if station N
+  pc_delay_x 0.0
+  pc_delay_y -0.092
+  pc_phase_offset_x 0.0
+  pc_phase_offset_y -21.3
+
+if station V
+  pc_delay_x 0.0
+  pc_delay_y 0.093
+  pc_phase_offset_x 0.0
+  pc_phase_offset_y -15.9

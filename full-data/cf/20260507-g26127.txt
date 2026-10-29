@@ -1,0 +1,96 @@
+*vgos control file
+
+*==========================================================
+*basic setup
+*==========================================================
+
+sb_win -512.0 512.0
+dr_win -5.e-6  5.e-6
+pc_mode multitone
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+ref_freq 10680.4
+weak_channel 0.1
+pc_amp_hcode .001
+* general ionosphere search parameters:
+ion_npts 75
+ion_win  -100.0 100.0
+
+freqs a b c d e f g h i j k l m n o p q r s t u v w x y z A B C D E F
+
+*==========================================================
+*==========================================================
+* start of if-statement blocks
+
+if station X
+  freqs i j k l m n o p q r s t u v w x y z A B C D E F
+
+*==========================================================
+*==========================================================
+
+*==========================================================
+*station sampler delays
+*==========================================================
+if station Y
+  sampler_delay_x 100 150 100 100
+  sampler_delay_y 100 0 95 95
+
+if station I
+  sampler_delay_x  -40  -50  -60  -65
+  sampler_delay_y  -40  -50  -65  -75
+
+if station X
+  sampler_delay_x   70   65   70   70
+  sampler_delay_y   70   70   65   70
+
+if station A
+  sampler_delay_x  -35  -35  -40  -45
+  sampler_delay_y  -45  -35  -45  -45
+
+if station A
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  -2.9  -4.9  -9.5  -9.0  7.6  4.0  10.8  4.3  11.1  5.4  -13.7  -10.4  -16.0  11.6  4.9  -6.7  -5.2  2.7  -1.2  11.8  18.1  -0.1  -24.2  3.7  -26.0  13.6  -10.6  15.7  -107.9  22.6  31.6  0.8
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -22.3  11.3  -1.2  -42.1  20.5  -18.7  41.3  11.9  9.5  14.0  7.7  11.1  -4.7  -13.5  -9.4  -27.6  0.1  -11.2  -1.4  -8.7  4.5  1.9  2.8  5.1  52.3  58.5  14.1  17.1  -44.3  -6.5  -96.3  -8.4
+
+if station I
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  1.2  2.3  0.6  -2.1  5.3  2.1  -0.6  -8.3  1.7  -8.3  -2.2  -6.8  -0.3  4.0  4.5  -5.8  -0.7  -1.8  5.2  -2.1  2.3  2.5  1.7  5.1  11.5  9.9  12.4  3.1  -13.2  2.1  -16.6  -7.5
+
+if station X
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  8.5  1.0  -7.2  -9.2  -0.0  3.1  6.3  1.8  -2.6  0.9  1.1  -7.3  0.9  -0.8  -2.9  9.5  -7.0  9.4  19.1  8.3  -10.9  0.7  -19.5  -2.7
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  15.7  -31.0  23.8  4.2  36.1  12.6  -6.7  -12.5  -22.6  -17.4  -20.1  4.7  10.8  11.2  7.4  5.6  -15.9  -6.3  4.6  27.0  -12.3  14.4  -13.2  -15.6
+
+if station Y
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  0.2  -4.6  1.1  -2.4  3.4  10.3  1.9  -0.1  22.3  6.6  9.2  -11.3  -22.9  -21.3  -25.4  -24.1  5.7  6.7  13.7  11.4  8.5  7.8  5.4  4.0  1.6  0.8  6.7  10.2  -11.0  -2.1  -6.5  -7.4
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -2.7  -0.5  -0.8  -3.5  8.8  1.9  3.5  -1.8  15.4  6.5  5.4  -16.6  -13.2  -9.4  -25.6  -26.1  8.2  3.6  16.1  9.9  11.3  12.7  -0.3  6.2  -0.5  2.5  0.6  12.9  -11.0  3.7  -13.0  -5.5
+
+if station A
+  pc_delay_x  0.0
+  pc_delay_y 0.028 * (ns) estimated error is +/- 0.076
+  pc_phase_offset_x  0.0
+  pc_phase_offset_y 2.9 * (deg) estimated error is +/- 75.8
+
+if station I
+  pc_delay_x  0.0
+  pc_delay_y 0.033 * (ns) estimated error is +/- 0.003
+  pc_phase_offset_x  0.0
+  pc_phase_offset_y -49.2 * (deg) estimated error is +/- 8.1
+
+if station X
+  pc_delay_x  0.0
+  pc_delay_y -0.42 * (ns) estimated error is +/- 0.001
+  pc_phase_offset_x  0.0
+  pc_phase_offset_y 168.5 * (deg) estimated error is +/- 4.0
+
+if station Y
+  pc_delay_x  0.0
+  pc_delay_y -0.035 * (ns) estimated error is +/- 0.003
+  pc_phase_offset_x  0.0
+  pc_phase_offset_y -143.5 * (deg) estimated error is +/- 7.2
+
+*==========================================================
+* This control file was generated with the script fourphase.py
+* on Jun-10-0821AM-2026 using the following arguments:
+* args: Namespace(control_file='../cf_1111_IAXY_pcphases', network_reference_station='I', stations='AXY', data_directory='./', verbosity=2, num_proc=32, snr_min=10.0, quality_lower_limit=4, dtec_thresh=2.5, begin_scan_limit='000-0000', end_scan_limit='999-9999', sigma_cut_factor=3.0, use_scratch=True, use_progress_ticker=True, output_filename='', averaging_scan_limit=10, toggle_dump_info=True)
+*==========================================================

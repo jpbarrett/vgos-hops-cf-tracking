@@ -1,0 +1,54 @@
+dr_win -5e-06 5e-06
+sb_win -2.0 2.0
+pc_mode multitone
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+ref_freq 10680.4
+weak_channel 0.1
+pc_amp_hcode 0.001
+ion_npts 75
+ion_win -100.0 100.0
+
+if station I
+  sampler_delay_x 50 40 35 30
+  sampler_delay_y 50 35 35 20
+
+if station N
+  sampler_delay_x -35 -40 -55 -65
+  sampler_delay_y -40 -45 -55 -70
+
+if station V
+  sampler_delay_x -25 -65 -30 -45
+  sampler_delay_y -40 -85 -35 -75
+
+if station I
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF 7.3 -47.0 -0.2 -3.4 3.4 7.1 11.9 -63.1 5.3 8.5 -2.6 7.3 11.2 3.1 15.3 19.0 -21.9 -32.4 -10.6 -16.1 5.2 8.8 7.8 1.7 44.3 63.5 41.4 -33.0 -17.1 -37.5 -21.8 -43.4
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF 8.0 -75.5 -14.7 9.2 20.9 4.9 19.3 -47.5 2.7 4.1 9.2 3.0 5.4 5.9 10.4 17.3 -22.3 -22.4 -20.0 -14.6 3.5 3.3 0.4 16.3 48.4 49.6 39.0 -2.2 -8.2 -14.0 -39.0 -37.1
+
+if station N
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+
+if station V
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF -32.6 -25.2 -31.2 15.4 31.9 18.3 25.6 -36.0 -7.7 -5.7 -3.5 -0.9 10.9 15.2 30.1 38.6 -18.5 -22.7 -13.0 -7.0 1.7 -1.3 2.8 -1.6 39.2 38.5 14.8 -8.5 10.0 -43.3 -18.5 -35.9
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF -0.5 -1.0 -68.4 -27.1 23.3 37.8 20.8 -36.7 -17.1 -7.1 -24.6 2.4 -3.1 0.9 36.1 40.0 -25.6 -38.9 8.7 36.8 -5.6 -12.9 -11.8 71.3 28.8 16.1 2.7 40.4 -32.4 2.4 -35.4 3.2
+
+if station I
+  pc_delay_x 0.0
+  pc_delay_y 0.026
+  pc_phase_offset_x 0.0
+  pc_phase_offset_y -57.9
+
+if station N
+  pc_delay_x 0.0
+  pc_delay_y -0.088
+  pc_phase_offset_x 0.0
+  pc_phase_offset_y 168.0
+
+if station V
+  pc_delay_x 0.0
+  pc_delay_y 0.083
+  pc_phase_offset_x 0.0
+  pc_phase_offset_y 143.7

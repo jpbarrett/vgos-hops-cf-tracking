@@ -1,0 +1,70 @@
+* Fourfit control file for b26248
+
+*==========================================================
+*basic setup
+*==========================================================
+
+sb_win -256.0 256.0
+mb_win -2.0 2.0
+dr_win -5.e-4  5.e-4
+pc_mode multitone
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+ref_freq 6000.0
+weak_channel 0.1
+pc_amp_hcode .001
+* general ionosphere search parameters:
+ion_npts 45
+ion_win  -88.0 88.0
+
+
+*==========================================================
+* sampler delays and pc_tonemask
+*==========================================================
+
+if station S
+  pc_tonemask l 4
+
+if station T
+  pc_tonemask dzE 16 16 2
+
+if station I
+  sampler_delay_x   35   25   10   30 
+  sampler_delay_y   30   20   10   30 
+
+if station T
+  sampler_delay_x  -20  -10  -20  -30 
+  sampler_delay_y  -30  -25  -30  -45 
+
+
+*==========================================================
+*station pc_phases
+*==========================================================
+if baseline ST
+  skip true
+
+if station I
+  freqs a b c d e f g h i j k l m n o p q r s t u v w x y z A B C D E F 
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0 
+* pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF   15.0    5.0   10.0    5.0   10.0   20.0   10.0   -5.0    0.0    0.0  -10.0   -5.0    0.0  -10.0   -5.0  -15.0    5.0   -5.0    5.0    5.0  -10.0   -5.0    0.0    0.0  -15.0  -10.0  -20.0  -25.0  -40.0  -25.0  -50.0  -30.0
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF   15.6    6.4    7.4   10.8    7.6   11.2    8.0    1.4   -3.4   -0.2   -7.4   -1.3    0.9   -3.7    1.3   -6.5    0.2   -2.3   -3.0    3.5  -10.3   -7.1  -11.7   -1.6  -14.4   -9.2  -21.7  -25.9  -46.8  -22.6  -48.7  -20.7
+
+if station T
+  freqs a b c d e f g h i j k l m n o p q r s t u v w x y z A B C D E F 
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  130.7  -11.4  108.0  122.6   -7.1   82.4   71.6 -114.3   25.6   33.5   33.9   70.6   75.7   85.5  123.0  106.9  138.5    4.7  110.3   74.7   66.8   88.3   91.7   77.9   62.9   78.1   81.5   58.5   49.5   86.7   91.3  106.1
+* pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF -155.0   45.0  150.0 -160.0   40.0  175.0  -90.0  -35.0 -145.0 -140.0 -120.0  -65.0  -20.0    0.0   35.0   40.0 -160.0  -90.0  -75.0   50.0   45.0   65.0  105.0  100.0  -35.0   -5.0   -5.0   65.0   80.0  125.0  130.0  150.0
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF -157.0   44.9  151.1 -160.8   41.2  172.5  -89.9  -35.8 -143.6 -141.1 -120.8  -64.0  -20.4    0.4   31.1   40.6 -156.3  -93.8  -77.7   50.2   43.8   65.1  108.1  103.9  -31.6   -9.1   -6.5   66.2   80.8  125.5  130.8  149.5
+
+if station I
+  pc_delay_x  0.0
+  pc_delay_y 0.043 * (ns) estimated error is +/- 0.013
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y -99.0 * (deg) estimated error is +/- 0.8
+
+if station T
+  pc_delay_x  0.0
+  pc_delay_y  0.0 * (ns) 
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y  0.0 * (deg) 

@@ -1,0 +1,54 @@
+dr_win -5e-6  5e-6
+pc_mode multitone
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+ref_freq 6000.0
+weak_channel 0.1
+pc_amp_hcode 0.001
+ion_npts 75
+ion_win  -100.0 100.0
+
+if station M
+  pc_amp_hcode 0.0001
+
+if station M
+  sampler_delay_x -11.8 124.0 91.5 122.0
+  sampler_delay_y -11.1 123.5 90.4 120.8
+
+if station V
+  sampler_delay_x -18.5 -58.4 6.0 -27.7
+  sampler_delay_y -35.3 -87.6 -10.9 -46.8
+
+if station M
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -4.8  -0.2  1.2  -2.1  -4.6  -1.6  -2.6  -2.4  -1.6  -2.9  -2.6  -2.5  -3.8  -3.4  -5.3  -1.5  -1.5  0.5  0.8  -0.3  1.3  0.6  4.4  -1.5  4.4  2.5  4.4  2.3  5.0  3.3  0.8  2.6
+
+if station V
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  -23.9  -16.9  -7.2  5.8  20.3  27.7  20.8  12.4  -21.5  -17.2  -11.7  -4.5  -1.5  -7.6  -1.5  3.7  -1.6  -1.0  -4.2  -3.3  -1.6  -11.8  -17.2  -18.1  13.4  24.5  30.1  4.7  -6.9  -4.3  9.3  14.1
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -21.6  -15.3  -12.0  17.9  26.3  24.9  32.4  27.8  -20.5  -13.0  0.7  15.9  -1.9  -10.0  11.3  26.2  -8.9  -7.7  -13.5  22.8  -0.7  -18.8  -27.6  -39.4  15.3  11.4  8.3  -10.7  -15.4  -13.9  -4.6  -15.6
+
+*==========================================================
+* This control file was generated with the script ffres2pcp.py
+* on Mar-03-0459PM-2025 using the following arguments:
+* args: Namespace(control_file='cf_1234_MV_final', network_reference_station='M', stations='V', data_directory='1234/', verbosity=3, num_proc=22, snr_min=15.0, quality_lower_limit=6, dtec_thresh=1.0, begin_scan_limit='000-0000', end_scan_limit='999-9999', sigma_cut_factor=2.0, use_scratch=True, use_progress_ticker=True, output_filename='', averaging_scan_limit=30, toggle_dump_info=True, nchannel_discard_threshold=5, channel_discard_tolerance=15.0)
+*==========================================================
+
+if station M
+  pc_delay_x  0.0
+  pc_delay_y -1.027 * (ns) estimated error is +/- 0.002
+  pc_phase_offset_x  0.0
+  pc_phase_offset_y -45.3 * (deg) estimated error is +/- 3.2
+
+if station V
+  pc_delay_x  0.0
+  pc_delay_y 0.1 * (ns) estimated error is +/- 0.004
+  pc_phase_offset_x  0.0
+  pc_phase_offset_y -15.1 * (deg) estimated error is +/- 11.3
+
+*==========================================================
+* This control file was generated with the script fourphase.py
+* on Mar-04-0803AM-2025 using the following arguments:
+* args: Namespace(control_file='cf_1234_MV_final', network_reference_station='M', stations='V', data_directory='1234/', verbosity=3, num_proc=22, snr_min=15.0, quality_lower_limit=6, dtec_thresh=1.0, begin_scan_limit='000-0000', end_scan_limit='999-9999', sigma_cut_factor=2.0, use_scratch=True, use_progress_ticker=True, output_filename='', averaging_scan_limit=30, toggle_dump_info=True)
+*==========================================================

@@ -1,0 +1,61 @@
+* Fourfit control file for g26029
+
+*==========================================================
+*basic setup
+*==========================================================
+
+sb_win -256.0 256.0
+mb_win -2.0 2.0
+dr_win -5.e-4  5.e-4
+pc_mode multitone
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+ref_freq 6000.0
+weak_channel 0.1
+pc_amp_hcode .001
+* general ionosphere search parameters:
+ion_npts 45
+ion_win  -88.0 88.0
+
+
+*==========================================================
+* sampler delays and pc_tonemask
+*  I:ISHIOKA  X:SESHAN13  A:RAEGSMAR  Y:RAEGYEB
+*==========================================================
+
+if station X
+  sampler_delay_x  -45  -40  -10  -40 
+  sampler_delay_y  -60  -40  -20  -40 
+
+if station Y
+  sampler_delay_x   95   90   65  100 
+  sampler_delay_y   95   90   60  100 
+
+
+*==========================================================
+*station pc_phases
+*==========================================================
+
+if station X
+  freqs a b c d         i j k l m n o p q r s t u v w x y z A B C D E F
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF   89.7  105.0  115.3  148.6    0.0    0.0    0.0    0.0   85.5   97.6   99.6  123.3  124.9  146.0  150.1  146.3  122.0  122.3  114.7  104.3  111.7  102.3  104.2  106.1  176.3  150.7  146.0  121.4  111.9  101.9   76.8   82.8
+* pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF   55.0   85.0  110.0 -155.0    0.0    0.0    0.0    0.0    5.0   15.0   35.0  125.0  150.0 -160.0 -130.0 -115.0  155.0  175.0 -180.0 -115.0  -80.0  -55.0  -30.0  -20.0  130.0  140.0  130.0 -175.0 -145.0 -125.0 -130.0 -105.0
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF   34.1   76.4  107.4 -118.5    0.0    0.0    0.0    0.0  -35.5  -22.8    0.6   97.8  131.3 -176.6 -142.1 -127.7  170.2 -176.2 -166.7 -103.5  -61.8  -37.9   -8.4    1.7  129.8  139.1  129.6  178.1 -145.9 -129.5 -142.4 -114.4
+
+if station Y
+  freqs a b c d e f g h i j k l m n o p q r s t u v w x y z A B C D E F
+
+
+if station X
+  pc_delay_x 0.0
+  pc_delay_y -1.664
+  pc_phase_offset_x 0.0
+  pc_phase_offset_y -53.7
+
+if station Y
+  pc_delay_x 0.0
+  pc_delay_y -0.038
+  pc_phase_offset_x 0.0
+  pc_phase_offset_y -87.7

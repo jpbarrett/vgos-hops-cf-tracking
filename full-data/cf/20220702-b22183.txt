@@ -1,0 +1,83 @@
+* Fourfit control file for B22183
+
+*==========================================================
+*basic setup
+*==========================================================
+
+dr_win -5.e-6  5.e-6
+pc_mode multitone
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+ref_freq 6000.0
+weak_channel 0.1
+pc_amp_hcode .001
+* general ionosphere search parameters:
+ion_npts 45
+ion_win  -88.0 88.0
+
+*==========================================================
+* sampler delays and pc_tonemask
+*==========================================================
+
+if baseline IT
+   freqs a b c d e f g h q r s t u v w x y z A B C D E F
+
+if station S
+  pc_tonemask l 4
+
+if station T
+  pc_tonemask dzE 16 16 2
+
+if station S
+  sampler_delay_x 85 90 85 70
+  sampler_delay_y 85 90 85 70
+
+if station T
+  sampler_delay_x -40 -30 -40 -50
+  sampler_delay_y -40 -30 -40 -50
+
+if station I
+  sampler_delay_x   15  -15  -45  -50
+  sampler_delay_y   15  -15  -45  -50
+
+if baseline ST
+   skip true
+
+*==========================================================
+*station pc_phases
+*==========================================================
+
+
+if station I
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  -8.8  1.8  3.4  -5.1  -2.6  5.9  -0.9  8.2  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  6.7  6.2  1.1  -1.2  -13.5  -10.9  -5.2  3.8  -8.6  -7.7  -6.2  -4.7  1.5  5.2  12.9  17.4 
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -12.8  5.8  -1.6  -3.8  4.8  13.1  -9.2  -5.4  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  11.0  8.9  7.6  3.9  -13.4  -6.7  -2.4  4.0  0.1  -9.0  -4.7  -10.8  8.2  2.0  -0.3  13.9 
+
+if station T
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  -37.3  -22.6  -22.8  3.2  14.3  20.0  10.1  7.4  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  -16.4  -12.8  -29.3  -26.7  -49.2  -40.3  -41.1  -40.7  23.8  8.9  -5.9  8.8  3.1  23.3  4.9  25.5 
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -39.1  -27.3  -25.9  3.3  20.0  24.3  12.0  8.1  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  -14.4  -14.0  -12.2  -23.6  -39.7  -33.3  -17.5  -35.6  13.0  7.2  1.5  5.3  29.2  26.0  -9.0  -26.7 
+
+
+
+if station I
+  pc_delay_x  0.0
+  pc_delay_y -0.043 * (ns) estimated error is +/- 0.0
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y 81.7 * (deg) estimated error is +/- 1.1
+
+if station T
+  pc_delay_x  0.0
+  pc_delay_y 0.224 * (ns) estimated error is +/- 0.001
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y -60.6 * (deg) estimated error is +/- 1.9
+
+*==========================================================
+* This control file was generated with the script vgoscf_generate.py
+* on Aug-31-1158AM-2022 using the following arguments: 
+* args: Namespace(averaging_scan_limit=10, begin_scan_limit='000-0000', channel_discard_tolerance=15.0, control_file='./cf_1234_IT_pstokes', data_directory='./1234/', dtec_thresh=1.0, end_scan_limit='999-9999', nchannel_discard_threshold=5, network_reference_station='I', num_proc=10, output_filename='', quality_lower_limit=5, sigma_cut_factor=3.0, snr_min=30, stations='T', toggle_dump_info=True, use_progress_ticker=True, use_scratch=False, verbosity=2)
+*========================================================== 
+
+*TIMETAG 2025/07/23 05:39:58 UTC
+*This vgosDB was renamed from '22JUL02VB' to '20220702-b22183'
+*by Christopher Dieck <christopher.a.dieck.civ@us.navy.mil>.

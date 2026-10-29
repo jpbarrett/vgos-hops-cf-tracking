@@ -1,0 +1,42 @@
+dr_win -5.e-6  5.e-6
+pc_mode multitone
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+ref_freq 6000.0
+weak_channel 0.1
+pc_amp_hcode .001
+ion_npts 45
+ion_win  -88.0 88.0
+
+if station M
+  sampler_delay_x   20  120  150  120
+  sampler_delay_y   20  120  150  120
+
+if station V
+  sampler_delay_x    0 -50 -15 -40
+  sampler_delay_y  -20 -70 -30 -70
+
+if station M
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0 
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -2.6  -0.3  -2.8  -3.9  -3.9  -5.7  -4.9  -5.3  -7.4  -4.9  -2.2  -1.7  -0.8  0.9  2.9  5.7  0.1  1.7  0.7  0.7  0.8  3.6  -0.0  1.0  -3.4  -2.8  -1.9  0.3  4.5  6.9  9.3  8.7 
+
+if station V
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  -22.5  -14.8  -11.9  9.0  26.4  26.9  15.9  6.4  -32.6  -19.5  -12.9  -12.0  4.0  10.9  11.5  14.6  18.8  16.9  14.1  10.6  2.4  -9.0  -17.5  -20.2  7.9  12.9  14.4  -2.5  -10.1  -15.8  -14.0  -6.5 
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -22.8  -11.8  -9.2  15.0  28.8  30.2  20.1  10.8  -34.3  -21.1  -11.1  -11.5  2.9  11.7  11.2  13.2  13.4  16.3  12.8  5.2  2.9  -6.3  -16.6  -25.5  6.3  13.8  13.2  -19.0  -24.8  -29.7  -10.8  -10.8 
+
+if station M
+  pc_delay_x  0.0
+  pc_delay_y -1.014 * (ns) estimated error is +/- 0.001
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y -40.0 * (deg) estimated error is +/- 1.2
+
+if station V
+  pc_delay_x  0.0
+  pc_delay_y 0.072 * (ns) estimated error is +/- 0.001
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y 142.3 * (deg) estimated error is +/- 1.4
+
+*Regards,
+* Christian Ploetz

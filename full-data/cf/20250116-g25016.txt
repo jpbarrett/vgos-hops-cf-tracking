@@ -1,0 +1,75 @@
+dr_win -5e-06 5e-06
+sb_win -2.0 2.0
+pc_mode multitone
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+ref_freq 6000.0
+weak_channel 0.01
+pc_amp_hcode 0.001
+ion_npts 75
+ion_win -100 100
+
+if station X
+  freqs a b c d i j k l m n o p q r s t u v y z A B C D E F
+
+if station I
+  sampler_delay_x 85 85 70 65
+  sampler_delay_y 80 80 65 55
+
+if station A
+  sampler_delay_x 28 30 10 10
+  sampler_delay_y 25 15 10 0
+
+if station X
+  sampler_delay_x -50 -50 -50 -50
+  sampler_delay_y -50 -50 -55 -50
+
+if station A
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF
+    1.5 -3.7 1.2 1.6 0.0 0.0 0.0 0.0 -0.1 7.9 -6.3 -18.1 -21.5 -25.4
+    -8.6 -4.1 14.6 20.0 10.4 4.2 4.7 5.1 0.0 0.0 -4.0 -12.0 -27.8 -0.8
+    2.1 14.2 6.3 -14.1
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF
+    -10.4 -18.3 -14.1 2.8 0.0 0.0 0.0 0.0 2.4 10.6 -1.7 -10.2 -4.4
+    -26.5 -21.4 -13.8 25.5 15.5 8.6 9.3 14.5 3.1 0.0 0.0 -7.2 -3.2
+    -22.7 11.8 15.7 -1.5 0.0 -22.2
+
+if station I
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF
+    8.1 2.3 10.7 0.5 5.1 -7.9 -7.5 -4.3 1.4 8.5 -11.5 -9.9 -17.1 -13.3
+    -1.3 16.4 10.4 11.1 3.3 1.2 5.1 1.0 -5.1 -4.6 13.0 10.2 -5.7 -9.9
+    -20.6 4.1 11.4 -5.3
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF
+    11.7 4.1 6.7 9.3 -2.6 -5.6 -5.7 -5.8 -4.3 -2.7 -4.9 -19.5 -14.5
+    -8.5 5.8 16.8 3.7 15.4 -4.2 6.9 4.4 4.0 -4.3 3.5 21.2 13.8 -0.6
+    -3.9 -10.5 -1.6 -2.1 -27.3
+
+if station X
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF
+    13.0 1.3 8.1 -42.3 0.0 0.0 0.0 0.0 -9.3 -1.3 -19.1 -15.7 -6.7
+    -13.7 -0.6 1.0 4.8 -0.3 11.8 -6.1 -7.4 -3.3 0.0 0.0 13.7 9.0 -8.4
+    -19.6 -12.1 -3.8 2.3 -10.1
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF
+    28.1 41.7 46.8 0.1 0.0 0.0 0.0 0.0 5.2 9.3 -10.8 -12.8 -16.2 -8.4
+    3.4 17.5 15.5 27.7 15.4 5.8 -8.1 -8.0 0.0 0.0 -7.1 19.2 4.9 1.8
+    -25.3 -8.8 -1.3 -21.9
+
+if station A
+  pc_delay_x 0.0
+  pc_delay_y -0.012
+  pc_phase_offset_x 0.0
+  pc_phase_offset_y 146.9
+
+if station I
+  pc_delay_x 0.0
+  pc_delay_y 0.03
+  pc_phase_offset_x 0.0
+  pc_phase_offset_y -99.3
+
+if station X
+  pc_delay_x 0.0
+  pc_delay_y -1.676
+  pc_phase_offset_x 0.0
+  pc_phase_offset_y -63.3

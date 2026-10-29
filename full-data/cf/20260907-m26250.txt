@@ -1,0 +1,84 @@
+*vgos  control file
+
+*==========================================================
+*basic setup
+*==========================================================
+
+dr_win -5.e-6  5.e-6
+sb_win -2.0 2.0
+pc_mode multitone
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+ref_freq 10680.4
+weak_channel 0.1
+pc_amp_hcode 0.001
+* general ionosphere search parameters:
+ion_npts 75
+ion_win  -100.0 100.0
+
+*==========================================================
+* start of if-statement blocks
+*==========================================================
+
+*==========================================================
+*station sampler delays
+*==========================================================
+if station I **slight changes
+  sampler_delay_x -170 -180 -190 -200
+  sampler_delay_y -170 -190 -190 -205
+
+if station N *ok
+  sampler_delay_x -15  -20  -30  -45
+  sampler_delay_y -20  -35  -35  -45
+
+*if station L *
+*  sampler_delay_x  20  5  0  -10
+*  sampler_delay_y   5  0 -5  -15
+
+if station V *
+  sampler_delay_x  15  10  10  -15
+  sampler_delay_y  15   5   5  -20
+
+if station I
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  29.1  37.0  40.0  -22.2  -24.5  -33.7  -13.9  -6.3  -18.4  1.8  20.0  1.5  19.1  -0.5  -32.7  -15.7  -7.5  17.5  13.6  -6.7  13.0  8.9  9.1  8.2  8.5  19.1  10.8  -26.9  3.6  -7.4  -57.1  -2.3
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  32.6  20.7  17.5  -13.4  -27.1  -12.9  -24.7  -6.5  2.8  9.2  13.9  10.1  -10.4  -33.2  -35.6  -17.3  7.3  -10.7  -6.0  -5.6  22.2  13.6  29.2  29.9  6.1  -11.9  15.1  0.3  3.2  21.8  -24.6  -15.4
+
+if station N
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  12.9  -7.6  -5.8  -33.3  85.6  -30.7  -18.9  32.9  13.7  32.3  24.0  31.6  28.8  -3.6  -18.8  -38.2  14.2  20.1  12.6  -17.8  -10.9  -24.7  -31.2  -37.4  -13.3  -10.2  -17.2  2.8  16.2  27.0  9.9  8.3
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  9.3  -14.5  29.3  -7.7  -16.4  -7.5  -12.6  0.7  24.0  37.1  30.2  35.9  12.5  12.4  -11.5  -26.5  10.9  12.4  7.5  -13.1  -10.0  -24.9  -35.6  -39.0  -9.5  -14.1  -8.3  -10.7  9.5  26.2  11.5  0.4
+
+if station V
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+
+*==========================================================
+* This control file was generated with the script ffres2pcp.py
+* on Sep-07-0517PM-2026 using the following arguments:
+* args: Namespace(control_file='cf_initial', network_reference_station='V', stations='IN', data_directory='.', verbosity=2, num_proc=20, snr_min=12.0, quality_lower_limit=5, dtec_thresh=5.0, begin_scan_limit='000-0000', end_scan_limit='999-9999', sigma_cut_factor=3.0, use_scratch=True, use_progress_ticker=True, output_filename='', averaging_scan_limit=30, toggle_dump_info=True, nchannel_discard_threshold=5, channel_discard_tolerance=15.0, network_reference_station_bline_station='')
+*==========================================================
+
+if station I
+  pc_delay_x  0.0
+  pc_delay_y 0.031 * (ns) estimated error is +/- 0.001
+  pc_phase_offset_x  0.0
+  pc_phase_offset_y -48.6 * (deg) estimated error is +/- 7.0
+
+if station N
+  pc_delay_x  0.0
+  pc_delay_y -0.088 * (ns) estimated error is +/- 0.004
+  pc_phase_offset_x  0.0
+  pc_phase_offset_y -177.2 * (deg) estimated error is +/- 9.0
+
+if station V
+  pc_delay_x  0.0
+  pc_delay_y -0.063 * (ns) estimated error is +/- 0.003
+  pc_phase_offset_x  0.0
+  pc_phase_offset_y 105.2 * (deg) estimated error is +/- 9.0
+
+*==========================================================
+* This control file was generated with the script fourphase.py
+* on Sep-07-0526PM-2026 using the following arguments:
+* args: Namespace(control_file='cf_6346_VIN_pcphases', network_reference_station='V', stations='IN', data_directory='.', verbosity=2, num_proc=20, snr_min=12.0, quality_lower_limit=5, dtec_thresh=5.0, begin_scan_limit='000-0000', end_scan_limit='999-9999', sigma_cut_factor=3.0, use_scratch=False, use_progress_ticker=True, output_filename='', averaging_scan_limit=30, toggle_dump_info=True)
+*==========================================================

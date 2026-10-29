@@ -1,0 +1,66 @@
+* Fourfit control file for m26236
+
+*==========================================================
+*basic setup
+*==========================================================
+
+sb_win -256.0 256.0
+mb_win -2.0 2.0
+dr_win -5.e-4  5.e-4
+pc_mode multitone
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+ref_freq 6000.0
+weak_channel 0.1
+pc_amp_hcode .001
+* general ionosphere search parameters:
+ion_npts 45
+ion_win  -100.0 100.0
+
+
+*==========================================================
+* sampler delays and pc_tonemask
+*==========================================================
+
+if station L
+  sampler_delay_x   10    5    0  -10 
+  sampler_delay_y   10    0   -5  -15 
+
+if station V
+  sampler_delay_x   20   15    5  -10 
+  sampler_delay_y   15    5    5  -15 
+
+
+*==========================================================
+*station pc_phases
+*==========================================================
+
+if station L
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  129.8  116.8  121.9  104.9  121.9  118.9  139.5  114.2  74.3  83.1  93.8  134.7  154.4  164.0  -178.7  -171.2  40.9  43.2  55.6  93.0  113.9  133.8  147.7  154.2  -177.9  -169.2  -145.1  -63.6  -32.9  -13.1  27.1  43.5 
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -50.3  -59.5  -61.9  -50.4  -61.5  -63.7  -63.7  -68.7  -118.3  -103.4  -95.0  -64.8  -37.0  -16.8  -6.9  6.6  -150.7  -121.7  -68.2  -59.5  -177.8  -26.0  117.3  -47.4  -5.3  -10.4  30.8  97.4  147.8  168.5  -176.3  -138.1 
+
+if station V
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  85.4  61.8  102.4  53.3  34.0  -5.0  -0.6  -42.7  64.3  55.2  58.0  48.8  50.1  58.8  76.1  76.4  58.0  53.3  53.2  52.7  34.0  46.9  35.2  34.4  18.8  26.2  37.2  57.5  57.0  50.6  77.4  87.3 
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  76.7  55.2  95.7  45.2  22.0  -13.9  -15.3  -54.4  58.4  53.6  52.6  61.1  59.0  56.4  61.3  63.9  64.0  54.9  54.1  54.8  51.1  43.4  30.8  22.6  1.1  5.2  12.6  55.1  60.3  47.6  71.8  78.5 
+
+
+
+if station L
+  pc_delay_x  0.0
+  pc_delay_y -0.157 * (ns) estimated error is +/- 0.002
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y 29.4 * (deg) estimated error is +/- 3.0
+
+if station V
+  pc_delay_x  0.0
+  pc_delay_y 0.054 * (ns) estimated error is +/- 0.002
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y 96.6 * (deg) estimated error is +/- 2.0
+
+*==========================================================
+* This control file was generated with the script vgoscf_generate.py
+* on Aug-25-0449AM-2026 using the following arguments: 
+* args: Namespace(averaging_scan_limit=10, begin_scan_limit='000-0000', channel_discard_tolerance=15.0, control_file='./m26236.cf', data_directory='./0300', dtec_thresh=1.0, end_scan_limit='999-9999', nchannel_discard_threshold=5, network_reference_station='L', num_proc=10, output_filename='', quality_lower_limit=5, sigma_cut_factor=3.0, snr_min=30, stations='V', toggle_dump_info=True, use_progress_ticker=True, use_scratch=False, verbosity=2)
+*========================================================== 

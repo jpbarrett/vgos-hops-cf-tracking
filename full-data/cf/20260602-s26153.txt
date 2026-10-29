@@ -1,0 +1,66 @@
+*vgos  control file
+
+*==========================================================
+*basic setup
+*==========================================================
+
+dr_win -5.e-6  5.e-6
+sb_win -2.0 2.0
+pc_mode multitone
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+ref_freq 10680.4
+weak_channel 0.1
+pc_amp_hcode 0.001
+* general ionosphere search parameters:
+ion_npts 75
+ion_win  -100.0 100.0
+
+*==========================================================
+* start of if-statement blocks
+*==========================================================
+
+*==========================================================
+*station sampler delays
+*==========================================================
+if station M
+  sampler_delay_x 50 215 215 215
+  sampler_delay_y 50 215 215 215
+
+if station V *ok
+  sampler_delay_x  15  10  -5   -5
+  sampler_delay_y  10   5  -5  -10
+
+if station M
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  2.5  1.1  -2.7  0.0  0.8  -2.1  -1.4  -3.2  -7.2  -6.9  -6.2  -9.8  -7.7  -11.6  -6.4  -8.0  -7.8  -6.2  -7.2  -6.5  -3.7  -1.7  1.1  -9.8  5.9  8.9  11.6  12.8  11.4  7.8  6.5  8.9
+
+if station V
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  -37.0  -30.0  -19.6  2.2  20.6  25.6  13.9  5.1  -7.4  -7.9  -1.7  -12.3  0.4  -2.0  6.8  6.2  -13.9  -14.7  -14.8  -8.7  -10.3  -17.2  -19.7  -13.8  54.9  45.0  51.1  33.8  15.5  11.2  25.1  31.7
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -40.3  -30.1  -28.6  5.1  26.3  24.5  24.4  23.3  3.1  3.9  1.8  23.9  19.2  13.0  13.3  29.8  -10.5  -8.5  -15.8  10.3  1.9  -10.3  -23.3  -18.8  -27.8  -16.9  -26.2  -36.3  -49.6  -64.1  -53.9  -51.7
+
+*==========================================================
+* This control file was generated with the script ffres2pcp.py
+* on Jun-03-0350PM-2026 using the following arguments:
+* args: Namespace(averaging_scan_limit=30, begin_scan_limit='000-0000', channel_discard_tolerance=15.0, control_file='cf_initial', data_directory='.', dtec_thresh=5.0, end_scan_limit='999-9999', nchannel_discard_threshold=5, network_reference_station='M', num_proc=20, output_filename='', quality_lower_limit=5, sigma_cut_factor=3.0, snr_min=12.0, stations='V', toggle_dump_info=True, use_progress_ticker=True, use_scratch=True, verbosity=2)
+*==========================================================
+
+if station M
+  pc_delay_x  0.0
+  pc_delay_y -1.023 * (ns) estimated error is +/- 0.004
+  pc_phase_offset_x  0.0
+  pc_phase_offset_y 31.7 * (deg) estimated error is +/- 11.3
+
+if station V
+  pc_delay_x  0.0
+  pc_delay_y 0.076 * (ns) estimated error is +/- 0.008
+  pc_phase_offset_x  0.0
+  pc_phase_offset_y -111.4 * (deg) estimated error is +/- 17.1
+
+*==========================================================
+* This control file was generated with the script fourphase.py
+* on Jun-03-0402PM-2026 using the following arguments:
+* args: Namespace(averaging_scan_limit=30, begin_scan_limit='000-0000', control_file='cf_6201_MV_pcphases', data_directory='.', dtec_thresh=5.0, end_scan_limit='999-9999', network_reference_station='M', num_proc=20, output_filename='', quality_lower_limit=5, sigma_cut_factor=3.0, snr_min=12.0, stations='V', toggle_dump_info=True, use_progress_ticker=True, use_scratch=True, verbosity=2)
+*==========================================================

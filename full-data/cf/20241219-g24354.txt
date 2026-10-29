@@ -1,0 +1,67 @@
+* Fourfit control file for g24354
+
+*==========================================================
+*basic setup
+*==========================================================
+
+sb_win -256.0 256.0
+mb_win -2.0 2.0
+dr_win -5e-06 5e-06
+pc_mode multitone
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+ref_freq 6000.0
+weak_channel 0.01
+pc_amp_hcode 0.001
+ion_npts 75
+ion_win -100.0 100.0
+
+
+*==========================================================
+* sampler delays and pc_tonemask
+*==========================================================
+
+if station C
+  sampler_delay_x 2.4 1.9 -1.2 6.1 
+  sampler_delay_y 2.1 0.6 -3.9 3.4 
+
+if station D
+  sampler_delay_x 39.4 26.0 20.2 12.3 
+  sampler_delay_y 24.4 19.1 9.1 4.3 
+
+
+*==========================================================
+*station pc_phases
+*==========================================================
+
+if station C
+  freqs a b c d         i j k l m n o p q r s t u v w
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  120.7  119.2  132.2  132.6    0.0    0.0    0.0    0.0  106.4  103.1  111.5  119.3  150.3  142.4  143.6  132.0  126.0  138.2  129.9  118.6  129.9  116.0  124.4    0.0    0.0    0.0    0.0    0.0    0.0    0.0    0.0    0.0
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF -111.3 -101.9  -93.9 -138.3    0.0    0.0    0.0    0.0    5.2    1.0  -17.6  -60.3 -101.1 -108.1 -159.0 -171.0  -96.4 -117.4 -124.4  165.8  121.1   84.1   57.1    0.0    0.0    0.0    0.0    0.0    0.0    0.0    0.0    0.0
+
+if station D
+  freqs a b c d         i j k l m n o p q r s t u v w 
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0   
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -11.3  -10.8   -9.8    0.3    0.0    0.0    0.0    0.0  -14.4   -4.6    0.1    8.5   21.6    6.7   -5.1  -21.5  -18.3  -13.2  -26.8  -22.9  -14.9  -21.5  -26.0    0.0    0.0    0.0    0.0    0.0    0.0    0.0    0.0    0.0
+
+
+if station C
+  pc_delay_x  0.0
+  pc_delay_y -0.476 * (ns) estimated error is +/- 0.003
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y 13.8 * (deg) estimated error is +/- 4.0
+
+if station D
+  pc_delay_x  0.0
+  pc_delay_y -0.003 * (ns) estimated error is +/- 0.003
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y 165.1 * (deg) estimated error is +/- 3.0
+
+
+*==========================================================
+* This control file was generated with the script vgoscf_generate.py
+* on Nov-28-0109PM-2024 using the following arguments: 
+* args: Namespace(averaging_scan_limit=10, begin_scan_limit='000-0000', channel_discard_tolerance=15.0, control_file='./g24326.cf', data_directory='./0002', dtec_thresh=1.0, end_scan_limit='999-9999', nchannel_discard_threshold=5, network_reference_station='D', num_proc=10, output_filename='', quality_lower_limit=5, sigma_cut_factor=3.0, snr_min=30, stations='C', toggle_dump_info=True, use_progress_ticker=True, use_scratch=False, verbosity=2)
+*========================================================== 

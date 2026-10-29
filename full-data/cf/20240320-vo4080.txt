@@ -1,0 +1,187 @@
+sb_win -6096.0 6096.0
+dr_win -5e-06 5e-06
+pc_mode multitone
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+ref_freq 6000.0
+weak_channel 0.1
+pc_amp_hcode 0.001
+ion_npts 75
+ion_win -100.0 100.0
+
+if station G
+  pc_tonemask cf 2 16
+
+if station H
+  pc_tonemask abde 16 16 16 16
+
+if station S
+  pc_tonemask l 4
+
+if station T
+  weak_channel 0.001
+  pc_tonemask dzE 16 16 2
+
+if station E
+  pc_tonemask def 16 16 17
+  pc_amp_hcode 1e-07
+
+if baseline ST
+  skip true
+
+if station G
+  sampler_delay_x -195 105 105 105
+  sampler_delay_y -195 105 105 105
+
+if station Y
+  sampler_delay_x 9.8 4.0 9.8 -13.0
+  sampler_delay_y 12.5 6.0 18.0 -10.9
+
+if station S
+  sampler_delay_x 91.1 105.5 92.9 83.9
+  sampler_delay_y 93.7 101.4 93.4 75.6
+
+if station T
+  sampler_delay_x -28.8 -14.2 -22.3 -28.0
+  sampler_delay_y -27.8 -24.8 -29.4 -38.9
+
+if station E
+  sampler_delay_x -52.4 -35.1 -39.9 -37.5
+  sampler_delay_y -51.7 -34.4 -36.5 -36.0
+
+if station H
+  sampler_delay_x -249.0 31.2 4.5 34.8
+  sampler_delay_y -252.5 29.3 2.1 32.4
+
+if station M
+  sampler_delay_x -44.5 122.5 122.9 122.8
+  sampler_delay_y -43.9 121.9 121.8 121.8
+
+if station L
+  sampler_delay_x 76.7 73.9 27.6 26.2
+  sampler_delay_y 75.9 79.0 24.3 29.0
+
+if station N
+  sampler_delay_x -10 -15 -25 -35
+  sampler_delay_y -15 -20 -30 -40
+
+if station V
+  sampler_delay_x -172.2 -210.3 -157.3 -169.4
+  sampler_delay_y -189.0 -220.8 -118.4 -182.0
+
+if station I
+  sampler_delay_x -150.3 -143.6 -148.0 -151.3
+  sampler_delay_y -162.3 -140.1 -155.5 -159.8
+
+if station D
+  sampler_delay_x 29.6 24.9 15.4 11.5
+  sampler_delay_y 32.4 19.5 9.3 4.2
+
+if station K
+  sampler_delay_x 27.2 -0.8 -2.6 2.6
+  sampler_delay_y 23.2 3.2 -0.5 -8.4
+
+if baseline ST and f_group X
+  freqs d e f g i j k l m n o p q r s t v w y z A B C D E
+
+if station D
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF -12.5 -13.6 -8.7 -4.8 1.7 9.5 16.3 15.7 -3.0 -0.2 -7.7 -24.8 -16.5 -17.3 -7.1 -4.4 16.5 20.2 14.2 5.7 3.9 7.7 16.1 9.5 -8.8 -12.1 -11.7 4.0 5.1 9.9 1.4 -5.5
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF -4.9 -13.8 -14.8 -1.2 4.7 9.0 19.3 16.4 -3.7 -6.0 -4.9 -14.3 -11.3 -16.4 -12.6 -9.7 18.0 7.4 12.7 14.1 2.0 9.5 2.4 4.0 -5.0 -5.4 -7.5 4.3 1.9 10.0 0.2 -6.9
+
+if station E
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF 9.8 -0.0 2.3 -2.9 -6.6 8.0 6.8 -8.8 4.9 -3.1 -1.0 -2.7 0.9 9.4 10.1 18.5 -10.8 -24.5 -23.0 -16.4 -0.6 3.2 3.1 8.1 -11.8 -11.5 -5.1 -5.3 -2.9 15.0 14.1 20.5
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF 6.3 8.9 3.6 -5.1 -8.2 -2.8 -5.4 3.1 5.6 0.2 2.0 -1.7 9.9 7.7 13.1 15.7 -15.7 -25.8 -26.1 -10.1 -4.5 3.5 3.6 3.3 -4.9 -9.3 -7.4 -0.3 4.5 13.5 12.3 17.6
+
+if station H
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF -4.2 -4.0 -2.6 0.0 2.0 4.9 2.2 1.6 -2.6 -4.0 -4.1 -4.6 5.4 6.6 5.2 4.4 -0.3 -2.3 -1.3 -0.2 -3.4 -1.5 2.8 0.2 -5.5 -3.8 -2.9 1.9 -0.4 3.9 2.6 3.5
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF -3.0 -4.2 -2.9 -0.4 0.9 3.3 3.3 2.0 -1.8 -3.1 -3.8 -1.5 6.3 7.8 5.5 4.5 -0.7 -2.3 -2.1 -3.8 -5.0 -1.4 2.0 -1.7 -3.4 -2.8 -2.5 1.6 -1.0 3.4 1.2 3.2
+
+if station I
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF -2.9 -5.0 -5.5 -0.7 -0.6 9.3 10.6 12.2 -0.8 2.1 -5.0 -8.4 -6.6 -6.0 -1.0 3.2 3.6 3.5 0.9 1.2 -2.1 -1.7 8.6 7.3 38.3 32.5 39.0 -49.5 2.5 -38.0 -22.5 -22.0
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF -1.2 2.2 -4.0 -2.3 4.8 5.8 4.6 -1.6 -15.9 -15.0 -16.3 -21.2 -16.0 -15.1 -6.4 -2.0 7.7 6.7 7.7 12.4 13.8 14.0 26.3 27.0 -30.9 -32.2 -37.7 8.4 11.6 9.2 23.4 29.3
+
+if station L
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF 2.4 -2.7 -22.9 4.8 -4.9 -9.2 10.6 1.7 32.2 19.2 8.8 25.5 -6.3 -11.6 3.3 -1.1 12.5 -12.2 -13.2 1.1 -26.2 -16.5 -3.4 -13.0 0.6 -9.0 -18.5 -30.6 21.5 25.4 17.9 13.9
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF 8.0 -14.3 -16.6 4.1 -11.3 -4.6 27.0 11.4 30.1 11.4 8.1 21.8 2.4 10.5 13.3 11.4 4.6 -10.6 -18.4 -5.1 -35.1 -29.9 -19.1 -20.6 8.1 -86.0 -15.6 -17.5 21.0 29.4 21.7 19.2
+
+if station M
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF -2.1 -4.3 -0.2 2.6 4.8 6.7 3.5 4.0 10.0 -1.6 -8.9 -9.7 -5.0 -4.0 4.8 3.2 -2.7 -3.1 -3.9 -4.7 -6.2 0.4 9.1 5.2 -1.2 -9.2 -15.3 3.3 8.7 14.5 1.0 0.5
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF -0.9 -3.9 0.6 2.3 2.8 4.4 5.7 3.0 11.7 -1.3 -11.0 -7.6 -5.4 -3.7 5.5 2.2 -4.5 -3.8 -4.8 -5.1 -4.7 -0.1 8.7 6.5 -2.8 -9.1 -13.3 -0.6 7.2 18.1 5.2 -1.9
+
+if station S
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF 29.6 14.9 1.7 -0.8 5.2 5.8 -2.5 -3.2 -21.7 -25.1 -18.4 -24.5 -20.9 -27.2 -18.7 -16.5 19.7 22.1 16.1 29.8 26.3 13.9 10.6 17.1 5.1 -2.2 -6.4 -10.0 -10.1 -4.9 1.5 -3.8
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF 23.5 9.5 1.3 -1.1 8.4 8.0 1.6 -1.7 -21.7 -21.7 -24.1 -26.4 -25.8 -28.6 -23.4 -17.5 29.8 27.1 30.9 22.0 12.9 16.1 14.2 12.4 1.5 -6.5 -10.2 -2.5 -8.4 -1.4 9.3 -6.7
+
+if station T
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF 8.9 6.1 2.2 8.1 3.5 5.5 2.1 4.0 -16.0 -16.4 -20.2 -23.9 -17.7 -8.6 9.0 10.7 9.9 2.7 0.7 3.4 -0.3 9.8 14.6 9.7 -13.6 -10.0 15.6 -3.2 -2.5 7.1 -1.1 -0.5
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF 23.8 22.8 20.4 23.1 26.9 22.2 16.1 16.5 -13.1 -23.8 -31.8 -31.5 -24.1 -14.9 -6.5 -4.8 2.3 5.3 6.3 15.3 16.2 25.3 36.5 35.7 -20.7 -14.3 -13.9 2.9 12.0 15.4 10.3 7.4
+
+if station V
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF -34.5 -27.6 -12.8 7.6 22.2 22.0 26.1 12.6 -14.2 -14.7 -17.9 -13.9 1.6 1.9 10.5 6.3 11.4 14.9 9.2 5.0 1.7 0.1 -4.9 -9.9 9.7 6.9 3.8 -0.6 -11.0 -4.7 -7.3 -4.3
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF -27.5 -34.3 -28.7 13.0 18.3 14.6 23.3 22.3 -18.0 -18.4 -13.4 2.2 -5.6 -7.0 19.5 23.8 6.6 5.3 1.6 33.4 11.0 -11.5 -12.7 -35.8 19.4 12.8 2.5 -7.5 2.6 -1.1 -2.5 -12.5
+
+if station Y
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF 5.5 -2.0 1.5 -3.9 3.3 4.3 2.9 7.6 -22.4 -18.9 -9.2 -27.7 -15.5 -7.8 -23.9 -12.2 30.1 22.0 14.3 1.9 -27.4 38.5 26.1 75.6 -5.1 -6.0 -4.9 -2.9 -6.2 2.3 -6.7 -15.9
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF -4.1 -7.4 -17.6 -9.9 10.4 15.4 23.5 4.8 14.9 -11.7 -17.0 -18.6 -2.7 -5.8 -7.7 5.3 -7.1 -2.3 -8.0 22.2 -53.3 10.8 46.0 156.5 -1.6 8.8 0.6 4.6 -7.6 -5.4 -5.3 -9.2
+
+if station D
+  pc_delay_x 0.0
+  pc_delay_y -0.01
+  pc_phase_offset_x 0.0
+  pc_phase_offset_y 153.3
+
+if station E
+  pc_delay_x 0.0
+  pc_delay_y 1.45
+  pc_phase_offset_x 0.0
+  pc_phase_offset_y -96.9
+
+if station H
+  pc_delay_x 0.0
+  pc_delay_y 0.145
+  pc_phase_offset_x 0.0
+  pc_phase_offset_y -50.1
+
+if station I
+  pc_delay_x 0.0
+  pc_delay_y -0.018
+  pc_phase_offset_x 0.0
+  pc_phase_offset_y -123.5
+
+if station L
+  pc_delay_x 0.0
+  pc_delay_y -0.005
+  pc_phase_offset_x 0.0
+  pc_phase_offset_y 165.4
+
+if station M
+  pc_delay_x 0.0
+  pc_delay_y -1.021
+  pc_phase_offset_x 0.0
+  pc_phase_offset_y -52.5
+
+if station S
+  pc_delay_x 0.0
+  pc_delay_y -0.106
+  pc_phase_offset_x 0.0
+  pc_phase_offset_y 131.2
+
+if station T
+  pc_delay_x 0.0
+  pc_delay_y 0.225
+  pc_phase_offset_x 0.0
+  pc_phase_offset_y -69.1
+
+if station V
+  pc_delay_x 0.0
+  pc_delay_y 0.078
+  pc_phase_offset_x 0.0
+  pc_phase_offset_y -3.4
+
+if station Y
+  pc_delay_x 0.0
+  pc_delay_y -0.039
+  pc_phase_offset_x 0.0
+  pc_phase_offset_y -86.9

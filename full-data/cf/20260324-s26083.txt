@@ -1,0 +1,53 @@
+sb_win -1. 1.
+*dr_win -5.e-6  5.e-6
+
+pc_mode multitone
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+ref_freq 10680.4
+weak_channel 0.1
+pc_amp_hcode 0.001
+ion_npts 75
+ion_win -100.0 100.0
+
+if station M
+  sampler_delay_x 50 215 215 215
+  sampler_delay_y 50 215 215 215
+
+if station V
+   sampler_delay_x 15  15  15  10
+   sampler_delay_y 10  10  10   5
+
+*==========================================================
+* This control file was generated with the script vgoscf_generate.py
+* on Mar-04-0458PM-2026 using the following arguments:
+* args: Namespace(control_file='./cf_1234_MV_initial', network_reference_station='M', stations='V', data_directory='./1234/', verbosity=3, num_proc=22, snr_min=12.0, quality_lower_limit=6, dtec_thresh=1.0, begin_scan_limit='000-0000', end_scan_limit='999-9999', sigma_cut_factor=1.5, use_scratch=True, use_progress_ticker=True, output_filename='', averaging_scan_limit=30, toggle_dump_info=True, nchannel_discard_threshold=5, channel_discard_tolerance=15.0)
+*==========================================================
+
+if station M
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  2.5  1.1  -2.7  0.0  0.8  -2.1  -1.4  -3.2  -7.2  -6.9  -6.2  -9.8  -7.7  -11.6  -6.4  -8.0  -7.8  -6.2  -7.2  -6.5  -3.7  -1.7  1.1  -9.8  5.9  8.9  11.6  12.8  11.4  7.8  6.5  8.9
+
+if station V
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  -35.2  -26.0  -13.9  6.6  16.8  26.9  12.2  0.3  -12.6  -8.5  -8.0  -19.7  -4.2  -5.8  7.1  5.4  -17.4  -18.3  -12.8  -4.1  -5.5  -11.8  -15.2  -2.9  48.7  53.6  46.7  26.4  17.9  14.1  26.9  34.7
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -41.3  -27.5  -25.9  10.3  28.9  29.4  22.1  17.4  -1.6  2.6  2.5  11.7  11.7  7.8  17.4  14.9  -7.8  -15.6  -22.0  -1.1  9.9  -4.4  -18.2  -18.2  -28.7  -30.7  -21.9  -41.2  -48.6  -68.6  -59.9  -51.9
+
+if station M
+  pc_delay_x  0.0
+  pc_delay_y -1.026 * (ns) estimated error is +/- 0.004
+  pc_phase_offset_x  0.0
+  pc_phase_offset_y 26.9 * (deg) estimated error is +/- 9.0
+
+if station V
+  pc_delay_x  0.0
+  pc_delay_y 0.085 * (ns) estimated error is +/- 0.004
+  pc_phase_offset_x  0.0
+  pc_phase_offset_y -101.8 * (deg) estimated error is +/- 9.3
+
+*==========================================================
+* This control file was generated with the script vgoscf_generate.py
+* on Mar-25-0402PM-2026 using the following arguments:
+* args: Namespace(control_file='./cf_1234_MV_initial', network_reference_station='M', stations='V', data_directory='./1234/', verbosity=3, num_proc=22, snr_min=12.0, quality_lower_limit=6, dtec_thresh=1.0, begin_scan_limit='000-0000', end_scan_limit='999-9999', sigma_cut_factor=1.5, use_scratch=True, use_progress_ticker=True, output_filename='', averaging_scan_limit=30, toggle_dump_info=True, nchannel_discard_threshold=5, channel_discard_tolerance=15.0)
+*==========================================================

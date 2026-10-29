@@ -1,0 +1,90 @@
+* Fourfit control file for C22176
+
+*==========================================================
+*basic setup
+*==========================================================
+
+dr_win -5.e-6  5.e-6
+pc_mode multitone
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+ref_freq 6000.0
+weak_channel 0.1
+pc_amp_hcode .001
+* general ionosphere search parameters:
+ion_npts 45
+ion_win  -88.0 88.0
+
+*==========================================================
+* sampler delays and pc_tonemask
+*==========================================================
+
+if station S
+  pc_tonemask l 4
+
+if station T
+  pc_tonemask dzE 16 16 2
+
+if station S
+  sampler_delay_x 85 90 85 70
+  sampler_delay_y 85 90 85 70
+
+if station T
+  sampler_delay_x 85 90 85 70
+  sampler_delay_y 85 90 85 70
+
+if station I
+  sampler_delay_x   15  -15  -45  -50
+  sampler_delay_y   15  -15  -45  -50
+
+if baseline ST
+   skip true
+
+*==========================================================
+*station pc_phases
+*==========================================================
+
+
+if station I
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  -56.4  -55.2  -54.2  -55.6  -55.1  -57.9  -52.8  -52.9  -66.5  -68.7  -68.9  -69.1  -68.8  -68.3  -66.7  -63.9  -110.1  -110.5  -111.9  -112.2  -111.3  -110.5  -108.6  -106.3  -122.3  -124.6  -124.1  -125.6  -124.3  -123.9  -123.7  -121.6 
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -52.9  -47.4  -45.5  -50.6  -48.7  -47.1  -52.9  -52.8  -65.9  -65.3  -65.1  -67.5  -63.8  -63.2  -62.8  -61.9  -106.3  -110.6  -111.8  -116.1  -107.8  -104.0  -104.5  -115.6  -127.8  -137.5  -127.3  -139.7  -130.7  -132.3  -128.9  -128.5 
+
+if station S
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  98.3  91.4  96.3  78.6  85.3  74.2  72.0  64.9  91.3  80.2  90.0  97.7  95.9  93.6  94.9  95.1  90.7  89.6  84.1  87.1  99.6  80.3  83.1  60.2  90.3  89.0  81.9  72.5  58.7  67.5  65.8  60.3 
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  92.7  78.2  76.6  69.2  86.7  85.8  83.8  68.9  81.2  81.5  85.6  95.9  91.2  76.2  77.1  81.3  73.3  71.3  78.7  77.2  68.2  79.9  80.1  61.3  53.7  60.3  59.7  57.3  84.2  70.8  73.4  71.8 
+
+if station T
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  80.6  81.0  76.5  100.0  92.5  86.8  72.7  69.4  94.4  91.6  91.8  81.6  99.4  99.3  108.2  104.5  76.3  74.9  72.1  71.9  83.5  90.7  95.8  75.8  64.7  60.7  83.5  59.4  79.3  87.3  79.6  71.0 
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  80.1  72.1  76.0  90.0  96.5  80.8  82.0  67.0  76.8  68.2  62.8  75.0  76.1  72.7  84.6  80.4  68.2  62.7  65.9  96.5  83.1  95.9  107.6  104.8  47.0  37.1  32.7  49.3  73.5  75.0  89.0  104.8 
+
+
+
+if station I
+  pc_delay_x  0.0
+  pc_delay_y -0.036 * (ns) estimated error is +/- 0.001
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y 80.5 * (deg) estimated error is +/- 4.3
+
+if station S
+  pc_delay_x  0.0
+  pc_delay_y -0.116 * (ns) estimated error is +/- 0.001
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y 127.9 * (deg) estimated error is +/- 0.2
+
+if station T
+  pc_delay_x  0.0
+  pc_delay_y 0.228 * (ns) estimated error is +/- 0.001
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y -50.5 * (deg) estimated error is +/- 4.7
+
+*==========================================================
+* This control file was generated with the script vgoscf_generate.py
+* on Aug-24-0701PM-2022 using the following arguments: 
+* args: Namespace(averaging_scan_limit=10, begin_scan_limit='000-0000', channel_discard_tolerance=15.0, control_file='./c22176.cf', data_directory='./1234/', dtec_thresh=1.0, end_scan_limit='999-9999', nchannel_discard_threshold=5, network_reference_station='I', num_proc=10, output_filename='', quality_lower_limit=5, sigma_cut_factor=3.0, snr_min=30, stations='ST', toggle_dump_info=True, use_progress_ticker=True, use_scratch=False, verbosity=2)
+*========================================================== 
+
+*TIMETAG 2025/07/23 05:34:27 UTC
+*This vgosDB was renamed from '22JUN25VC' to '20220625-c22176'
+*by Christopher Dieck <christopher.a.dieck.civ@us.navy.mil>.
