@@ -33,9 +33,9 @@
       "name": "ISHIOKA",
       "file": "series/station/Is.json",
       "n_series": 111,
-      "n_sessions": 726,
+      "n_sessions": 727,
       "first_epoch": "2020-01-07T18:30:00Z",
-      "last_epoch": "2026-10-26T05:30:00Z"
+      "last_epoch": "2026-10-30T23:30:00Z"
     },
     {
       "code": "K2",
@@ -96,18 +96,18 @@
       "name": "ONSA13NE",
       "file": "series/station/Oe.json",
       "n_series": 81,
-      "n_sessions": 636,
+      "n_sessions": 637,
       "first_epoch": "2020-01-07T18:30:00Z",
-      "last_epoch": "2026-10-25T11:30:00Z"
+      "last_epoch": "2026-10-30T23:30:00Z"
     },
     {
       "code": "Ow",
       "name": "ONSA13SW",
       "file": "series/station/Ow.json",
       "n_series": 92,
-      "n_sessions": 540,
+      "n_sessions": 541,
       "first_epoch": "2020-01-07T18:30:00Z",
-      "last_epoch": "2026-10-25T11:30:00Z"
+      "last_epoch": "2026-10-30T23:30:00Z"
     },
     {
       "code": "S6",
