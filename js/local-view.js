@@ -2,7 +2,7 @@
 // came to, beside the export. What the import means is in local-import.js;
 // this is only the page.
 
-import { clearImport, importSession, isStationFile, lastHistoricalPoint, saveImport } from './local-import.js';
+import { clearImport, importSession, isStationFile, lastHistoricalPoint, saveImport, todayDate } from './local-import.js';
 import { parseStationIds } from './local-series.js';
 import { day, el, fmt, parseHash } from './ui.js';
 
@@ -16,60 +16,81 @@ const STATION_FORMAT_NOTE = {
 const CHANNEL_NOTE = 'Channel values are matched by letter, on the assumption that this session ' +
                      'follows the standard channel plan: that needs the correlator report to check.';
 
-// the files chosen so far, before they are imported
-const pending = { control: null, station: null, session: '', error: null };
+// the files chosen so far, before they are imported. sessionTyped: the reader
+// wrote the session, so a station file does not replace it
+const pending = { control: null, station: null, session: '', sessionTyped: false, error: null };
 
 /** Forget the files chosen so far. */
 function resetPending() {
   pending.control = null;
   pending.station = null;
   pending.session = '';
+  pending.sessionTyped = false;
   pending.error = null;
 }
 
-/** File by file: each goes in its place, and a station file fills in the session. */
+/** Take a file as the control file. */
+async function pickControl(file) {
+  pending.control = { name: file.name, text: await file.text() };
+}
+
+/** Take a file as the station file, which fills in the session if it names one. */
+async function pickStation(file) {
+  const text = await file.text();
+  try {
+    const parsed = parseStationIds(text);
+    pending.station = { name: file.name, text: text };
+    if (!pending.sessionTyped) {
+      pending.session = parsed.session ?? '';
+    }
+  } catch (err) {
+    pending.station = null;
+    pending.error = `${file.name}: ${err.message}`;
+  }
+}
+
+/** Files dropped on the page, which say for themselves which is which. */
 async function addFiles(fileList) {
   pending.error = null;
   for (const file of fileList) {
-    const text = await file.text();
-    if (!isStationFile(file.name, text)) {
-      pending.control = { name: file.name, text: text };
-      continue;
-    }
-    try {
-      const parsed = parseStationIds(text);
-      pending.station = { name: file.name, text: text };
-      if (parsed.session !== null) {
-        pending.session = parsed.session;
-      }
-    } catch (err) {
-      pending.station = null;
-      pending.error = `${file.name}: ${err.message}`;
+    if (isStationFile(file.name, await file.text())) {
+      await pickStation(file);
+    } else {
+      await pickControl(file);
     }
   }
 }
 
-/** One line of the form: which file is chosen for this place. */
-function chosenFile(label, chosen) {
-  let name = 'none yet';
+/** One line of the form: a file chooser for this place, and what it holds. */
+function fileRow(label, chosen, pick, page) {
+  const chooser = el('input', {
+    type: 'file', 'aria-label': label,
+    onchange: async (ev) => {
+      if (ev.target.files.length === 0) {
+        return;
+      }
+      pending.error = null;
+      await pick(ev.target.files[0]);
+      page.rerender();
+    },
+  });
+  let name = el('span', { class: 'note' }, 'No file chosen');
   if (chosen !== null) {
     name = chosen.name;
   }
-  return el('tr', {}, el('th', {}, label), el('td', { class: 'wrap' }, name));
+  return el('tr', {}, el('th', {}, label),
+            el('td', { class: 'wrap' }, el('label', { class: 'file-choice' }, chooser, 'Choose file'), ' ', name));
 }
 
 /** The form that chooses the two files and the session. */
 function importForm(page) {
-  const chooser = el('input', {
-    type: 'file', multiple: true, 'aria-label': 'Control file and station file',
-    onchange: async (ev) => {
-      await addFiles(ev.target.files);
-      page.rerender();
-    },
-  });
   const sessionInput = el('input', {
-    type: 'text', value: pending.session, placeholder: '20260930-vo6273 or 2026-09-30',
-    'aria-label': 'Session', oninput: (ev) => { pending.session = ev.target.value; },
+    type: 'text', value: pending.session, placeholder: `${todayDate()}, or a session id`,
+    'aria-label': 'Session',
+    oninput: (ev) => {
+      pending.session = ev.target.value;
+      pending.sessionTyped = ev.target.value.trim() !== '';
+    },
   });
   const ready = pending.control !== null && pending.station !== null;
   const button = el('button', {
@@ -83,12 +104,12 @@ function importForm(page) {
 
   return el('section', { class: 'import-form' },
     el('p', { class: 'note' },
-      'Choose a control file and a station file together or one at a time, or drop them anywhere on ' +
-      'this page. The station file is a station_ids.tsv or a HOPS station.codes. Both stay in this ' +
-      'browser tab: nothing is uploaded.'),
-    el('label', { class: 'dropzone' }, 'Files ', chooser),
+      'The station file is a station_ids.tsv or a HOPS station.codes. You can also drop the files ' +
+      'anywhere on this page. Both stay in this browser tab: nothing is uploaded. Unless the station ' +
+      'file names one, the session is today\'s date until you give a session id or another date.'),
     el('table', {}, el('tbody', {},
-      chosenFile('Control file', pending.control), chosenFile('Station file', pending.station),
+      fileRow('Control file', pending.control, pickControl, page),
+      fileRow('Station file', pending.station, pickStation, page),
       el('tr', {}, el('th', {}, 'Session'), el('td', {}, sessionInput)))),
     pending.error !== null && el('p', { class: 'error' }, pending.error),
     button);
@@ -99,7 +120,7 @@ async function runImport(page) {
   const files = {
     controlName: pending.control.name, controlText: pending.control.text,
     stationName: pending.station.name, stationText: pending.station.text,
-    session: pending.session,
+    session: pending.session.trim() || todayDate(),
   };
   try {
     const local = await importSession(files, page.data);

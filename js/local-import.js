@@ -64,6 +64,11 @@ export function parseSessionInput(text) {
   return { id: id, date: `${year}-${month}-${day}` };
 }
 
+/** A date as the session input takes it: today, in UTC like every epoch here. */
+export function todayDate(now = new Date()) {
+  return now.toISOString().slice(0, 10);
+}
+
 /**
  * The session an import is: { label, exportedId, epoch, x, type, correlator }.
  * A session already in the export takes its epoch, type and correlator from

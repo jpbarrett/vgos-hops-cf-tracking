@@ -17,6 +17,7 @@
   --type-3:         #1baf7a;
   --type-rd:        #0b0b0b;
   --accent:         #d03b3b;   /* status critical: the offsets-missed cross only */
+  --imported:       #e3170a;   /* the imported star */
   --link:           #1c5cab;
   --div-low:        #184f95;
   --div-mid:        #f0efec;
@@ -43,6 +44,7 @@
     --type-3:         #199e70;
     --type-rd:        #f0efec;
     --accent:         #d03b3b;
+    --imported:       #ff4b3e;
     --link:           #86b6ef;
     --div-low:        #3987e5;
     --div-mid:        #383835;
@@ -69,6 +71,7 @@
   --type-3:         #199e70;
   --type-rd:        #f0efec;
   --accent:         #d03b3b;
+  --imported:       #ff4b3e;
   --link:           #86b6ef;
   --div-low:        #3987e5;
   --div-mid:        #383835;
@@ -249,10 +252,14 @@ button.linkish:hover { text-decoration: underline; }
   background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 3px 6px;
 }
 .import-form .error { padding: 8px 0 0; }
-.dropzone {
-  display: block; margin: 8px 0; padding: 20px; color: var(--text-secondary);
-  border: 1px dashed var(--axis); border-radius: 8px; background: var(--surface);
+.file-choice {
+  display: inline-block; font-size: 13px; padding: 3px 10px; cursor: pointer; color: var(--text-primary);
+  background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
 }
+.file-choice:hover { background: var(--page); }
+.file-choice:focus-within { outline: 2px solid var(--link); outline-offset: 1px; }
+/* out of sight but not out of reach: the label is the button, the keyboard still gets here */
+.file-choice input { position: absolute; width: 1px; height: 1px; opacity: 0; }
 button.action {
   font: inherit; font-size: 13px; margin: 12px 0 0; padding: 4px 12px; cursor: pointer;
   color: var(--text-primary); background: var(--surface);

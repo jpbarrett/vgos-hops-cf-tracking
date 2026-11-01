@@ -223,7 +223,7 @@ function importedTraces(imported, t, deviation, compact) {
     type: 'scatter', mode: 'markers', name: IMPORTED.label, x: a.x, y: a.y, hoverinfo: 'skip',
     // a session at the end of the range sits on the plot's edge
     cliponaxis: false,
-    marker: { symbol: IMPORTED.symbol, size: compact ? 12 : 15, color: token(IMPORTED.colour),
+    marker: { symbol: IMPORTED.symbol, size: compact ? 22 : 28, color: token(IMPORTED.colour),
               line: { color: t.surface, width: IMPORTED.ringWidth } },
   };
   const target = {
