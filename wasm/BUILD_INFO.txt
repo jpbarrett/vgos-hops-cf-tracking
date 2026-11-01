@@ -1,0 +1,7 @@
+built by scripts/build_cf2json_wasm.sh; do not edit
+hops_commit        510f0bf3107c754aa630b8569904158bd50fc57f
+hops_dirty         false
+emscripten         6.0.13
+control_keywords   98
+cf2json.wasm       sha256:44b1afbb807eb39e066a2893badbd60b588e69d5e299de12dc62117d69f8c709
+built_at           2026-11-01T14:18:47Z
