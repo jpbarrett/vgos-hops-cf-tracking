@@ -3,7 +3,7 @@
 /* global Plotly */
 
 import { keepSession } from './loader.js';
-import { TYPE_GROUPS, typeGroup, NOT_SET, NOT_SET_SYMBOL } from './legend.js';
+import { IMPORTED, TYPE_GROUPS, typeGroup, NOT_SET, NOT_SET_SYMBOL } from './legend.js';
 import { fmt } from './ui.js';
 
 function token(name) {
@@ -164,6 +164,112 @@ function notSetTrace(missing, compact) {
   };
 }
 
+// --------------------------------------------------------------------------
+// an imported control file: `imported` is { points, session }, the points of
+// one series in the form of an export series file, and the session they are
+// (local-import.js). They are drawn apart from the export's, never joined to
+// them by a line: nothing is known about how the session relates to its
+// neighbours, not even its type
+
+// smaller than any other marker on a plot, so that it wins the hover
+const IMPORTED_TARGET_SIZE = 5;
+
+/** Arrays for the trace of a series' imported points. */
+export function importedArrays(imported, deviation = false) {
+  const { points, session } = imported;
+  let values = points.v;
+  if (deviation && Array.isArray(points.d)) {
+    values = points.d;
+  }
+  return { x: values.map(() => session.x), y: values, cd: values.map((_, i) => i) };
+}
+
+/** The hover line of an imported point. */
+export function describeImported(entry, imported, i, { deviation = false, compact = true } = {}) {
+  const { points, session } = imported;
+  let value = withUnit(points.v[i], entry.unit);
+  if (deviation && Array.isArray(points.d)) {
+    value = `${withUnit(points.d[i], entry.unit)} from median (value ${value})`;
+  }
+  const parts = [value, `imported ${session.label}`];
+  if (session.type) parts.push(session.type);
+  if (session.correlator) parts.push(session.correlator);
+  const stated = points.r && points.r[String(i)];
+  if (stated !== undefined) parts.push(`stated as ${fmt(stated)}`);
+  if (!compact) parts.push(`${points.c[i]}, line ${points.l[i]}`);
+  return parts.join(' · ');
+}
+
+/**
+ * An invisible trace across `span`, for a plot with nothing but imported
+ * points: alone, a star would stretch the date axis over a millisecond.
+ */
+function spanTrace(span, imported, deviation) {
+  const y = importedArrays(imported, deviation).y[0];
+  return { type: 'scatter', mode: 'markers', x: span, y: span.map(() => y), hoverinfo: 'skip',
+           showlegend: false, marker: { size: 1, opacity: 0 } };
+}
+
+/**
+ * The traces of a series' imported points: the stars, drawn last, over the
+ * rest, and an invisible marker on each that takes the hover and the click.
+ * Inside overlapping marks Plotly picks the smallest, so a star, the largest
+ * mark on the plot, would lose to any neighbour touching it, and in dense
+ * recent sessions could not be reached at all.
+ */
+function importedTraces(imported, t, deviation, compact) {
+  const a = importedArrays(imported, deviation);
+  const stars = {
+    type: 'scatter', mode: 'markers', name: IMPORTED.label, x: a.x, y: a.y, hoverinfo: 'skip',
+    // a session at the end of the range sits on the plot's edge
+    cliponaxis: false,
+    marker: { symbol: IMPORTED.symbol, size: compact ? 12 : 15, color: token(IMPORTED.colour),
+              line: { color: t.surface, width: IMPORTED.ringWidth } },
+  };
+  const target = {
+    type: 'scatter', mode: 'markers', name: IMPORTED.label, meta: 'imported',
+    x: a.x, y: a.y, customdata: a.cd, hoverinfo: 'none', showlegend: false,
+    marker: { size: IMPORTED_TARGET_SIZE, opacity: 0 },
+  };
+  return [stars, target];
+}
+
+/** A dotted rule through the imported session, so that its date reads against the history. */
+function importedRule(imported, t) {
+  const x = imported.session.x;
+  return { type: 'line', xref: 'x', yref: 'paper', x0: x, x1: x, y0: 0, y1: 1, layer: 'below',
+           line: { color: t.muted, width: 1, dash: 'dot' } };
+}
+
+/**
+ * The column of imported values beside a heatmap's `rows`: { z, value }, each
+ * with one single-element row per heatmap row, null where the import has no
+ * value. Null if it has none at all. Where a series has several points, the
+ * last, as in the heatmap's own columns.
+ */
+export function importedColumn(rows, imported, deviation = false) {
+  const z = [];
+  const value = [];
+  let found = false;
+  for (const entry of rows) {
+    const points = imported.series[entry.key];
+    if (points === undefined) {
+      z.push([null]);
+      value.push([null]);
+      continue;
+    }
+    found = true;
+    const last = points.v.length - 1;
+    if (deviation && Array.isArray(points.d)) {
+      z.push([points.d[last]]);
+    } else {
+      z.push([points.v[last]]);
+    }
+    value.push([points.v[last]]);
+  }
+  return found ? { z, value } : null;
+}
+
 // one series over time; compact for small multiples, full size for detail.
 //
 // Only sessions of the chosen `types` are drawn, one trace per session type
@@ -172,10 +278,15 @@ function notSetTrace(missing, compact) {
 //
 // `missing` are the sessions where this station correlated but the value
 // was not set (offsets_not_set entries, already filtered to this series and
-// the chosen types). Each is marked, and breaks its type's line
+// the chosen types). Each is marked, and breaks its type's line.
+//
+// `imported` is this series' imported points, or null. They show whatever the
+// chosen types, since an import may have no type to choose. `span` is the
+// dates to give the axis if they are all there is to draw
 export function plotSeries(div, entry, pts, sessionById,
                            { range = null, compact = true, deviation = false,
-                             types = null, info = null, missing = [], pick = null } = {}) {
+                             types = null, info = null, missing = [], pick = null,
+                             imported = null, span = null } = {}) {
   const t = theme();
   deviation = deviation && Array.isArray(pts.d);
   const byType = new Map();
@@ -213,17 +324,29 @@ export function plotSeries(div, entry, pts, sessionById,
     layout.yaxis2 = { domain: [0, 0.07], range: [0, 1], visible: false, fixedrange: true };
     layout.xaxis.anchor = 'y2';
   }
+  if (imported) {
+    if (byType.size === 0 && span !== null) traces.push(spanTrace(span, imported, deviation));
+    traces.push(...importedTraces(imported, t, deviation, compact));
+    layout.shapes = [importedRule(imported, t)];
+  }
   // small panels have no room for the toolbar; the detail view keeps it
   return Plotly.react(div, traces, layout, compact ? { ...CONFIG, displayModeBar: false } : CONFIG)
     .then((d) => {
       bindInfo(div, info, (p) => {
         if (p.customdata == null) return null;
         if (p.data && p.data.meta === 'not-set') return describeNotSet(missing[p.customdata]);
+        if (p.data && p.data.meta === 'imported') {
+          return describeImported(entry, imported, p.customdata, { deviation, compact });
+        }
         return describePoint(entry, pts, p.customdata, sessionById, { deviation, compact });
       });
       div._pickOf = (p) => {
         if (p.customdata == null) return null;
         if (p.data && p.data.meta === 'not-set') return { session: missing[p.customdata].session.id };
+        if (p.data && p.data.meta === 'imported') {
+          const n = p.customdata;
+          return { session: imported.points.s[n], line: imported.points.l[n], keyword: entry.keyword };
+        }
         const i = p.customdata;
         return { session: pts.s[i], line: pts.l[i], keyword: entry.keyword };
       };
@@ -239,9 +362,15 @@ export function plotSeries(div, entry, pts, sessionById,
 // deviation colours each cell by its offset from that channel's circular
 // median rather than by its value. A diverging scale centred on zero is only
 // right for values near zero: on raw phases, a channel sitting near 180
-// flips between the two ends of the scale while barely moving
+// flips between the two ends of the scale while barely moving.
+//
+// `imported` is { series, session }, or null. Its values get a column of their
+// own beside the date axis, on the same rows and colour scale. As a column
+// among the dates it would be under a pixel wide with 2000 sessions on the
+// axis, and would share its date with the session itself on a re-fringe
 export function plotChannelHeatmap(div, entries, filePoints, sessions,
-                                   { range = null, deviation = false, info = null } = {}) {
+                                   { range = null, deviation = false, info = null,
+                                     imported = null } = {}) {
   const t = theme();
   const rows = [...entries].sort((p, q) => (p.freq_mhz ?? 0) - (q.freq_mhz ?? 0));
   deviation = deviation && rows.every((e) => Array.isArray(filePoints[e.key].d));
@@ -259,9 +388,26 @@ export function plotChannelHeatmap(div, entries, filePoints, sessions,
     });
   });
 
+  const column = imported ? importedColumn(rows, imported, deviation) : null;
+
+  // value · channel · imported session · type · correlator
+  const describeColumn = (r) => {
+    if (!rows[r] || column.z[r][0] == null) return null;
+    const e = rows[r], s = imported.session;
+    const parts = [deviation ? `${fmt(column.z[r][0])}${unit} from median (value ${fmt(column.value[r][0])}${unit}, ` +
+                               `channel median ${fmt(e.circ_median)})`
+                             : `${fmt(column.z[r][0])}${unit}`,
+                   `${e.channel ?? '?'}${e.freq_mhz != null ? ' ' + e.freq_mhz.toFixed(1) + ' MHz' : ''}`,
+                   `imported ${s.label}`];
+    if (s.type) parts.push(s.type);
+    if (s.correlator) parts.push(s.correlator);
+    return parts.join(' · ');
+  };
+
   // value · channel · session · type · correlator
   const describe = (p) => {
     const [r, c] = Array.isArray(p.pointNumber) ? p.pointNumber : [p.y, -1];
+    if (p.data && p.data.meta === 'imported') return describeColumn(r);
     if (!rows[r] || !sessions[c] || z[r][c] == null) return null;
     const e = rows[r], s = sessions[c];
     const parts = [deviation ? `${fmt(z[r][c])}${unit} from median (value ${fmt(value[r][c])}${unit}, ` +
@@ -275,6 +421,7 @@ export function plotChannelHeatmap(div, entries, filePoints, sessions,
   };
 
   const flat = z.flat().filter((v) => v != null);
+  if (column) flat.push(...column.z.flat().filter((v) => v != null));
   const signed = rows.some((e) => e.circular) || flat.some((v) => v < 0);
   let colour;
   if (signed) {
@@ -285,6 +432,11 @@ export function plotChannelHeatmap(div, entries, filePoints, sessions,
     colour = { colorscale: t.diverging, zmin: -lim, zmax: lim, zmid: 0 };
   } else {
     colour = { colorscale: t.sequential };
+    // two traces only share a scale when it is stated
+    if (column) {
+      colour.zmin = Math.min(...flat);
+      colour.zmax = Math.max(...flat);
+    }
   }
 
   const labels = rows.map((e) => `${e.channel ?? '?'}  ${e.freq_mhz != null ? e.freq_mhz.toFixed(0) : ''}`);
@@ -305,14 +457,30 @@ export function plotChannelHeatmap(div, entries, filePoints, sessions,
     }
   }
 
+  const colorbar = { thickness: 10, outlinewidth: 0, tickfont: { size: 10, color: t.secondary },
+                     title: { text: deviation ? `${unit.trim()}<br>from<br>median` : unit.trim(),
+                              font: { size: 10, color: t.secondary } } };
   const trace = {
     type: 'heatmap', x: sessions.map((s) => s.x), y: rows.map((_, i) => i), z,
-    ...colour, hoverongaps: false, xgap: 0, ygap: 1, hoverinfo: 'none',
-    colorbar: { thickness: 10, outlinewidth: 0, tickfont: { size: 10, color: t.secondary },
-                title: { text: deviation ? `${unit.trim()}<br>from<br>median` : unit.trim(),
-                         font: { size: 10, color: t.secondary } } },
+    ...colour, hoverongaps: false, xgap: 0, ygap: 1, hoverinfo: 'none', colorbar,
   };
-  return Plotly.react(div, [trace], layout, CONFIG).then(() => {
+  const traces = [trace];
+  if (column) {
+    traces.push({ type: 'heatmap', meta: 'imported', name: IMPORTED.label, xaxis: 'x2',
+                  x: ['imported'], y: rows.map((_, i) => i), z: column.z,
+                  ...colour, showscale: sessions.length === 0, colorbar,
+                  hoverongaps: false, ygap: 1, hoverinfo: 'none' });
+    layout.xaxis.domain = [0, 0.94];
+    // with no sessions the date axis has nothing to say, and would make up dates
+    if (sessions.length === 0) {
+      layout.xaxis.showticklabels = false;
+      layout.xaxis.ticks = '';
+    }
+    layout.xaxis2 = { type: 'category', domain: [0.955, 1], anchor: 'y', fixedrange: true,
+                      showgrid: false, linecolor: t.axis, automargin: true,
+                      tickfont: { size: 10, color: t.primary } };
+  }
+  return Plotly.react(div, traces, layout, CONFIG).then(() => {
     bindInfo(div, info, describe);
     return rows;
   });

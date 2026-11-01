@@ -97,6 +97,7 @@ header.site {
 }
 .brand { font-weight: 600; font-size: 16px; color: var(--text-primary); }
 .dataset { color: var(--text-secondary); font-size: 13px; }
+.import-link { margin-left: auto; font-size: 13px; }
 footer.site { color: var(--text-muted); font-size: 12px; padding-top: 24px; padding-bottom: 24px; }
 
 h1 { font-size: 22px; font-weight: 600; margin: 20px 0 4px; }
@@ -239,3 +240,26 @@ button.linkish {
   font: inherit; padding: 0; border: 0; background: none; color: var(--link); cursor: pointer;
 }
 button.linkish:hover { text-decoration: underline; }
+
+/* importing a control file (#/local) */
+.import-form { max-width: 640px; }
+.import-form th { width: 8em; }
+.import-form input[type="text"] {
+  font: inherit; font-size: 13px; color: var(--text-primary); width: 100%; max-width: 280px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 3px 6px;
+}
+.import-form .error { padding: 8px 0 0; }
+.dropzone {
+  display: block; margin: 8px 0; padding: 20px; color: var(--text-secondary);
+  border: 1px dashed var(--axis); border-radius: 8px; background: var(--surface);
+}
+button.action {
+  font: inherit; font-size: 13px; margin: 12px 0 0; padding: 4px 12px; cursor: pointer;
+  color: var(--text-primary); background: var(--surface);
+  border: 1px solid var(--border); border-radius: 6px;
+}
+button.action:disabled { color: var(--text-muted); cursor: default; }
+tr.imported td { font-weight: 600; }
+table.facts { width: auto; }
+table.facts th, table.facts td { padding-right: 32px; }
+.note.wrap { overflow-wrap: anywhere; }

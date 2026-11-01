@@ -39,3 +39,9 @@ export const NOT_SET = {
   session: { label: 'Offsets not set for any station in the session', colour: '--text-muted', width: 1.5 },
 };
 export const NOT_SET_SYMBOL = 'x-thin';
+
+// a value from an imported control file: a star in ink, told from the session
+// types by its shape rather than by a further hue, ringed in the surface colour
+// so that it stays readable on top of the points around it
+export const IMPORTED = { label: 'Imported control file', colour: '--text-primary', symbol: 'star',
+                          ringWidth: 2 };

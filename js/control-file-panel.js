@@ -6,7 +6,11 @@
 // exactly this text. Block 0 is the part before the first `if`. Opened from
 // a not-set mark, there is no block: the blocks for any uncorrelated id the
 // session's offsets went to are highlighted instead
+//
+// The session may be the imported one (LOCAL_ID), whose text is the reader's
+// file as it stands, and which is not in the export
 
+import { LOCAL_ID } from './local-import.js';
 import { el, patchQuery } from './ui.js';
 
 // the left edge drags to resize; the width is a per-reader convenience, kept
@@ -33,8 +37,8 @@ function blockRange(lines, line) {
 
 // the panel for one export. open(what) shows a control file and records it
 // in the hash; sync(q) follows the hash after a render; button(what, label)
-// is a table's link to it
-export function controlFilePanel(data) {
+// is a table's link to it. currentImport() is the import, or null
+export function controlFilePanel(data, currentImport) {
   const panel = el('aside', { class: 'cf-panel', hidden: true, 'aria-label': 'Control file' });
   document.body.append(panel);
   let seq = 0;
@@ -67,6 +71,22 @@ export function controlFilePanel(data) {
     return g;
   }
 
+  // what the panel shows of a session, or null if there is no such session:
+  // { title, facts, offsetsNotSet, textNote, text() }
+  function source(id) {
+    const local = currentImport();
+    if (id === LOCAL_ID && local !== null) {
+      const { label, type, correlator } = local.session;
+      return { title: `Imported ${label}`, facts: [type, correlator, local.files.controlName],
+               offsetsNotSet: [], textNote: 'as imported', text: () => Promise.resolve(local.text) };
+    }
+    const s = data.sessionById.get(id);
+    if (s === undefined) return null;
+    return { title: id, facts: [s.type, s.correlator, s.cf], offsetsNotSet: s.offsets_not_set,
+             textNote: 'as parsed; prose after the last statement is shown commented',
+             text: () => data.controlFile(id) };
+  }
+
   function hide() {
     panel.hidden = true;
     panel.replaceChildren();
@@ -84,17 +104,17 @@ export function controlFilePanel(data) {
 
   async function show(what) {
     const mine = ++seq;
-    const s = data.sessionById.get(what.session);
+    const s = source(what.session);
     const closeButton = el('button', { type: 'button', class: 'close', 'aria-label': 'Close', onclick: close }, '×');
     const head = el('header', {},
-      el('div', {}, el('strong', {}, what.session),
-         el('div', { class: 'note' }, [s?.type, s?.correlator, s?.cf].filter(Boolean).join(' · '))),
+      el('div', {}, el('strong', {}, s?.title ?? what.session),
+         el('div', { class: 'note' }, (s?.facts ?? []).filter(Boolean).join(' · '))),
       closeButton);
     panel.hidden = false;
     panel.replaceChildren(grip(), head, el('p', { class: 'status' }, 'Loading control file…'));
     let text;
     try {
-      text = await data.controlFile(what.session);
+      text = s === null ? null : await s.text();
     } catch (err) {
       if (mine === seq) panel.replaceChildren(grip(), head, el('p', { class: 'error' }, String(err.message || err)));
       return;
@@ -119,8 +139,8 @@ export function controlFilePanel(data) {
       sub = (what.line >= 1 ? `Block at line ${what.line}` : 'Lines before the first if') +
             (what.keyword ? `, ${what.keyword}${hit.size ? ` on line ${[...hit][0]}` : ' (continued from an earlier line)'}` : '');
     } else if (s) {
-      const ids = [...new Set(s.offsets_not_set.flatMap((m) => m.uncorrelated_ids))];
-      const stations = s.offsets_not_set.map((m) => m.station);
+      const ids = [...new Set(s.offsetsNotSet.flatMap((m) => m.uncorrelated_ids))];
+      const stations = s.offsetsNotSet.map((m) => m.station);
       if (stations.length) sub = `Offsets not set for ${stations.join(', ')}`;
       if (ids.length) {
         sub += `; highlighted: the blocks for ${ids.join(', ')}, which did not correlate`;
@@ -139,14 +159,14 @@ export function controlFilePanel(data) {
       lines.map((ln, i) => el('div', { class: hit.has(i + 1) ? 'hit' : block.has(i + 1) ? 'block' : null },
         el('span', { class: 'ln' }, i + 1), el('span', { class: 'code' }, ln || ' '))));
     panel.replaceChildren(grip(), head, el('div', { class: 'note cf-sub' }, sub,
-      ` · ${lines.length} lines · as parsed; prose after the last statement is shown commented`), body);
+      ` · ${lines.length} lines · ${s.textNote}`), body);
     const target = body.children[([...hit][0] ?? [...block][0] ?? 1) - 1];
     if (target) body.scrollTop = Math.max(0, target.offsetTop - body.clientHeight / 3);
   }
 
   function sync(q) {
     const what = parseCf(q.get('cf'));
-    if (what && data.sessionById.has(what.session)) show(what);
+    if (what && source(what.session) !== null) show(what);
     else if (!panel.hidden) hide();
   }
 

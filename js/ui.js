@@ -3,7 +3,7 @@
 // colour key. Knows nothing about which view is showing; what a control
 // needs from the export is passed in.
 
-import { TYPE_GROUPS, TYPE_PRESETS, NOT_SET } from './legend.js';
+import { IMPORTED, TYPE_GROUPS, TYPE_PRESETS, NOT_SET } from './legend.js';
 
 // --------------------------------------------------------------------------
 // tiny DOM helpers; all text goes in through textContent
@@ -54,19 +54,31 @@ export function patchQuery(changes) {
 // --------------------------------------------------------------------------
 // date range: presets count back from the last session in the data, not from
 // today, so "last 12 months" always has something in it. `coverage` is the
-// manifest's
+// manifest's, or that with an import (coverageWith, local-import.js)
+
+// the end of a range holding the last session: a plain date on an axis means
+// its midnight, which would cut off a session later that day
+function rangeEnd(coverage) {
+  const end = new Date(coverage.last_epoch);
+  end.setUTCDate(end.getUTCDate() + 1);
+  return end.toISOString().slice(0, 10);
+}
+
+// the whole of a coverage, as a range
+export function coverageRange(coverage) {
+  return [day(coverage.first_epoch), rangeEnd(coverage)];
+}
 
 export function rangeFromQuery(q, coverage) {
   const from = q.get('from'), to = q.get('to');
-  return from || to ? [from || day(coverage.first_epoch), to || day(coverage.last_epoch)] : null;
+  return from || to ? [from || day(coverage.first_epoch), to || rangeEnd(coverage)] : null;
 }
 
 function presetRange(months, coverage) {
   if (!months) return null;
-  const last = new Date(coverage.last_epoch);
-  const from = new Date(last);
+  const from = new Date(coverage.last_epoch);
   from.setUTCMonth(from.getUTCMonth() - months);
-  return [from.toISOString().slice(0, 10), last.toISOString().slice(0, 10)];
+  return [from.toISOString().slice(0, 10), rangeEnd(coverage)];
 }
 
 export function rangeControls(range, apply, coverage) {
@@ -85,7 +97,7 @@ export function rangeControls(range, apply, coverage) {
     apply(r);
   }
   const custom = () => set(from.value || to.value ? [from.value || day(coverage.first_epoch),
-                                                     to.value || day(coverage.last_epoch)] : null);
+                                                     to.value || rangeEnd(coverage)] : null);
   from.addEventListener('change', custom);
   to.addEventListener('change', custom);
   return { node: el('span', { class: 'filters-range' },
@@ -130,6 +142,16 @@ export function notSetSwatch(kind) {
   return svg;
 }
 
+// the star an imported value is drawn with
+export function importedSwatch() {
+  const svg = svgBox();
+  const mark = document.createElementNS(SVG, 'polygon');
+  mark.setAttribute('points', '5,0.5 6.2,3.8 9.7,3.9 6.9,6.1 7.9,9.5 5,7.5 2.1,9.5 3.1,6.1 0.3,3.9 3.8,3.8');
+  mark.setAttribute('style', `fill: var(${IMPORTED.colour})`);
+  svg.append(mark);
+  return svg;
+}
+
 // --------------------------------------------------------------------------
 // the session-type filter plus the colour key, which is the legend for every
 // plot on the page.
@@ -137,10 +159,11 @@ export function notSetSwatch(kind) {
 // available: the export's types ({type, n, group}); chosen: the Set of
 // types shown, or null for all; nShown: how many sessions that keeps;
 // go(set): apply a new choice (null for all); notSet: the kinds of not-set
-// mark the page shows, which join the key. Null when no session has a type
+// mark the page shows, which join the key, as does the imported star when
+// `imported` says the page shows one. Null when no session has a type
 // (none is in a master file); shown for even one type, so it is clear what
 // the data holds
-export function typeFilter({ available, chosen, nShown, go, notSet = [] }) {
+export function typeFilter({ available, chosen, nShown, go, notSet = [], imported = false }) {
   if (!available.length) return null;
   const names = available.map((t) => t.type);
   const ticked = chosen || new Set(names);
@@ -166,5 +189,6 @@ export function typeFilter({ available, chosen, nShown, go, notSet = [] }) {
     el('span', { class: 'key', 'aria-label': 'Colour key' },
       groups.map((g) => el('span', {}, swatch(g), TYPE_GROUPS[g].label)),
       Object.keys(NOT_SET).filter((k) => notSet.includes(k))
-        .map((k) => el('span', {}, notSetSwatch(k), NOT_SET[k].label))));
+        .map((k) => el('span', {}, notSetSwatch(k), NOT_SET[k].label)),
+      imported && el('span', {}, importedSwatch(), IMPORTED.label)));
 }

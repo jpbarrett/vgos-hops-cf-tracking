@@ -3,8 +3,9 @@
 // is the parse fourfit performs. Fetched the first time a file is parsed, so
 // a reader who never imports one does not download it.
 
-// HOPS colours its messages for a terminal
+// HOPS colours its messages for a terminal, and pads them into columns
 const ANSI_COLOUR = /\x1b\[[0-9;]*m/g;
+const COLUMN_PADDING = /\s{2,}/g;
 
 export class ControlFileError extends Error {}
 
@@ -14,7 +15,7 @@ let messages = [];
 let loading = null;
 
 function collectMessage(line) {
-  messages.push(line.replace(ANSI_COLOUR, '').trim());
+  messages.push(line.replace(ANSI_COLOUR, '').replace(COLUMN_PADDING, ' ').trim());
 }
 
 async function loadParser() {

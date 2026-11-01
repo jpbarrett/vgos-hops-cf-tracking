@@ -6,9 +6,11 @@ import { dataUrl } from './config.js';
 import { DataExport, OFFSET_KEYWORDS, typeCounts, keepSession } from './loader.js';
 import { NOT_SET } from './legend.js';
 import { plotSeries, plotChannelHeatmap, onRangeChange, setRange, purge } from './plots.js';
-import { el, day, fmt, parseHash, hashHref, patchQuery, rangeFromQuery, rangeControls,
-         notSetSwatch, typeFilter } from './ui.js';
+import { el, day, fmt, parseHash, hashHref, patchQuery, coverageRange, rangeFromQuery, rangeControls,
+         importedSwatch, notSetSwatch, typeFilter } from './ui.js';
 import { controlFilePanel } from './control-file-panel.js';
+import { coverageWith, differsFromHistory, restoreImport } from './local-import.js';
+import { bindFileDrop, viewLocal } from './local-view.js';
 
 const main = document.getElementById('main');
 let data;
@@ -18,12 +20,15 @@ let cf;
 // hash on every render and carried by every link, so it follows the reader
 // from page to page
 let types = null;
+// the imported control file, or null. Kept apart from `data`, so that nothing
+// counted from the export ever includes it
+let local = null;
 
 // cfseries names session-wide series "session <keyword>"
 const label = (e) => e.label.replace(/^session /, 'Session-wide ');
 
 // --------------------------------------------------------------------------
-// routes: #/  #/station/Gs  #/global  #/series/<key>  #/missing
+// routes: #/  #/station/Gs  #/global  #/series/<key>  #/missing  #/local
 
 function href(parts, q = {}) {
   // the type filter rides along unless the caller sets it
@@ -49,15 +54,21 @@ function typesParam(set) {
 const keep = (s) => keepSession(types, s);
 
 // the filter and colour key for this page; notSet: the kinds of not-set mark
-// the page shows
-function typeControls({ notSet = [] } = {}) {
+// the page shows; imported: whether it shows an imported value
+function typeControls({ notSet = [], imported = false } = {}) {
   return typeFilter({
-    available: data.types, chosen: types, nShown: data.sessions.filter(keep).length, notSet,
+    available: data.types, chosen: types, nShown: data.sessions.filter(keep).length, notSet, imported,
     go: (set) => {
       const { parts, q } = parseHash();
       location.hash = href(parts, { ...Object.fromEntries(q), types: typesParam(set) });
     },
   });
+}
+
+// this series' imported points, as plotSeries wants them, or null
+function importedFor(key) {
+  if (!local || !local.series[key]) return null;
+  return { points: local.series[key], session: local.session };
 }
 
 // the correlated sessions, of the chosen types, where the control file set
@@ -141,15 +152,17 @@ async function viewGroup(kind, id, q) {
   const g = data.group(kind, id);
   if (!g) return notFound(`No ${kind} ${id ?? ''} in this export.`);
   if (!g.file) return notFound(`${g.title} has no numeric series.`);
-  // only what the chosen session types have
+  // only what the chosen session types have, and whatever was imported: an
+  // import shows whatever the filter, since it may have no type to choose
   g.sessions = g.sessions.filter(keep);
-  g.entries = g.entries.filter((e) => typeCounts(e, types));
-  const stats = new Map(g.entries.map((e) => [e.key, typeCounts(e, types)]));
+  g.entries = g.entries.filter((e) => typeCounts(e, types) || importedFor(e.key));
+  const stats = new Map(g.entries.map((e) => [e.key, typeCounts(e, types) ?? { n: 0, n_changes: 0 }]));
   const tab = q.get('view') === 'channels' ? 'channels' : 'params';
   // sessions it correlated in with no polarisation offsets; marked on the
   // offset panels, so they join the key there
   const notSet = kind === 'station' ? data.notSet.filter((m) => m.station === id && keep(m.session)) : [];
-  const tc = typeControls({ notSet: tab === 'params' ? [...new Set(notSet.map((m) => m.kind))] : [] });
+  const tc = typeControls({ notSet: tab === 'params' ? [...new Set(notSet.map((m) => m.kind))] : [],
+                            imported: g.entries.some((e) => importedFor(e.key)) });
   const channelKw = [...new Set(g.entries.filter((e) => e.index_kind === 'channel').map((e) => e.keyword))].sort();
   const paramEntries = g.entries.filter((e) => e.index_kind !== 'channel');
 
@@ -157,7 +170,8 @@ async function viewGroup(kind, id, q) {
     el('div', { class: 'crumbs' }, el('a', { href: '#/' }, 'All stations')),
     el('h1', {}, g.name ? `${g.title} ${g.name}` : g.title),
     el('p', { class: 'sub' }, kind === 'station'
-      ? `${g.sessions.length} sessions, ${day(g.sessions[0]?.epoch)} to ${day(g.sessions.at(-1)?.epoch)}`
+      ? (g.sessions.length ? `${g.sessions.length} sessions, ${day(g.sessions[0]?.epoch)} to ${day(g.sessions.at(-1)?.epoch)}`
+                           : 'No sessions of the chosen session types')
       : `${g.entries.length} series`,
       notSet.length > 0 && [`. Polarisation offsets not set in ${notSet.length} correlated ` +
                             `session${notSet.length === 1 ? '' : 's'} (${notSetCounts(notSet)}): `,
@@ -170,7 +184,7 @@ async function viewGroup(kind, id, q) {
                                         'aria-current': tab === 'channels' ? 'page' : null },
                                  `Channels (${channelKw.length} keywords)`)),
   ];
-  if (!g.sessions.length) {
+  if (!g.sessions.length && !g.entries.some((e) => importedFor(e.key))) {
     main.replaceChildren(...heading, tc && el('div', { class: 'filters' }, tc),
       el('p', { class: 'status' }, `${g.title} has no sessions of the chosen session types.`));
     return;
@@ -180,12 +194,13 @@ async function viewGroup(kind, id, q) {
 
   const plots = [];
   let syncing = false;
-  const range = rangeFromQuery(q, data.manifest.coverage);
+  const coverage = coverageWith(data.manifest.coverage, local);
+  const range = rangeFromQuery(q, coverage);
   const rc = rangeControls(range, (r) => {
     patchQuery({ from: r ? r[0] : null, to: r ? r[1] : null });
     syncing = true;
     Promise.all(plots.map((d) => setRange(d, r))).finally(() => { syncing = false; });
-  }, data.manifest.coverage);
+  }, coverage);
   // zooming one panel moves them all, and the date inputs follow
   const follow = (div) => onRangeChange(div, (r) => {
     if (syncing) return;
@@ -213,7 +228,7 @@ async function viewGroup(kind, id, q) {
       // keep whatever range the plot is zoomed to
       const xa = div.layout && div.layout.xaxis;
       const now = xa && !xa.autorange && xa.range ? xa.range : range;
-      rows = await plotChannelHeatmap(div, entries, filePoints, columns, { range: now, deviation, info });
+      rows = await plotChannelHeatmap(div, entries, filePoints, columns, { range: now, deviation, info, imported: local });
     };
     const devBox = hasDev && el('label', {},
       el('input', { type: 'checkbox', checked: deviation, onchange: (ev) => {
@@ -244,8 +259,13 @@ async function viewGroup(kind, id, q) {
   const kwSel = q.get('kw') && keywords.includes(q.get('kw')) ? q.get('kw') : '';
   const showConstant = q.get('constant') === '1';
   let shown = sortEntries(paramEntries.filter((e) => !kwSel || e.keyword === kwSel));
-  // constant within the chosen types: no step inside any of them
-  const isConstant = (e) => stats.get(e.key).n_changes === 0;
+  // constant within the chosen types: no step inside any of them. A value
+  // imported that breaks one is what the reader came to see, so that stays
+  const isConstant = (e) => {
+    const imported = importedFor(e.key);
+    return stats.get(e.key).n_changes === 0 &&
+           !(imported && differsFromHistory(imported.points, filePoints[e.key], data.sessionById, types));
+  };
   const nConstant = shown.filter(isConstant).length;
   if (!showConstant) shown = shown.filter((e) => !isConstant(e));
 
@@ -277,10 +297,31 @@ async function viewGroup(kind, id, q) {
     grid.append(el('div', { class: 'card' },
       el('h3', {}, el('a', { href: seriesHref(e.key) }, title)), meta, div));
     await plotSeries(div, e, filePoints[e.key], data.sessionById,
-                     { range, types, info: meta, missing, pick: cf.open });
+                     { range, types, info: meta, missing, pick: cf.open, imported: importedFor(e.key),
+                       span: coverageRange(coverage) });
     plots.push(div);
     follow(div);
   }
+}
+
+// the points table's rows for a series' imported points, as [epoch, <tr>]
+function importedRows(imported, hasDev, keyword) {
+  if (!imported) return [];
+  const { points, session } = imported;
+  const rows = [];
+  for (let i = 0; i < points.v.length; i++) {
+    const stated = points.r ? points.r[String(i)] : undefined;
+    rows.push([session.epoch, el('tr', { class: 'imported' },
+      el('td', {}, day(session.epoch)),
+      el('td', {}, importedSwatch(), ` imported ${session.label}`),
+      el('td', {}, session.type ?? ''), el('td', {}, session.correlator ?? ''),
+      el('td', { class: 'num' }, fmt(points.v[i])),
+      el('td', { class: 'num' }, stated !== undefined ? fmt(stated) : ''),
+      hasDev && el('td', { class: 'num' }, fmt(points.d[i])),
+      el('td', {}, points.c[i]),
+      el('td', { class: 'num' }, cf.button({ session: points.s[i], line: points.l[i], keyword }, points.l[i])))]);
+  }
+  return rows;
 }
 
 async function viewSeries(key, q) {
@@ -290,15 +331,17 @@ async function viewSeries(key, q) {
   const pts = await data.points(key);
   const st = typeCounts(e, types);
   const missing = notSetFor(e);
-  const tc = typeControls({ notSet: [...new Set(missing.map((m) => m.kind))] });
+  const imported = importedFor(key);
+  const tc = typeControls({ notSet: [...new Set(missing.map((m) => m.kind))], imported: imported !== null });
   const div = el('div', { class: 'plot big' });
   const info = el('div', { class: 'info' }, 'Hover a point to see its value, session and correlator; ' +
                                              'click it to read the control file.');
-  const range = rangeFromQuery(q, data.manifest.coverage);
+  const coverage = coverageWith(data.manifest.coverage, local);
+  const range = rangeFromQuery(q, coverage);
   const rc = rangeControls(range, (r) => {
     patchQuery({ from: r ? r[0] : null, to: r ? r[1] : null });
     setRange(div, r);
-  }, data.manifest.coverage);
+  }, coverage);
   // here the value itself is the default; ?dev=1 (set when arriving from a
   // deviation-coloured heatmap) plots the offset from the median instead
   const hasDev = Array.isArray(pts.d);
@@ -307,7 +350,8 @@ async function viewSeries(key, q) {
     const xa = div.layout && div.layout.xaxis;
     const now = xa && !xa.autorange && xa.range ? xa.range : range;
     return plotSeries(div, e, pts, data.sessionById,
-                      { range: now, compact: false, deviation, types, info, missing, pick: cf.open });
+                      { range: now, compact: false, deviation, types, info, missing, pick: cf.open, imported,
+                        span: coverageRange(coverage) });
   };
   const devBox = hasDev && el('label', {},
     el('input', { type: 'checkbox', checked: deviation, onchange: (ev) => {
@@ -360,6 +404,7 @@ async function viewSeries(key, q) {
          (m.n_obs != null ? `; ${m.n_obs} obs correlated` : '') +
          (m.uncorrelated_ids.length ? `; offsets given to ${m.uncorrelated_ids.join(', ')}, which did not correlate` : '')))]);
   }
+  rows.push(...importedRows(imported, hasDev, e.keyword));
   rows.sort((p, q) => (p[0] < q[0]) - (p[0] > q[0]));
 
   main.replaceChildren(
@@ -439,6 +484,24 @@ function viewMissing(q) {
                 : el('p', { class: 'status' }, 'None with these filters.'));
 }
 
+// what the #/local page needs of this module
+function localPage(q) {
+  return { data, types, q, href, seriesHref, typeControls, rerender: render, setLocal };
+}
+
+// the header's link says what is imported
+function showImport() {
+  const link = document.getElementById('import-link');
+  link.textContent = local ? `Imported: ${local.session.label}` : 'Import a control file';
+}
+
+function setLocal(imported) {
+  local = imported;
+  showImport();
+  if (parseHash().parts[0] === 'local') render();
+  else location.hash = href(['local']);
+}
+
 function notFound(msg) {
   main.replaceChildren(el('div', { class: 'crumbs' }, el('a', { href: '#/' }, 'All stations')),
                        el('p', { class: 'error' }, msg));
@@ -457,6 +520,7 @@ async function render() {
     else if (parts[0] === 'global') await viewGroup('global', null, q);
     else if (parts[0] === 'series' && parts[1]) await viewSeries(parts.slice(1).join('/'), q);
     else if (parts[0] === 'missing') viewMissing(q);
+    else if (parts[0] === 'local') await viewLocal(main, local, localPage(q));
     else viewHome();
     if (seq === renderSeq) cf.sync(q);
   } catch (err) {
@@ -475,7 +539,7 @@ async function start() {
   }
   try {
     data = await new DataExport(base).open();
-    cf = controlFilePanel(data);
+    cf = controlFilePanel(data, () => local);
   } catch (err) {
     main.replaceChildren(el('p', { class: 'error' },
       `Could not open the data export at ${base}\n\n${err.message}\n\n` +
@@ -491,6 +555,11 @@ async function start() {
     `Data generated ${m.generated_at.replace('T', ' ').replace('Z', ' UTC')}`,
     m.source.commit ? ` from ${m.source.commit.slice(0, 10)}${m.source.dirty ? ' (uncommitted changes)' : ''}` : '',
     ` · schema v${m.schema_version} · `, el('a', { href: base + 'manifest.json' }, 'manifest'));
+
+  // a reload keeps an import, derived afresh against this export
+  local = await restoreImport(sessionStorage, data);
+  showImport();
+  bindFileDrop(() => { setLocal(local); });
 
   window.addEventListener('hashchange', render);
   // a theme change needs a redraw: plot colours are read from the CSS tokens
