@@ -104,12 +104,12 @@ function importForm(page) {
 
   return el('section', { class: 'import-form' },
     el('p', { class: 'note' },
-      'The station file is a station_ids.tsv or a HOPS station.codes. You can also drop the files ' +
+      'The station codes file is a station_ids.tsv or a HOPS station.codes. You can also drop the files ' +
       'anywhere on this page. Both stay in this browser tab: nothing is uploaded. Unless the station ' +
-      'file names one, the session is today\'s date until you give a session id or another date.'),
+      'codes file names one, the session is today\'s date until you give a session id or another date.'),
     el('table', {}, el('tbody', {},
       fileRow('Control file', pending.control, pickControl, page),
-      fileRow('Station file', pending.station, pickStation, page),
+      fileRow('Station codes file', pending.station, pickStation, page),
       el('tr', {}, el('th', {}, 'Session'), el('td', {}, sessionInput)))),
     pending.error !== null && el('p', { class: 'error' }, pending.error),
     button);
@@ -142,7 +142,7 @@ function importSummary(local) {
   }
   const facts = [
     ['Control file', local.files.controlName],
-    ['Station file', stationFile],
+    ['Station codes file', stationFile],
     ['Session', session.label],
     ['Date', day(session.epoch)],
     ['Session type', session.type ?? 'not known'],
@@ -204,7 +204,7 @@ function leftOutItems(local) {
   const { ignored, stationFile } = local;
   const items = [];
   if (ignored.absentIds.size > 0) {
-    items.push(`Blocks for ${listed(ignored.absentIds)}: not in the station file.`);
+    items.push(`Blocks for ${listed(ignored.absentIds)}: not in the station codes file.`);
   }
   if (ignored.perBaselineRows > 0) {
     items.push(`${ignored.perBaselineRows} values set per baseline: only station and ` +
@@ -217,7 +217,7 @@ function leftOutItems(local) {
     items.push(`Keywords the export leaves out: ${listed(ignored.excludedKeywords)}.`);
   }
   if (stationFile.skippedLines.length > 0) {
-    items.push(`Lines of the station file that could not be read: ${stationFile.skippedLines.join(' | ')}.`);
+    items.push(`Lines of the station codes file that could not be read: ${stationFile.skippedLines.join(' | ')}.`);
   }
   return items.map((text) => el('li', {}, text));
 }

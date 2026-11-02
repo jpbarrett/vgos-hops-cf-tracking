@@ -40,7 +40,7 @@ export const NOT_SET = {
 };
 export const NOT_SET_SYMBOL = 'x-thin';
 
-// a value from an imported control file: a large red star, the one mark on the
+// a value from an imported control file: a large orange star, the one mark on the
 // page meant to stand out, ringed in the surface colour so that it stays
 // readable on top of the points around it
 export const IMPORTED = { label: 'Imported control file', colour: '--imported', symbol: 'star',

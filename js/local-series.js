@@ -97,7 +97,7 @@ function parseStationIdsTsv(lines, columns) {
     if (sessionColumn >= 0) {
       const rowSession = cells[sessionColumn];
       if (session !== null && rowSession !== session) {
-        throw new StationIdsError(`the station file names two sessions: ${session} and ${rowSession}`);
+        throw new StationIdsError(`the station codes file names two sessions: ${session} and ${rowSession}`);
       }
       session = rowSession;
     }
@@ -160,7 +160,7 @@ function parseStationCodes(lines) {
 export function parseStationIds(text) {
   const lines = contentLines(text);
   if (lines.length === 0) {
-    throw new StationIdsError('the station file is empty');
+    throw new StationIdsError('the station codes file is empty');
   }
 
   const columns = lines[0].split('\t');
@@ -172,7 +172,7 @@ export function parseStationIds(text) {
   }
 
   if (parsed.stations.size === 0) {
-    throw new StationIdsError('the station file lists no stations: it should be a ' +
+    throw new StationIdsError('the station codes file lists no stations: it should be a ' +
                               'station_ids.tsv or a station.codes');
   }
   return parsed;
