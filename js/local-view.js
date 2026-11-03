@@ -7,14 +7,12 @@ import { parseStationIds } from './local-series.js';
 import { day, el, fmt, parseHash } from './ui.js';
 
 const STATION_FORMAT_NOTE = {
-  'station_ids.tsv': 'A station_ids.tsv comes from the vgosDB and lists the stations that observed. Blocks for any other ' +
-                     'id are left out, as left over from another session.',
-  'station.codes': 'A station.codes may name a station that was not correlated, and nothing in it can show that, ' +
-                   'so such a station\'s block is treated as applied.',
+  'station_ids.tsv': 'A station_ids.tsv is a 4-column, tab-separated file containing:
+   <session> <mk4id> <station-code> <station name> <n_obs>',
+  'station.codes': 'A station.codes file is a two column file mapping 1-char to 2-char station codes (as given to difx2mark).',
 };
 
-const CHANNEL_NOTE = 'Channel values are matched by letter, on the assumption that this session ' +
-                     'follows the standard channel plan: that needs the correlator report to check.';
+const CHANNEL_NOTE = 'Channel values are matched by fourfit letter code to standard VGOS frequency sequence, non-standard frequency setups are dropped';
 
 // the files chosen so far, before they are imported. sessionTyped: the reader
 // wrote the session, so a station file does not replace it
@@ -104,9 +102,8 @@ function importForm(page) {
 
   return el('section', { class: 'import-form' },
     el('p', { class: 'note' },
-      'The station codes file is a station_ids.tsv or a HOPS station.codes. You can also drop the files ' +
-      'anywhere on this page. Both stay in this browser tab: nothing is uploaded. Unless the station ' +
-      'codes file names one, the session is today\'s date until you give a session id or another date.'),
+      'The station codes file is a station_ids.tsv or a HOPS/difx2mark station.codes. You can also drop the files ' +
+      'anywhere on this page. This data is processed client-side, not uploaded. Unless specified, the session is treated as today\'s date.'),
     el('table', {}, el('tbody', {},
       fileRow('Control file', pending.control, pickControl, page),
       fileRow('Station codes file', pending.station, pickStation, page),
@@ -150,10 +147,9 @@ function importSummary(local) {
   ];
   const notes = [STATION_FORMAT_NOTE[local.stationFile.format], CHANNEL_NOTE];
   if (session.exportedId === null) {
-    notes.unshift('This session is not in the export, so its type and correlator are not known, ' +
-                  'and it is placed at midnight on its date.');
+    notes.unshift('This session is not in the export, so its type and correlator are not known, treating session start as midnight');
   } else {
-    notes.unshift('This session is in the export: its values are shown beside the export\'s own.');
+    notes.unshift('This session is in the export: its values will be shown beside the export\'s own.');
   }
   return [
     el('table', { class: 'facts' }, el('tbody', {}, facts.map(([name, value]) =>
@@ -371,7 +367,7 @@ export async function viewLocal(main, local, page) {
   main.replaceChildren(
     el('div', { class: 'crumbs' }, el('a', { href: page.href([]) }, 'All stations')),
     el('h1', {}, 'Import a control file'),
-    el('p', { class: 'sub' }, 'Parse your own control file with HOPS\' parser, and see its values ' +
+    el('p', { class: 'sub' }, 'Parse your own control file with the HOPS\' parser, and see its values ' +
                               'beside the history in this export.'),
     importForm(page));
 }

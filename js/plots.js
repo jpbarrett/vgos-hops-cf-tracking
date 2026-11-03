@@ -16,7 +16,7 @@ export function theme() {
     secondary: token('--text-secondary'), muted: token('--text-muted'),
     grid: token('--grid'), axis: token('--axis'), series: token('--series'),
     accent: token('--accent'),
-    types: TYPE_GROUPS.map((g) => token(g.colour)),
+    types: TYPE_GROUPS.map((g) => token(g.color)),
     diverging: [[0, token('--div-low')], [0.5, token('--div-mid')], [1, token('--div-high')]],
     sequential: [[0, token('--seq-low')], [1, token('--seq-high')]],
   };
@@ -139,7 +139,7 @@ export function traceArrays(entry, pts, sessionById, deviation = false,
 }
 
 // the hover line for a session where the station correlated but its
-// control file set no polarisation offsets (an export offsets_not_set entry)
+// control file set no polarization offsets (an export offsets_not_set entry)
 function describeNotSet(m) {
   const s = m.session;
   const parts = [m.kind === 'session' ? 'not set for any station' : 'not set', s.id];
@@ -159,7 +159,7 @@ function notSetTrace(missing, compact) {
     x: missing.map((m) => m.session.x), y: missing.map(() => 0.5),
     customdata: missing.map((_, i) => i), hoverinfo: 'none',
     marker: { symbol: NOT_SET_SYMBOL, size: compact ? 8 : 10, color: 'rgba(0,0,0,0)',
-              line: { color: missing.map((m) => token(NOT_SET[m.kind].colour)),
+              line: { color: missing.map((m) => token(NOT_SET[m.kind].color)),
                       width: missing.map((m) => NOT_SET[m.kind].width) } },
   };
 }
@@ -223,7 +223,7 @@ function importedTraces(imported, t, deviation, compact) {
     type: 'scatter', mode: 'markers', name: IMPORTED.label, x: a.x, y: a.y, hoverinfo: 'skip',
     // a session at the end of the range sits on the plot's edge
     cliponaxis: false,
-    marker: { symbol: IMPORTED.symbol, size: compact ? 15 : 20, color: token(IMPORTED.colour),
+    marker: { symbol: IMPORTED.symbol, size: compact ? 15 : 20, color: token(IMPORTED.color),
               line: { color: t.surface, width: IMPORTED.ringWidth } },
   };
   const target = {
@@ -306,15 +306,15 @@ export function plotSeries(div, entry, pts, sessionById,
   const order = [...byType.keys()].sort((p, q) => (p === 'VGOS-OPS') - (q === 'VGOS-OPS'));
   const traces = order.map((type) => {
     const g = type ? typeGroup(type) : 0;
-    const colour = t.types[g] || t.series;
+    const color = t.types[g] || t.series;
     const a = traceArrays(entry, pts, sessionById, deviation, byType.get(type), breaksOf(type));
     return {
       type: 'scatter', mode: 'lines+markers', name: type ?? 'unknown type',
       x: a.x, y: a.y, customdata: a.cd,
       connectgaps: false, hoverinfo: 'none',
-      line: { color: colour, width: compact ? 1.5 : 2 },
-      marker: { color: colour, size: compact ? 6 : 8, symbol: TYPE_GROUPS[g].symbol,
-                line: { color: colour, width: 1.5 } },
+      line: { color: color, width: compact ? 1.5 : 2 },
+      marker: { color: color, size: compact ? 6 : 8, symbol: TYPE_GROUPS[g].symbol,
+                line: { color: color, width: 1.5 } },
     };
   });
   if (missing.length) {
@@ -359,13 +359,13 @@ export function plotSeries(div, entry, pts, sessionById,
 // column, so one the station missed is a blank stripe rather than its
 // neighbours stretched over it.
 //
-// deviation colours each cell by its offset from that channel's circular
+// deviation colors each cell by its offset from that channel's circular
 // median rather than by its value. A diverging scale centred on zero is only
 // right for values near zero: on raw phases, a channel sitting near 180
 // flips between the two ends of the scale while barely moving.
 //
 // `imported` is { series, session }, or null. Its values get a column of their
-// own beside the date axis, on the same rows and colour scale. As a column
+// own beside the date axis, on the same rows and color scale. As a column
 // among the dates it would be under a pixel wide with 2000 sessions on the
 // axis, and would share its date with the session itself on a re-fringe
 export function plotChannelHeatmap(div, entries, filePoints, sessions,
@@ -423,19 +423,19 @@ export function plotChannelHeatmap(div, entries, filePoints, sessions,
   const flat = z.flat().filter((v) => v != null);
   if (column) flat.push(...column.z.flat().filter((v) => v != null));
   const signed = rows.some((e) => e.circular) || flat.some((v) => v < 0);
-  let colour;
+  let color;
   if (signed) {
     // symmetric about zero so "no correction" reads as nothing; the 99th
     // percentile keeps one wild value from washing out the rest
     const abs = flat.map(Math.abs).sort((p, q) => p - q);
     const lim = abs.length ? (abs[Math.floor(0.99 * (abs.length - 1))] || 1) : 1;
-    colour = { colorscale: t.diverging, zmin: -lim, zmax: lim, zmid: 0 };
+    color = { colorscale: t.diverging, zmin: -lim, zmax: lim, zmid: 0 };
   } else {
-    colour = { colorscale: t.sequential };
+    color = { colorscale: t.sequential };
     // two traces only share a scale when it is stated
     if (column) {
-      colour.zmin = Math.min(...flat);
-      colour.zmax = Math.max(...flat);
+      color.zmin = Math.min(...flat);
+      color.zmax = Math.max(...flat);
     }
   }
 
@@ -462,13 +462,13 @@ export function plotChannelHeatmap(div, entries, filePoints, sessions,
                               font: { size: 10, color: t.secondary } } };
   const trace = {
     type: 'heatmap', x: sessions.map((s) => s.x), y: rows.map((_, i) => i), z,
-    ...colour, hoverongaps: false, xgap: 0, ygap: 1, hoverinfo: 'none', colorbar,
+    ...color, hoverongaps: false, xgap: 0, ygap: 1, hoverinfo: 'none', colorbar,
   };
   const traces = [trace];
   if (column) {
     traces.push({ type: 'heatmap', meta: 'imported', name: IMPORTED.label, xaxis: 'x2',
                   x: ['imported'], y: rows.map((_, i) => i), z: column.z,
-                  ...colour, showscale: sessions.length === 0, colorbar,
+                  ...color, showscale: sessions.length === 0, colorbar,
                   hoverongaps: false, ygap: 1, hoverinfo: 'none' });
     layout.xaxis.domain = [0, 0.94];
     // with no sessions the date axis has nothing to say, and would make up dates

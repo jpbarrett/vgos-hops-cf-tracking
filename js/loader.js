@@ -47,7 +47,7 @@ export class DataExport {
     this.global = stations.global;
     this.sessions = sessions.sessions.map((s) => ({ ...s, x: plotDate(s.epoch) }));
     this.sessionById = new Map(this.sessions.map((s) => [s.id, s]));
-    // every correlated station whose control file has no polarisation
+    // every correlated station whose control file has no polarization
     // offsets, in epoch order, each with its session
     this.notSet = this.sessions.flatMap((s) => s.offsets_not_set.map((m) => (
       { ...m, session: s, n_obs: s.correlated[m.station] ?? null })));
@@ -112,7 +112,7 @@ export class DataExport {
   }
 }
 
-// the keywords offsets_not_set can name: a station's polarisation offsets
+// the keywords offsets_not_set can name: a station's polarization offsets
 // (EXPORT_SCHEMA.md, sessions.json)
 export const OFFSET_KEYWORDS = new Set(['pc_phase_offset_x', 'pc_phase_offset_y',
                                         'pc_delay_x', 'pc_delay_y']);

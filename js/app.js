@@ -53,7 +53,7 @@ function typesParam(set) {
 
 const keep = (s) => keepSession(types, s);
 
-// the filter and colour key for this page; notSet: the kinds of not-set mark
+// the filter and color key for this page; notSet: the kinds of not-set mark
 // the page shows; imported: whether it shows an imported value
 function typeControls({ notSet = [], imported = false } = {}) {
   return typeFilter({
@@ -73,7 +73,7 @@ function importedFor(key) {
 
 // the correlated sessions, of the chosen types, where the control file set
 // no value for this series although its station took part. Only the
-// polarisation offsets are tracked this way (offsets_not_set in the export)
+// polarization offsets are tracked this way (offsets_not_set in the export)
 function notSetFor(entry) {
   if (!entry.station || !OFFSET_KEYWORDS.has(entry.keyword)) return [];
   return data.notSet.filter((m) => m.station === entry.station && m.keywords.includes(entry.keyword) &&
@@ -123,10 +123,10 @@ function viewHome() {
     data.global.file && el('li', {}, el('a', { href: groupHref('global') }, 'Session-wide parameters'),
                            ` (${nGlobal} series)`));
   const checks = el('ul', {},
-    el('li', {}, el('a', { href: href(['missing']) }, 'Polarisation offsets not set'),
+    el('li', {}, el('a', { href: href(['missing']) }, 'Polarization offsets not set'),
        ` (${notSetCounts(notSet) ?? 'none'})`, el('br'),
-       el('span', { class: 'note' }, 'Stations that correlated, but whose control file gives no ' +
-                                     'pc_phase_offset_y or pc_delay_y.')));
+       el('span', { class: 'note' }, 'Stations that were correlated, but with no' +
+                                     'pc_phase_offset_y or pc_delay_y in the associated control file.')));
 
   const nSeries = data.catalogue.filter((e) => typeCounts(e, types)).length;
   const tc = typeControls();
@@ -158,7 +158,7 @@ async function viewGroup(kind, id, q) {
   g.entries = g.entries.filter((e) => typeCounts(e, types) || importedFor(e.key));
   const stats = new Map(g.entries.map((e) => [e.key, typeCounts(e, types) ?? { n: 0, n_changes: 0 }]));
   const tab = q.get('view') === 'channels' ? 'channels' : 'params';
-  // sessions it correlated in with no polarisation offsets; marked on the
+  // sessions it correlated in with no polarization offsets; marked on the
   // offset panels, so they join the key there
   const notSet = kind === 'station' ? data.notSet.filter((m) => m.station === id && keep(m.session)) : [];
   const tc = typeControls({ notSet: tab === 'params' ? [...new Set(notSet.map((m) => m.kind))] : [],
@@ -173,7 +173,7 @@ async function viewGroup(kind, id, q) {
       ? (g.sessions.length ? `${g.sessions.length} sessions, ${day(g.sessions[0]?.epoch)} to ${day(g.sessions.at(-1)?.epoch)}`
                            : 'No sessions of the chosen session types')
       : `${g.entries.length} series`,
-      notSet.length > 0 && [`. Polarisation offsets not set in ${notSet.length} correlated ` +
+      notSet.length > 0 && [`. Polarization offsets not set in ${notSet.length} correlated ` +
                             `session${notSet.length === 1 ? '' : 's'} (${notSetCounts(notSet)}): `,
                             el('a', { href: href(['missing'], { station: id }) }, 'list')]),
     el('nav', { class: 'tabs' },
@@ -215,7 +215,7 @@ async function viewGroup(kind, id, q) {
     const div = el('div', { class: 'plot heat' });
     const info = el('div', { class: 'info' }, 'Hover a cell to see its value, channel, session and correlator.');
     const entries = g.entries.filter((e) => e.keyword === kw && e.index_kind === 'channel');
-    // deviation colouring is on by default for phases; ?dev=0 turns it off
+    // deviation coloring is on by default for phases; ?dev=0 turns it off
     const hasDev = entries.length > 0 && entries.every((e) => e.circular);
     let deviation = hasDev && q.get('dev') !== '0';
     let rows = [];
@@ -236,14 +236,13 @@ async function viewGroup(kind, id, q) {
         patchQuery({ dev: deviation ? null : '0' });
         draw();
       } }),
-      'Colour by deviation from channel median');
+      'color by deviation from channel median');
     main.replaceChildren(...heading,
       el('div', { class: 'filters' }, tc, rc.node, el('label', {}, 'Keyword', select), devBox),
       el('p', { class: 'note' }, 'One row per channel, ordered by sky frequency; lines separate the bands. ' +
          'A blank column is a session with no value for this station. Click a cell to open that channel.' +
-         (hasDev ? ' Deviation colours each cell by its distance around the circle from that channel\'s ' +
-                   'typical value, so a channel that sits near ±180° does not flip between the two ' +
-                   'ends of the scale. Turn it off to colour by the phase itself.' : '')),
+         (hasDev ? ' Deviation colors each cell by its distance around the circle from that channel\'s ' +
+                   'typical circular median value. Turn it off to color by the phase itself.' : '')),
       el('div', { class: 'wide' }, info, div));
     await draw();
     div.on('plotly_click', (ev) => {
@@ -279,9 +278,9 @@ async function viewGroup(kind, id, q) {
   main.replaceChildren(...heading,
     el('div', { class: 'filters' }, tc, rc.node, el('label', {}, 'Keyword', select),
        el('label', {}, constBox, `Show constant series (${nConstant})`)),
-    el('p', { class: 'note' }, 'One panel per series, on a shared time axis with independent y axes. ' +
-       (data.types.length > 1 ? 'Each session type is its own line, so a line never joins two types. ' : '') +
-       'Zoom any panel to zoom them all. Click a point to read its control file.'),
+    el('p', { class: 'note' }, 'One panel is shown per series (independent y axes), with a shared time/x-axis . ' +
+       (data.types.length > 1 ? 'Session types are independently colored. ' : '') +
+       'Zoom on any panel to zoom them all. Click on a point to read its associated control file.'),
     grid);
   if (!shown.length) grid.append(el('p', { class: 'status' }, 'Nothing to show with these filters.'));
 
@@ -334,8 +333,8 @@ async function viewSeries(key, q) {
   const imported = importedFor(key);
   const tc = typeControls({ notSet: [...new Set(missing.map((m) => m.kind))], imported: imported !== null });
   const div = el('div', { class: 'plot big' });
-  const info = el('div', { class: 'info' }, 'Hover a point to see its value, session and correlator; ' +
-                                             'click it to read the control file.');
+  const info = el('div', { class: 'info' }, 'Hover on a point to see its value, session and correlator; ' +
+                                             'click it to read the associated control file.');
   const coverage = coverageWith(data.manifest.coverage, local);
   const range = rangeFromQuery(q, coverage);
   const rc = rangeControls(range, (r) => {
@@ -343,7 +342,7 @@ async function viewSeries(key, q) {
     setRange(div, r);
   }, coverage);
   // here the value itself is the default; ?dev=1 (set when arriving from a
-  // deviation-coloured heatmap) plots the offset from the median instead
+  // deviation-colored heatmap) plots the offset from the median instead
   const hasDev = Array.isArray(pts.d);
   let deviation = hasDev && q.get('dev') === '1';
   const draw = () => {
@@ -428,7 +427,7 @@ async function viewSeries(key, q) {
   });
 }
 
-// every correlated station whose control file set no polarisation offsets,
+// every correlated station whose control file set no polarization offsets,
 // newest first: ?station= and ?kind= narrow it
 function viewMissing(q) {
   const all = data.notSet.filter((m) => keep(m.session));
@@ -464,21 +463,21 @@ function viewMissing(q) {
         el('td', {}, m.keywords.length === OFFSET_KEYWORDS.size ? 'x and y phase offsets and delays'
                                                                  : m.keywords.join(', ')),
         el('td', { class: 'wrap' }, m.kind === 'session' ? 'no station in the session has offsets'
-          : m.uncorrelated_ids.length ? `offsets given to ${m.uncorrelated_ids.join(', ')}, which did not correlate` : ''));
+          : m.uncorrelated_ids.length ? `offsets given to ${m.uncorrelated_ids.join(', ')}, which was not correlated` : ''));
     })));
 
   main.replaceChildren(
     el('div', { class: 'crumbs' }, el('a', { href: '#/' }, 'All stations')),
-    el('h1', {}, 'Polarisation offsets not set'),
+    el('h1', {}, 'Polarization offsets not set'),
     el('p', { class: 'sub' }, `${list.length} correlated station-session${list.length === 1 ? '' : 's'}` +
        (list.length ? ` (${notSetCounts(list)})` : '') + '.'),
     el('div', { class: 'filters' }, tc, el('label', {}, 'Station', stSel), kindSel),
     el('p', { class: 'note' },
        'A station is listed when the vgosDB has fringe-fitted observations for it but the control file ' +
        'sets neither pc_phase_offset_y nor pc_delay_y for it. "Missed" means other stations in the ' +
-       'session have offsets, so the correlator applied them and left this one out. "Session-wide" means ' +
-       'no station in the session has them; that may have been deliberate. A station calibrated with ' +
-       'per-channel delay_offs instead is not listed. The same sessions are marked ✕ on the offset plots. ' +
+       'session have offsets, so the correlator applied them but may have left this one out. "Session-wide" means ' +
+       'no station in the session has these offsets set. A station calibrated with ' +
+       'per-channel delay_offs instead is not listed. These sessions are marked ✕ on the offset plots. ' +
        'Click a session to read its control file.'),
     list.length ? el('div', { class: 'table-wrap' }, table)
                 : el('p', { class: 'status' }, 'None with these filters.'));
@@ -534,7 +533,7 @@ async function start() {
   const base = dataUrl();
   if (typeof Plotly === 'undefined') {
     main.replaceChildren(el('p', { class: 'error' },
-      'Plotly did not load. It comes from cdn.jsdelivr.net, so this page needs network access.'));
+      'Plotly did not load from cdn.jsdelivr.net, this page needs network access to download it.'));
     return;
   }
   try {
@@ -543,9 +542,7 @@ async function start() {
   } catch (err) {
     main.replaceChildren(el('p', { class: 'error' },
       `Could not open the data export at ${base}\n\n${err.message}\n\n` +
-      'Serve this directory over HTTP (python3 -m http.server) rather than opening the file directly, ' +
-      'write the export when running locally (./export_web.py -o webapp/full-data), ' +
-      'or point at another export with ?data=<url>.'));
+      'This page should be served over HTTP (python3 -m http.server) rather than opening the file directly, or point at another export with ?data=<url>'));
     return;
   }
   const m = data.manifest;
@@ -562,7 +559,7 @@ async function start() {
   bindFileDrop(() => { setLocal(local); });
 
   window.addEventListener('hashchange', render);
-  // a theme change needs a redraw: plot colours are read from the CSS tokens
+  // a theme change needs a redraw: plot colors are read from the CSS tokens
   matchMedia('(prefers-color-scheme: dark)').addEventListener('change', render);
   render();
 }

@@ -1,6 +1,6 @@
 // The controls and helpers every view shares: building DOM, formatting, the
 // hash, the date-range and session-type filters, and the swatches of the
-// colour key. Knows nothing about which view is showing; what a control
+// color key. Knows nothing about which view is showing; what a control
 // needs from the export is passed in.
 
 import { IMPORTED, TYPE_GROUPS, TYPE_PRESETS, NOT_SET } from './legend.js';
@@ -118,15 +118,15 @@ function svgBox() {
   return svg;
 }
 
-// a small marker in a type group's colour and shape
+// a small marker in a type group's color and shape
 export function swatch(group) {
   const svg = svgBox();
-  const { symbol, colour } = TYPE_GROUPS[group];
+  const { symbol, color } = TYPE_GROUPS[group];
   const mark = document.createElementNS(SVG, symbol === 'circle' ? 'circle' : 'polygon');
   const points = { square: '1,1 9,1 9,9 1,9', 'triangle-up': '5,1 9.5,9 0.5,9', diamond: '5,0 10,5 5,10 0,5' };
   if (symbol === 'circle') { mark.setAttribute('cx', '5'); mark.setAttribute('cy', '5'); mark.setAttribute('r', '4'); }
   else mark.setAttribute('points', points[symbol]);
-  mark.setAttribute('style', `fill: var(${colour})`);
+  mark.setAttribute('style', `fill: var(${color})`);
   svg.append(mark);
   return svg;
 }
@@ -136,7 +136,7 @@ export function notSetSwatch(kind) {
   const svg = svgBox();
   const mark = document.createElementNS(SVG, 'path');
   mark.setAttribute('d', 'M1.5,1.5 L8.5,8.5 M8.5,1.5 L1.5,8.5');
-  mark.setAttribute('style', `fill: none; stroke: var(${NOT_SET[kind].colour}); ` +
+  mark.setAttribute('style', `fill: none; stroke: var(${NOT_SET[kind].color}); ` +
                              `stroke-width: ${NOT_SET[kind].width}`);
   svg.append(mark);
   return svg;
@@ -147,13 +147,13 @@ export function importedSwatch() {
   const svg = svgBox();
   const mark = document.createElementNS(SVG, 'polygon');
   mark.setAttribute('points', '5,0.5 6.2,3.8 9.7,3.9 6.9,6.1 7.9,9.5 5,7.5 2.1,9.5 3.1,6.1 0.3,3.9 3.8,3.8');
-  mark.setAttribute('style', `fill: var(${IMPORTED.colour})`);
+  mark.setAttribute('style', `fill: var(${IMPORTED.color})`);
   svg.append(mark);
   return svg;
 }
 
 // --------------------------------------------------------------------------
-// the session-type filter plus the colour key, which is the legend for every
+// the session-type filter plus the color key, which is the legend for every
 // plot on the page.
 //
 // available: the export's types ({type, n, group}); chosen: the Set of
@@ -186,7 +186,7 @@ export function typeFilter({ available, chosen, nShown, go, notSet = [], importe
   return el('span', { class: 'filters-types' },
     el('details', { class: 'types' }, el('summary', {}, `${what} (${nShown})`), menu),
     ' ',
-    el('span', { class: 'key', 'aria-label': 'Colour key' },
+    el('span', { class: 'key', 'aria-label': 'color key' },
       groups.map((g) => el('span', {}, swatch(g), TYPE_GROUPS[g].label)),
       Object.keys(NOT_SET).filter((k) => notSet.includes(k))
         .map((k) => el('span', {}, notSetSwatch(k), NOT_SET[k].label)),
