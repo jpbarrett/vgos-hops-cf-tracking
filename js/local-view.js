@@ -9,7 +9,7 @@ import { day, el, fmt, parseHash } from './ui.js';
 const STATION_FORMAT_NOTE = {
   'station_ids.tsv': 'A station_ids.tsv is a 4-column, tab-separated file containing: ' +
     '<session> <mk4id> <station-code> <station name> <n_obs>',
-  'station.codes': 'A station.codes file is a two column file mapping 1-char to 2-char station codes (as given to difx2mark).',
+  'station.codes': 'A station.codes file is a two column file mapping 1-char to 2-char station codes (as passed to difx2mark via the -s option).',
 };
 
 const CHANNEL_NOTE = 'Channel values are matched by fourfit letter code to standard VGOS frequency sequence, non-standard frequency setups are dropped';
@@ -102,7 +102,7 @@ function importForm(page) {
 
   return el('section', { class: 'import-form' },
     el('p', { class: 'note' },
-      'The station codes file is a station_ids.tsv or a HOPS/difx2mark station.codes. You can also drop the files ' +
+      'The station codes file can be either a station_ids.tsv or a HOPS/difx2mark station.codes file. You can also drop the files ' +
       'anywhere on this page. This data is processed client-side, not uploaded. Unless specified, the session is treated as today\'s date.'),
     el('table', {}, el('tbody', {},
       fileRow('Control file', pending.control, pickControl, page),
@@ -367,8 +367,8 @@ export async function viewLocal(main, local, page) {
   main.replaceChildren(
     el('div', { class: 'crumbs' }, el('a', { href: page.href([]) }, 'All stations')),
     el('h1', {}, 'Import a control file'),
-    el('p', { class: 'sub' }, 'Parse your own control file with the HOPS\' parser, and see its values ' +
-                              'beside the history in this export.'),
+    el('p', { class: 'sub' }, 'Extract a local control file with the HOPS/fourfit parser, to plot its values ' +
+                              'alongside the session history.'),
     importForm(page));
 }
 
