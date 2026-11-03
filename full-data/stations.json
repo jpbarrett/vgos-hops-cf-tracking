@@ -33,9 +33,9 @@
       "name": "ISHIOKA",
       "file": "series/station/Is.json",
       "n_series": 111,
-      "n_sessions": 729,
+      "n_sessions": 730,
       "first_epoch": "2020-01-07T18:30:00Z",
-      "last_epoch": "2026-10-31T23:30:00Z"
+      "last_epoch": "2026-11-02T05:30:00Z"
     },
     {
       "code": "K2",
@@ -69,18 +69,18 @@
       "name": "MACGO12M",
       "file": "series/station/Mg.json",
       "n_series": 78,
-      "n_sessions": 337,
+      "n_sessions": 338,
       "first_epoch": "2020-01-21T18:00:00Z",
-      "last_epoch": "2026-10-30T17:30:00Z"
+      "last_epoch": "2026-11-02T17:30:00Z"
     },
     {
       "code": "Nn",
       "name": "NYALE13N",
       "file": "series/station/Nn.json",
       "n_series": 78,
-      "n_sessions": 189,
+      "n_sessions": 190,
       "first_epoch": "2022-08-18T18:00:00Z",
-      "last_epoch": "2026-10-26T05:30:00Z"
+      "last_epoch": "2026-11-02T05:30:00Z"
     },
     {
       "code": "Ns",
@@ -177,9 +177,9 @@
       "name": "WETTZ13S",
       "file": "series/station/Ws.json",
       "n_series": 113,
-      "n_sessions": 1494,
+      "n_sessions": 1496,
       "first_epoch": "2020-01-09T18:00:00Z",
-      "last_epoch": "2026-10-30T17:30:00Z"
+      "last_epoch": "2026-11-02T17:30:00Z"
     },
     {
       "code": "Yg",

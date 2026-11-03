@@ -2117,5 +2117,7 @@
 {"id":"20261030-s26303","code":"s26303","epoch":"2026-10-30T17:30:00Z","type":"VGOS-INT-S","correlator":"WACO","report_format":"3","stations":["Gs","Mg","Ws"],"correlated":{"Gs":140,"Mg":140,"Ws":140},"offsets_not_set":[],"cf":"cf/20261030-s26303.txt"},
 {"id":"20261030-b26303","code":"b26303","epoch":"2026-10-30T23:30:00Z","type":"VGOS-INT-B","correlator":"GSI","report_format":"3","stations":["Is","Oe","Ow"],"correlated":{"Is":214,"Oe":107,"Ow":107},"offsets_not_set":[],"cf":"cf/20261030-b26303.txt"},
 {"id":"20261031-c26304","code":"c26304","epoch":"2026-10-31T11:30:00Z","type":"VGOS-INT-C","correlator":"GSI","report_format":"3","stations":["Is","Oe","Ow"],"correlated":{"Is":196,"Oe":98,"Ow":98},"offsets_not_set":[],"cf":"cf/20261031-c26304.txt"},
-{"id":"20261031-b26304","code":"b26304","epoch":"2026-10-31T23:30:00Z","type":"VGOS-INT-B","correlator":"GSI","report_format":"3","stations":["Is","Oe","Ow"],"correlated":{"Is":218,"Oe":109,"Ow":109},"offsets_not_set":[],"cf":"cf/20261031-b26304.txt"}
+{"id":"20261031-b26304","code":"b26304","epoch":"2026-10-31T23:30:00Z","type":"VGOS-INT-B","correlator":"GSI","report_format":"3","stations":["Is","Oe","Ow"],"correlated":{"Is":218,"Oe":109,"Ow":109},"offsets_not_set":[],"cf":"cf/20261031-b26304.txt"},
+{"id":"20261102-m26306","code":"m26306","epoch":"2026-11-02T05:30:00Z","type":"VGOS-INT-M","correlator":"BONN","report_format":"3","stations":["Is","Nn","Ws"],"correlated":{"Is":156,"Nn":156,"Ws":156},"offsets_not_set":[],"cf":"cf/20261102-m26306.txt"},
+{"id":"20261102-s26306","code":"s26306","epoch":"2026-11-02T17:30:00Z","type":"VGOS-INT-S","correlator":"WACO","report_format":"3","stations":["Mg","Ws"],"correlated":{"Mg":55,"Ws":55},"offsets_not_set":[],"cf":"cf/20261102-s26306.txt"}
 ]}
