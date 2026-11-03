@@ -7,8 +7,8 @@ import { parseStationIds } from './local-series.js';
 import { day, el, fmt, parseHash } from './ui.js';
 
 const STATION_FORMAT_NOTE = {
-  'station_ids.tsv': 'A station_ids.tsv is a 4-column, tab-separated file containing:
-   <session> <mk4id> <station-code> <station name> <n_obs>',
+  'station_ids.tsv': 'A station_ids.tsv is a 4-column, tab-separated file containing: ' +
+    '<session> <mk4id> <station-code> <station name> <n_obs>',
   'station.codes': 'A station.codes file is a two column file mapping 1-char to 2-char station codes (as given to difx2mark).',
 };
 
