@@ -7,9 +7,9 @@ import { parseStationIds } from './local-series.js';
 import { day, el, fmt, parseHash } from './ui.js';
 
 const STATION_FORMAT_NOTE = {
-  'station_ids.tsv': 'A station_ids.tsv is a 4-column, tab-separated file containing: ' +
+  'station_ids.tsv': 'A station_ids.tsv is a 5-column, tab-separated file containing: ' +
     '<session> <mk4id> <station-code> <station name> <n_obs>',
-  'station.codes': 'A station.codes file is a two column file mapping 1-char to 2-char station codes (as passed to difx2mark via the -s option).',
+  'station.codes': 'A station.codes file is a 2-column, space delimited file mapping 1-char to 2-char station codes (as passed to difx2mark via the -s option).',
 };
 
 const CHANNEL_NOTE = 'Channel values are matched by fourfit letter code to standard VGOS frequency sequence, non-standard frequency setups are dropped';
