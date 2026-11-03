@@ -4,4 +4,4 @@ This project supports the tracking and visualization of fourfit control file par
 
 To explore the parameter history, visit the [webpage](https://jpbarrett.github.io/vgos-hops-cf-tracking/).
 
-The parameter values are updated once daily from vgosDB data on [CDDIS](https://cddis.nasa.gov/archive/vlbi/ivsdata/db/). Only VGOS-OP, VGOS-RD, and VGOS-INT sessions are tracked.
+The parameter values are updated once daily from vgosDB data on [CDDIS](https://cddis.nasa.gov/archive/vlbi/ivsdata/vgosdb/). Only VGOS-OP, VGOS-RD, and VGOS-INT sessions are tracked.
