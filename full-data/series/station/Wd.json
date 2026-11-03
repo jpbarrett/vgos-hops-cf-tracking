@@ -1,4 +1,4 @@
-{"schema_version":2,"where":"station/Wd","series":{
+{"schema_version":3,"where":"station/Wd","series":{
 "Wd:pc_delay_x":{"s":["20240506-m24127"],"v":[0.0],"l":[68],"c":["station D"]},
 "Wd:pc_delay_y":{"s":["20240506-m24127"],"v":[0.09],"l":[68],"c":["station D"]},
 "Wd:pc_phase_offset_x":{"s":["20240506-m24127"],"v":[0.0],"l":[68],"c":["station D"],"d":[0.0]},

@@ -53,7 +53,7 @@ function baseLayout(t, { height, range, ytitle, compact }) {
 
 // The hovered point is described in `info`, an element the page reserves
 // for it (a card's meta line, a line above a big plot), and never drawn
-// over the plot where it would hide the point and its neighbours. `describe`
+// over the plot where it would hide the point and its neighbors. `describe`
 // turns Plotly's hover point into text, or null for nothing; it is replaced
 // on every redraw, while the listeners are bound once per div. Leaving the
 // plot puts back what `info` said before.
@@ -169,7 +169,7 @@ function notSetTrace(missing, compact) {
 // one series in the form of an export series file, and the session they are
 // (local-import.js). They are drawn apart from the export's, never joined to
 // them by a line: nothing is known about how the session relates to its
-// neighbours, not even its type
+// neighbors, not even its type
 
 // smaller than any other marker on a plot, so that it wins the hover
 const IMPORTED_TARGET_SIZE = 5;
@@ -214,7 +214,7 @@ function spanTrace(span, imported, deviation) {
  * The traces of a series' imported points: the stars, drawn last, over the
  * rest, and an invisible marker on each that takes the hover and the click.
  * Inside overlapping marks Plotly picks the smallest, so a star, the largest
- * mark on the plot, would lose to any neighbour touching it, and in dense
+ * mark on the plot, would lose to any neighbor touching it, and in dense
  * recent sessions could not be reached at all.
  */
 function importedTraces(imported, t, deviation, compact) {
@@ -357,10 +357,10 @@ export function plotSeries(div, entry, pts, sessionById,
 
 // channels x sessions for one keyword at one station. Every session is a
 // column, so one the station missed is a blank stripe rather than its
-// neighbours stretched over it.
+// neighbors stretched over it.
 //
 // deviation colors each cell by its offset from that channel's circular
-// median rather than by its value. A diverging scale centred on zero is only
+// median rather than by its value. A diverging scale centered on zero is only
 // right for values near zero: on raw phases, a channel sitting near 180
 // flips between the two ends of the scale while barely moving.
 //

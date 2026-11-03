@@ -1,4 +1,4 @@
-{"schema_version":2,"sessions":[
+{"schema_version":3,"sessions":[
 {"id":"20200107-b20007","code":"b20007","epoch":"2020-01-07T18:30:00Z","type":"VGOS-INT-B","correlator":"OSO","report_format":"legacy","stations":["Is","Oe","Ow"],"correlated":{"Is":106,"Oe":106,"Ow":106},"offsets_not_set":[],"cf":"cf/20200107-b20007.txt"},
 {"id":"20200109-vo0009","code":"vo0009","epoch":"2020-01-09T18:00:00Z","type":"VGOS-OPS","correlator":"HAYS","report_format":"legacy","stations":["Gs","Is","Oe","Ow","Wf","Ws"],"correlated":{"Gs":3061,"Is":2538,"Oe":2532,"Ow":2424,"Wf":2648,"Ws":3133},"offsets_not_set":[],"cf":"cf/20200109-vo0009.txt"},
 {"id":"20200113-b20013","code":"b20013","epoch":"2020-01-13T18:30:00Z","type":"VGOS-INT-B","correlator":"OSO","report_format":"legacy","stations":["Is","Oe","Ow"],"correlated":{"Is":106,"Oe":106,"Ow":106},"offsets_not_set":[],"cf":"cf/20200113-b20013.txt"},

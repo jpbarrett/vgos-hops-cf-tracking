@@ -1,4 +1,4 @@
-{"schema_version":2,"where":"station/Is","series":{
+{"schema_version":3,"where":"station/Is","series":{
 "Is:delay_offs_y:A":{"s":["20260430-g26120"],"v":[5.615],"l":[25],"c":["station I"]},
 "Is:delay_offs_y:B":{"s":["20260430-g26120"],"v":[5.615],"l":[25],"c":["station I"]},
 "Is:delay_offs_y:C":{"s":["20260430-g26120"],"v":[5.615],"l":[25],"c":["station I"]},

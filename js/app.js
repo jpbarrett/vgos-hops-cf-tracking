@@ -97,7 +97,7 @@ function viewHome() {
   const notSet = data.notSet.filter((m) => keep(m.session));
   const per = data.stations.map((s) => {
     const mine = sessions.filter((x) => x.stations.includes(s.code));
-    const series = data.catalogue.filter((e) => e.file === s.file && typeCounts(e, types)).length;
+    const series = data.catalog.filter((e) => e.file === s.file && typeCounts(e, types)).length;
     const ns = notSet.filter((m) => m.station === s.code);
     return { s, n: mine.length, series, first: mine[0]?.epoch, last: mine.at(-1)?.epoch,
              missed: ns.filter((m) => m.kind === 'station').length,
@@ -118,7 +118,7 @@ function viewHome() {
       el('td', {}, day(first)), el('td', {}, day(last)),
       nsCell(s.code, missed, 'station'), nsCell(s.code, wide, 'session')))));
 
-  const nGlobal = data.catalogue.filter((e) => e.file === data.global.file && typeCounts(e, types)).length;
+  const nGlobal = data.catalog.filter((e) => e.file === data.global.file && typeCounts(e, types)).length;
   const others = el('ul', {},
     data.global.file && el('li', {}, el('a', { href: groupHref('global') }, 'Session-wide parameters'),
                            ` (${nGlobal} series)`));
@@ -128,7 +128,7 @@ function viewHome() {
        el('span', { class: 'note' }, 'Stations that were correlated, but with no' +
                                      'pc_phase_offset_y or pc_delay_y in the associated control file.')));
 
-  const nSeries = data.catalogue.filter((e) => typeCounts(e, types)).length;
+  const nSeries = data.catalog.filter((e) => typeCounts(e, types)).length;
   const tc = typeControls();
   main.replaceChildren(
     el('h1', {}, m.name || 'Control file parameters'),
@@ -221,7 +221,7 @@ async function viewGroup(kind, id, q) {
     let rows = [];
     // every session in the station's active span is a column, including the
     // ones it missed, so a gap shows as a blank stripe instead of the
-    // neighbouring sessions stretched across it
+    // neighboring sessions stretched across it
     const first = g.sessions[0]?.epoch, last = g.sessions.at(-1)?.epoch;
     const columns = data.sessions.filter((s) => keep(s) && s.epoch >= first && s.epoch <= last);
     const draw = async () => {

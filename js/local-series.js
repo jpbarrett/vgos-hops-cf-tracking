@@ -425,7 +425,7 @@ function seriesPoints(rows, entry, sessionId) {
     }
     const value = exportNumber(wrapped);
     if (circular) {
-      // from the rounded value: circ_median is rounded in the catalogue, so
+      // from the rounded value: circ_median is rounded in the catalog, so
       // the unrounded one would leave a value equal to the median 3e-14 off
       deviations.push(exportNumber(phaseDifference(value, entry.circ_median)));
     }
@@ -451,17 +451,17 @@ function seriesPoints(rows, entry, sessionId) {
  * A parsed control file -> { series, ignored }.
  *
  * doc is what parseControlFile returns, stations the Map from parseStationIds,
- * byKey the export's catalogue entries by key, and sessionId what the points'
+ * byKey the export's catalog entries by key, and sessionId what the points'
  * `s` will say.
  *
  * series is an object of series key -> points, in the form of an export series
- * file (EXPORT_SCHEMA.md), holding the series the catalogue has. A key may
+ * file (EXPORT_SCHEMA.md), holding the series the catalog has. A key may
  * have more than one point, for the same reason it may in the export.
  *
  * ignored says what was left out, for the page to report: excludedKeywords and
  * nonNumericKeywords, Sets of keywords; absentIds, a Set of mk4 ids with no
  * station in the map; perBaselineRows, a count; and noHistory, a Set of series
- * keys the catalogue does not have.
+ * keys the catalog does not have.
  */
 export function deriveSeries(doc, stations, byKey, sessionId) {
   const ignored = {

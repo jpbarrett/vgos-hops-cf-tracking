@@ -1,4 +1,4 @@
-{"schema_version":2,"where":"station/Ws","series":{
+{"schema_version":3,"where":"station/Ws","series":{
 "Ws:delay_offs:A":{"s":["20220428-vo2118"],"v":[50.0],"l":[32],"c":["station V and f_group X"]},
 "Ws:delay_offs:B":{"s":["20220428-vo2118"],"v":[50.0],"l":[32],"c":["station V and f_group X"]},
 "Ws:delay_offs:C":{"s":["20220428-vo2118"],"v":[50.0],"l":[32],"c":["station V and f_group X"]},

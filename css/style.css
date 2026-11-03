@@ -173,7 +173,7 @@ td svg { vertical-align: -1px; }
 
 .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 480px), 1fr)); gap: 0 32px; }
 
-/* session-type filter: a dropdown of checkboxes, and the colour key that
+/* session-type filter: a dropdown of checkboxes, and the color key that
    doubles as the legend for every plot on the page */
 .types { position: relative; }
 .types > summary {

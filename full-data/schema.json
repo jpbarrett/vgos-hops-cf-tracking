@@ -1,9 +1,9 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "fourfit control file parameter export, schema version 2",
-  "description": "Validate each file against its $defs entry: manifest.json -> manifest, sessions.json -> sessions, stations.json -> stations, catalogue.json -> catalogue, series/**/*.json -> series_file. See EXPORT_SCHEMA.md.",
+  "title": "fourfit control file parameter export, schema version 3",
+  "description": "Validate each file against its $defs entry: manifest.json -> manifest, sessions.json -> sessions, stations.json -> stations, catalog.json -> catalog, series/**/*.json -> series_file. See EXPORT_SCHEMA.md.",
   "$defs": {
-    "schema_version": { "const": 2 },
+    "schema_version": { "const": 3 },
     "epoch": {
       "type": "string",
       "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"
@@ -78,13 +78,13 @@
         },
         "files": {
           "type": "object",
-          "required": ["schema", "sessions", "stations", "catalogue", "series"],
+          "required": ["schema", "sessions", "stations", "catalog", "series"],
           "additionalProperties": false,
           "properties": {
             "schema": { "const": "schema.json" },
             "sessions": { "const": "sessions.json" },
             "stations": { "const": "stations.json" },
-            "catalogue": { "const": "catalogue.json" },
+            "catalog": { "const": "catalog.json" },
             "series": {
               "type": "array",
               "items": { "type": "string", "pattern": "^series/(station/[A-Za-z0-9]{2}|global)\\.json$" },
@@ -185,17 +185,17 @@
       }
     },
 
-    "catalogue": {
+    "catalog": {
       "type": "object",
       "required": ["schema_version", "series"],
       "additionalProperties": false,
       "properties": {
         "schema_version": { "$ref": "#/$defs/schema_version" },
-        "series": { "type": "array", "items": { "$ref": "#/$defs/catalogue_entry" } }
+        "series": { "type": "array", "items": { "$ref": "#/$defs/catalog_entry" } }
       }
     },
 
-    "catalogue_entry": {
+    "catalog_entry": {
       "type": "object",
       "required": ["key", "label", "file", "scope", "station", "station_name",
                    "keyword", "pol", "index_kind", "index", "channel", "freq_mhz", "band",

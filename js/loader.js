@@ -3,7 +3,7 @@
 
 import { typeGroup } from './legend.js';
 
-export const SUPPORTED_SCHEMA = 2;
+export const SUPPORTED_SCHEMA = 3;
 
 export class ExportError extends Error {}
 
@@ -38,11 +38,11 @@ export class DataExport {
                             `(this viewer reads version ${SUPPORTED_SCHEMA})`);
     }
     const f = this.manifest.files;
-    const [catalogue, stations, sessions] = await Promise.all(
-      [f.catalogue, f.stations, f.sessions].map((p) => getJSON(this._url(p))));
+    const [catalog, stations, sessions] = await Promise.all(
+      [f.catalog, f.stations, f.sessions].map((p) => getJSON(this._url(p))));
 
-    this.catalogue = catalogue.series;
-    this.byKey = new Map(this.catalogue.map((e) => [e.key, e]));
+    this.catalog = catalog.series;
+    this.byKey = new Map(this.catalog.map((e) => [e.key, e]));
     this.stations = stations.stations;
     this.global = stations.global;
     this.sessions = sessions.sessions.map((s) => ({ ...s, x: plotDate(s.epoch) }));
@@ -96,12 +96,12 @@ export class DataExport {
       if (!st) return null;
       return { kind, id, file: st.file, title: `${st.code}`, name: st.name,
                sessions: this.sessions.filter((s) => s.stations.includes(id) || id in s.correlated),
-               entries: this.catalogue.filter((e) => e.file === st.file) };
+               entries: this.catalog.filter((e) => e.file === st.file) };
     }
     if (kind === 'global') {
       return { kind, id: null, file: this.global.file, title: 'Session-wide parameters',
                name: null, sessions: this.sessions,
-               entries: this.catalogue.filter((e) => e.file === this.global.file) };
+               entries: this.catalog.filter((e) => e.file === this.global.file) };
     }
     return null;
   }

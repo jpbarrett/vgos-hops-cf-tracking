@@ -1,10 +1,10 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "name": "VGOS",
-  "generated_at": "2026-11-03T14:56:47Z",
-  "data_hash": "sha256:972cad412d51720d73759076b6027de2f6d95630cd6abfd9c6745d69d9f005b1",
+  "generated_at": "2026-11-03T15:24:42Z",
+  "data_hash": "sha256:f5ad058669f116775b2d0125e0c7f167f2d52e27f2ee395908920a3d839f3eb4",
   "source": {
-    "commit": "aeeb074a74ed0c7766f338b809408dadce9836ca",
+    "commit": "4f72c694e90461640ac17889c02fa15dc6c65915",
     "dirty": false
   },
   "coverage": {
@@ -61,7 +61,7 @@
     "schema": "schema.json",
     "sessions": "sessions.json",
     "stations": "stations.json",
-    "catalogue": "catalogue.json",
+    "catalog": "catalog.json",
     "series": [
       "series/global.json",
       "series/station/Gs.json",

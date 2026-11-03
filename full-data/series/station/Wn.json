@@ -1,4 +1,4 @@
-{"schema_version":2,"where":"station/Wn","series":{
+{"schema_version":3,"where":"station/Wn","series":{
 "Wn:dr_win:[0]":{"s":["20250108-v25008","20250114-v25014","20250224-v25055","20250331-v25090","20250613-v25164"],"v":[-5e-06,-5e-06,-5e-06,-5e-06,-5e-06],"l":[64,65,65,68,67],"c":["station U","station U","station W","station W","station W"]},
 "Wn:dr_win:[1]":{"s":["20250108-v25008","20250114-v25014","20250224-v25055","20250331-v25090","20250613-v25164"],"v":[5e-06,5e-06,5e-06,5e-06,5e-06],"l":[64,65,65,68,67],"c":["station U","station U","station W","station W","station W"]},
 "Wn:ion_npts":{"s":["20250108-v25008","20250114-v25014","20250224-v25055","20250331-v25090","20250613-v25164"],"v":[75.0,75.0,75.0,75.0,75.0],"l":[64,65,65,68,67],"c":["station U","station U","station W","station W","station W"]},
