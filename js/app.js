@@ -125,7 +125,7 @@ function viewHome() {
   const checks = el('ul', {},
     el('li', {}, el('a', { href: href(['missing']) }, 'Polarization offsets not set'),
        ` (${notSetCounts(notSet) ?? 'none'})`, el('br'),
-       el('span', { class: 'note' }, 'Stations that were correlated, but with no' +
+       el('span', { class: 'note' }, 'Stations that were correlated, but with no ' +
                                      'pc_phase_offset_y or pc_delay_y in the associated control file.')));
 
   const nSeries = data.catalog.filter((e) => typeCounts(e, types)).length;
@@ -475,7 +475,7 @@ function viewMissing(q) {
     el('p', { class: 'note' },
        'A station is listed when the vgosDB has fringe-fitted observations for it but the control file ' +
        'sets neither pc_phase_offset_y nor pc_delay_y for it. "Missed" means other stations in the ' +
-       'session have offsets, so the correlator applied them but may have left this one out. "Session-wide" means ' +
+       'session have offsets, but this station was left out out. "Session-wide" means ' +
        'no station in the session has these offsets set. A station calibrated with ' +
        'per-channel delay_offs instead is not listed. These sessions are marked ✕ on the offset plots. ' +
        'Click a session to read its control file.'),
