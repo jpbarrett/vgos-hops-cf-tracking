@@ -6,7 +6,7 @@
       "name": "GGAO12M",
       "file": "series/station/Gs.json",
       "n_series": 79,
-      "n_sessions": 213,
+      "n_sessions": 214,
       "first_epoch": "2020-01-09T18:00:00Z",
       "last_epoch": "2026-10-30T17:30:00Z"
     },
@@ -42,7 +42,7 @@
       "name": "KOKEE12M",
       "file": "series/station/K2.json",
       "n_series": 83,
-      "n_sessions": 1324,
+      "n_sessions": 1326,
       "first_epoch": "2020-01-21T18:00:00Z",
       "last_epoch": "2026-09-04T17:30:00Z"
     },
@@ -69,7 +69,7 @@
       "name": "MACGO12M",
       "file": "series/station/Mg.json",
       "n_series": 78,
-      "n_sessions": 336,
+      "n_sessions": 337,
       "first_epoch": "2020-01-21T18:00:00Z",
       "last_epoch": "2026-10-30T17:30:00Z"
     },
@@ -177,7 +177,7 @@
       "name": "WETTZ13S",
       "file": "series/station/Ws.json",
       "n_series": 113,
-      "n_sessions": 1492,
+      "n_sessions": 1494,
       "first_epoch": "2020-01-09T18:00:00Z",
       "last_epoch": "2026-10-30T17:30:00Z"
     },
