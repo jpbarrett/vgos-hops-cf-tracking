@@ -1,0 +1,102 @@
+* Fourfit control file for c26297
+
+*==========================================================
+*basic setup
+*==========================================================
+
+sb_win -256.0 256.0
+mb_win -2.0 2.0
+dr_win -5.e-4  5.e-4
+pc_mode multitone
+pc_period 1
+ion_smooth true
+mbd_anchor sbd
+samplers 4 abcdefgh ijklmnop qrstuvwx yzABCDEF
+ref_freq 6000.0
+weak_channel 0.1
+pc_amp_hcode .001
+* general ionosphere search parameters:
+ion_npts 45
+ion_win  -88.0 88.0
+
+
+*==========================================================
+* sampler delays and pc_tonemask
+*==========================================================
+
+if station S
+  pc_tonemask l 4
+
+if station T
+  pc_tonemask dzE 16 16 2
+
+if station I
+  sampler_delay_x  -60  -80  -85  -90 
+  sampler_delay_y  -65  -80  -85 -100 
+
+if station S
+  sampler_delay_x   95  105   95   80 
+  sampler_delay_y   90  105   90   80 
+
+if station T
+  sampler_delay_x  -20  -15  -20  -35 
+  sampler_delay_y  -35  -25  -35  -45 
+
+
+*==========================================================
+*station pc_phases
+*==========================================================
+if baseline ST
+  skip true
+
+if station I
+  freqs a b c d e f g h i j k l m n o p q r s t u v w x y z A B C D E F 
+
+if station S
+  freqs a b c d e f g h i j k l m n o p q r s t u v w x y z A B C D E F 
+
+if station T
+  freqs a b c d e f g h i j k l m n o p q r s t u v w x y z A B C D E F 
+
+
+
+
+
+
+if station I
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0 
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -6.2  3.4  -7.3  -5.9  -5.7  -8.8  19.8  -4.8  -11.4  8.7  -18.9  -19.3  12.5  -13.3  -7.4  -9.6  -15.2  1.9  -6.0  -6.8  -3.3  -8.9  -3.7  -10.4  -6.9  -26.6  -24.4  -22.6  -16.7  -18.4  -25.5  -23.9 
+
+if station S
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  -53.8  -62.8  -50.6  -28.8  -49.5  -56.7  -60.8  -56.1  -29.8  -22.7  -26.7  -18.8  -18.4  -30.4  -40.6  -29.8  -68.0  -45.4  -66.8  -60.5  -65.4  -72.5  -89.2  -83.7  -20.5  -29.6  -32.5  -28.6  -47.2  -54.1  -46.4  -58.3 
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  -34.4  -41.0  -44.9  -41.4  -23.6  -20.7  -27.4  -29.0  -20.2  -24.8  -25.9  -17.8  -17.0  -27.7  -33.5  -32.3  -50.5  -45.9  -55.1  -54.4  -79.7  -85.5  -77.6  -84.4  -31.6  -49.7  -41.7  -54.7  -51.6  -48.4  -51.7  -62.3 
+
+if station T
+  pc_phases_x abcdefghijklmnopqrstuvwxyzABCDEF  107.9  109.7  181.0  58.3  -151.1  -102.8  142.6  8.7  97.6  101.9  112.0  91.2  111.0  111.2  136.2  152.0  91.6  89.3  96.0  125.9  99.3  75.9  37.1  52.9  52.6  60.0  67.2  144.2  126.0  140.9  166.2  150.0 
+  pc_phases_y abcdefghijklmnopqrstuvwxyzABCDEF  124.7  134.8  196.3  37.1  164.7  -140.2  -107.5  -120.2  -175.6  164.7  166.2  133.9  102.8  83.5  91.9  78.1  -158.7  -160.1  -152.9  180.1  103.8  80.2  -9.7  8.1  111.0  67.1  32.2  -149.4  181.6  167.8  154.6  138.4 
+
+
+
+if station I
+  pc_delay_x  0.0
+  pc_delay_y 0.037 * (ns) estimated error is +/- 0.002
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y -98.6 * (deg) estimated error is +/- 1.9
+
+if station S
+  pc_delay_x  0.0
+  pc_delay_y -0.103 * (ns) estimated error is +/- 0.0
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y 128.3 * (deg) estimated error is +/- 1.0
+
+if station T
+  pc_delay_x  0.0
+  pc_delay_y 1.056 * (ns) estimated error is +/- 0.001
+  pc_phase_offset_x  0.0 
+  pc_phase_offset_y 67.9 * (deg) estimated error is +/- 0.7
+
+*==========================================================
+* This control file was generated with the script vgoscf_generate.py
+* on Nov-04-1039AM-2026 using the following arguments: 
+* args: Namespace(averaging_scan_limit=10, begin_scan_limit='000-0000', channel_discard_tolerance=30.0, control_file='./c26305.cf', data_directory='./0301/', dtec_thresh=5.0, end_scan_limit='999-9999', nchannel_discard_threshold=5, network_reference_station='I', num_proc=10, output_filename='', quality_lower_limit=5, sigma_cut_factor=3.0, snr_min=15.0, stations='ST', toggle_dump_info=True, use_progress_ticker=True, use_scratch=False, verbosity=2)
+*========================================================== 

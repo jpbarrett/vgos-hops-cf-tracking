@@ -6,7 +6,7 @@
       "name": "GGAO12M",
       "file": "series/station/Gs.json",
       "n_series": 79,
-      "n_sessions": 214,
+      "n_sessions": 215,
       "first_epoch": "2020-01-09T18:00:00Z",
       "last_epoch": "2026-10-30T17:30:00Z"
     },
@@ -15,25 +15,25 @@
       "name": "HOBART12",
       "file": "series/station/Hb.json",
       "n_series": 89,
-      "n_sessions": 86,
+      "n_sessions": 87,
       "first_epoch": "2022-01-20T18:00:00Z",
-      "last_epoch": "2026-10-07T00:00:00Z"
+      "last_epoch": "2026-10-14T00:00:00Z"
     },
     {
       "code": "Hv",
       "name": "HARTVGS",
       "file": "series/station/Hv.json",
       "n_series": 76,
-      "n_sessions": 67,
+      "n_sessions": 68,
       "first_epoch": "2024-11-06T12:00:00Z",
-      "last_epoch": "2026-10-07T00:00:00Z"
+      "last_epoch": "2026-10-14T00:00:00Z"
     },
     {
       "code": "Is",
       "name": "ISHIOKA",
       "file": "series/station/Is.json",
       "n_series": 111,
-      "n_sessions": 730,
+      "n_sessions": 732,
       "first_epoch": "2020-01-07T18:30:00Z",
       "last_epoch": "2026-11-02T05:30:00Z"
     },
@@ -51,9 +51,9 @@
       "name": "KATH12M",
       "file": "series/station/Ke.json",
       "n_series": 87,
-      "n_sessions": 80,
+      "n_sessions": 81,
       "first_epoch": "2022-12-14T18:00:00Z",
-      "last_epoch": "2026-10-07T00:00:00Z"
+      "last_epoch": "2026-10-14T00:00:00Z"
     },
     {
       "code": "Mb",
@@ -78,7 +78,7 @@
       "name": "NYALE13N",
       "file": "series/station/Nn.json",
       "n_series": 78,
-      "n_sessions": 190,
+      "n_sessions": 191,
       "first_epoch": "2022-08-18T18:00:00Z",
       "last_epoch": "2026-11-02T05:30:00Z"
     },
@@ -96,18 +96,18 @@
       "name": "ONSA13NE",
       "file": "series/station/Oe.json",
       "n_series": 81,
-      "n_sessions": 639,
+      "n_sessions": 640,
       "first_epoch": "2020-01-07T18:30:00Z",
-      "last_epoch": "2026-10-31T23:30:00Z"
+      "last_epoch": "2026-11-01T11:30:00Z"
     },
     {
       "code": "Ow",
       "name": "ONSA13SW",
       "file": "series/station/Ow.json",
       "n_series": 92,
-      "n_sessions": 543,
+      "n_sessions": 544,
       "first_epoch": "2020-01-07T18:30:00Z",
-      "last_epoch": "2026-10-31T23:30:00Z"
+      "last_epoch": "2026-11-01T11:30:00Z"
     },
     {
       "code": "S6",
@@ -123,7 +123,7 @@
       "name": "RAEGSMAR",
       "file": "series/station/Sa.json",
       "n_series": 77,
-      "n_sessions": 134,
+      "n_sessions": 135,
       "first_epoch": "2023-01-25T18:00:00Z",
       "last_epoch": "2026-10-22T17:30:00Z"
     },
@@ -159,25 +159,25 @@
       "name": "WESTFORD",
       "file": "series/station/Wf.json",
       "n_series": 82,
-      "n_sessions": 208,
+      "n_sessions": 209,
       "first_epoch": "2020-01-09T18:00:00Z",
-      "last_epoch": "2026-10-07T00:00:00Z"
+      "last_epoch": "2026-10-14T00:00:00Z"
     },
     {
       "code": "Wn",
       "name": "WETTZ13N",
       "file": "series/station/Wn.json",
       "n_series": 87,
-      "n_sessions": 162,
+      "n_sessions": 163,
       "first_epoch": "2024-09-18T12:00:00Z",
-      "last_epoch": "2026-10-09T17:30:00Z"
+      "last_epoch": "2026-10-14T00:00:00Z"
     },
     {
       "code": "Ws",
       "name": "WETTZ13S",
       "file": "series/station/Ws.json",
       "n_series": 113,
-      "n_sessions": 1496,
+      "n_sessions": 1497,
       "first_epoch": "2020-01-09T18:00:00Z",
       "last_epoch": "2026-11-02T17:30:00Z"
     },
@@ -186,16 +186,16 @@
       "name": "YARRA12M",
       "file": "series/station/Yg.json",
       "n_series": 78,
-      "n_sessions": 46,
+      "n_sessions": 47,
       "first_epoch": "2024-12-04T12:00:00Z",
-      "last_epoch": "2026-10-07T00:00:00Z"
+      "last_epoch": "2026-10-14T00:00:00Z"
     },
     {
       "code": "Yj",
       "name": "RAEGYEB",
       "file": "series/station/Yj.json",
       "n_series": 117,
-      "n_sessions": 219,
+      "n_sessions": 220,
       "first_epoch": "2020-02-20T18:00:00Z",
       "last_epoch": "2026-10-22T17:30:00Z"
     }
