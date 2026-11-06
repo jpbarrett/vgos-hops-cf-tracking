@@ -69,9 +69,9 @@
       "name": "MACGO12M",
       "file": "series/station/Mg.json",
       "n_series": 78,
-      "n_sessions": 340,
+      "n_sessions": 341,
       "first_epoch": "2020-01-21T18:00:00Z",
-      "last_epoch": "2026-11-04T17:30:00Z"
+      "last_epoch": "2026-11-05T17:30:00Z"
     },
     {
       "code": "Nn",
@@ -177,9 +177,9 @@
       "name": "WETTZ13S",
       "file": "series/station/Ws.json",
       "n_series": 113,
-      "n_sessions": 1499,
+      "n_sessions": 1500,
       "first_epoch": "2020-01-09T18:00:00Z",
-      "last_epoch": "2026-11-04T17:30:00Z"
+      "last_epoch": "2026-11-05T17:30:00Z"
     },
     {
       "code": "Yg",

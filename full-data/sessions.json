@@ -2123,5 +2123,6 @@
 {"id":"20261102-m26306","code":"m26306","epoch":"2026-11-02T05:30:00Z","type":"VGOS-INT-M","correlator":"BONN","report_format":"3","stations":["Is","Nn","Ws"],"correlated":{"Is":156,"Nn":156,"Ws":156},"offsets_not_set":[],"cf":"cf/20261102-m26306.txt"},
 {"id":"20261102-s26306","code":"s26306","epoch":"2026-11-02T17:30:00Z","type":"VGOS-INT-S","correlator":"WACO","report_format":"3","stations":["Mg","Ws"],"correlated":{"Mg":55,"Ws":55},"offsets_not_set":[],"cf":"cf/20261102-s26306.txt"},
 {"id":"20261103-s26307","code":"s26307","epoch":"2026-11-03T19:45:00Z","type":"VGOS-INT-S","correlator":"WETZ","report_format":"3","stations":["Mg","Ws"],"correlated":{"Mg":76,"Ws":76},"offsets_not_set":[],"cf":"cf/20261103-s26307.txt"},
-{"id":"20261104-s26308","code":"s26308","epoch":"2026-11-04T17:30:00Z","type":"VGOS-INT-S","correlator":"WACO","report_format":"3","stations":["Mg","Ws"],"correlated":{"Mg":77,"Ws":77},"offsets_not_set":[],"cf":"cf/20261104-s26308.txt"}
+{"id":"20261104-s26308","code":"s26308","epoch":"2026-11-04T17:30:00Z","type":"VGOS-INT-S","correlator":"WACO","report_format":"3","stations":["Mg","Ws"],"correlated":{"Mg":77,"Ws":77},"offsets_not_set":[],"cf":"cf/20261104-s26308.txt"},
+{"id":"20261105-s26309","code":"s26309","epoch":"2026-11-05T17:30:00Z","type":"VGOS-INT-S","correlator":"WACO","report_format":"3","stations":["Mg","Ws"],"correlated":{"Mg":76,"Ws":76},"offsets_not_set":[],"cf":"cf/20261105-s26309.txt"}
 ]}
