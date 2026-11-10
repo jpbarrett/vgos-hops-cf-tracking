@@ -114,18 +114,18 @@
       "name": "SESHAN13",
       "file": "series/station/S6.json",
       "n_series": 141,
-      "n_sessions": 95,
+      "n_sessions": 96,
       "first_epoch": "2024-02-15T17:30:00Z",
-      "last_epoch": "2026-10-08T17:30:00Z"
+      "last_epoch": "2026-11-05T17:30:00Z"
     },
     {
       "code": "Sa",
       "name": "RAEGSMAR",
       "file": "series/station/Sa.json",
       "n_series": 77,
-      "n_sessions": 135,
+      "n_sessions": 136,
       "first_epoch": "2023-01-25T18:00:00Z",
-      "last_epoch": "2026-10-22T17:30:00Z"
+      "last_epoch": "2026-11-05T17:30:00Z"
     },
     {
       "code": "T1",
