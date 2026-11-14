@@ -1,29 +1,29 @@
 {
   "schema_version": 3,
   "name": "VGOS",
-  "generated_at": "2026-11-12T18:06:14Z",
-  "data_hash": "sha256:3dfee075059d995e5c26d9d0091de705e64af257f6ba591d317a09fe362119c8",
+  "generated_at": "2026-11-14T18:05:45Z",
+  "data_hash": "sha256:739a4de2b99ddc3d41ca8aa75ede99359792015de70aea9945e15273ed22a0c3",
   "source": {
     "commit": "f31360537295ad64200267c4544663e23f5ae2a4",
     "dirty": false
   },
   "coverage": {
     "first_epoch": "2020-01-07T18:30:00Z",
-    "last_epoch": "2026-11-11T17:30:00Z",
-    "n_sessions": 2130,
+    "last_epoch": "2026-11-13T17:30:00Z",
+    "n_sessions": 2132,
     "n_stations": 22,
     "n_series": 2019,
-    "n_points": 535983,
-    "n_control_files": 2130,
+    "n_points": 536310,
+    "n_control_files": 2132,
     "n_sessions_by_type": {
       "VGOS-24INT-S": 13,
       "VGOS-INT-A": 1104,
       "VGOS-INT-B": 193,
       "VGOS-INT-C": 203,
       "VGOS-INT-D": 14,
-      "VGOS-INT-G": 107,
+      "VGOS-INT-G": 108,
       "VGOS-INT-M": 119,
-      "VGOS-INT-S": 143,
+      "VGOS-INT-S": 144,
       "VGOS-INT-TST": 1,
       "VGOS-OPS": 204,
       "VGOS-RD": 29
