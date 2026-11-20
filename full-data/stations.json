@@ -69,9 +69,9 @@
       "name": "MACGO12M",
       "file": "series/station/Mg.json",
       "n_series": 78,
-      "n_sessions": 348,
+      "n_sessions": 349,
       "first_epoch": "2020-01-21T18:00:00Z",
-      "last_epoch": "2026-11-18T17:30:00Z"
+      "last_epoch": "2026-11-19T17:30:00Z"
     },
     {
       "code": "Nn",
@@ -114,7 +114,7 @@
       "name": "SESHAN13",
       "file": "series/station/S6.json",
       "n_series": 141,
-      "n_sessions": 97,
+      "n_sessions": 98,
       "first_epoch": "2024-02-15T17:30:00Z",
       "last_epoch": "2026-11-12T17:30:00Z"
     },
@@ -123,7 +123,7 @@
       "name": "RAEGSMAR",
       "file": "series/station/Sa.json",
       "n_series": 77,
-      "n_sessions": 137,
+      "n_sessions": 138,
       "first_epoch": "2023-01-25T18:00:00Z",
       "last_epoch": "2026-11-12T17:30:00Z"
     },
@@ -177,9 +177,9 @@
       "name": "WETTZ13S",
       "file": "series/station/Ws.json",
       "n_series": 113,
-      "n_sessions": 1508,
+      "n_sessions": 1509,
       "first_epoch": "2020-01-09T18:00:00Z",
-      "last_epoch": "2026-11-18T17:30:00Z"
+      "last_epoch": "2026-11-19T17:30:00Z"
     },
     {
       "code": "Yg",
@@ -195,9 +195,9 @@
       "name": "RAEGYEB",
       "file": "series/station/Yj.json",
       "n_series": 117,
-      "n_sessions": 220,
+      "n_sessions": 221,
       "first_epoch": "2020-02-20T18:00:00Z",
-      "last_epoch": "2026-10-22T17:30:00Z"
+      "last_epoch": "2026-10-29T17:30:00Z"
     }
   ],
   "global": {
