@@ -6,27 +6,27 @@
       "name": "GGAO12M",
       "file": "series/station/Gs.json",
       "n_series": 79,
-      "n_sessions": 215,
+      "n_sessions": 216,
       "first_epoch": "2020-01-09T18:00:00Z",
-      "last_epoch": "2026-10-30T17:30:00Z"
+      "last_epoch": "2026-11-04T00:00:00Z"
     },
     {
       "code": "Hb",
       "name": "HOBART12",
       "file": "series/station/Hb.json",
       "n_series": 89,
-      "n_sessions": 87,
+      "n_sessions": 88,
       "first_epoch": "2022-01-20T18:00:00Z",
-      "last_epoch": "2026-10-14T00:00:00Z"
+      "last_epoch": "2026-11-04T00:00:00Z"
     },
     {
       "code": "Hv",
       "name": "HARTVGS",
       "file": "series/station/Hv.json",
       "n_series": 76,
-      "n_sessions": 68,
+      "n_sessions": 69,
       "first_epoch": "2024-11-06T12:00:00Z",
-      "last_epoch": "2026-10-14T00:00:00Z"
+      "last_epoch": "2026-11-04T00:00:00Z"
     },
     {
       "code": "Is",
@@ -51,9 +51,9 @@
       "name": "KATH12M",
       "file": "series/station/Ke.json",
       "n_series": 87,
-      "n_sessions": 81,
+      "n_sessions": 82,
       "first_epoch": "2022-12-14T18:00:00Z",
-      "last_epoch": "2026-10-14T00:00:00Z"
+      "last_epoch": "2026-11-04T00:00:00Z"
     },
     {
       "code": "Mb",
@@ -69,16 +69,16 @@
       "name": "MACGO12M",
       "file": "series/station/Mg.json",
       "n_series": 78,
-      "n_sessions": 349,
+      "n_sessions": 351,
       "first_epoch": "2020-01-21T18:00:00Z",
-      "last_epoch": "2026-11-19T17:30:00Z"
+      "last_epoch": "2026-11-20T17:30:00Z"
     },
     {
       "code": "Nn",
       "name": "NYALE13N",
       "file": "series/station/Nn.json",
       "n_series": 78,
-      "n_sessions": 192,
+      "n_sessions": 193,
       "first_epoch": "2022-08-18T18:00:00Z",
       "last_epoch": "2026-11-16T05:30:00Z"
     },
@@ -96,7 +96,7 @@
       "name": "ONSA13NE",
       "file": "series/station/Oe.json",
       "n_series": 81,
-      "n_sessions": 644,
+      "n_sessions": 645,
       "first_epoch": "2020-01-07T18:30:00Z",
       "last_epoch": "2026-11-15T11:30:00Z"
     },
@@ -105,7 +105,7 @@
       "name": "ONSA13SW",
       "file": "series/station/Ow.json",
       "n_series": 92,
-      "n_sessions": 548,
+      "n_sessions": 549,
       "first_epoch": "2020-01-07T18:30:00Z",
       "last_epoch": "2026-11-15T11:30:00Z"
     },
@@ -123,7 +123,7 @@
       "name": "RAEGSMAR",
       "file": "series/station/Sa.json",
       "n_series": 77,
-      "n_sessions": 138,
+      "n_sessions": 139,
       "first_epoch": "2023-01-25T18:00:00Z",
       "last_epoch": "2026-11-12T17:30:00Z"
     },
@@ -159,45 +159,45 @@
       "name": "WESTFORD",
       "file": "series/station/Wf.json",
       "n_series": 82,
-      "n_sessions": 209,
+      "n_sessions": 210,
       "first_epoch": "2020-01-09T18:00:00Z",
-      "last_epoch": "2026-10-14T00:00:00Z"
+      "last_epoch": "2026-11-04T00:00:00Z"
     },
     {
       "code": "Wn",
       "name": "WETTZ13N",
       "file": "series/station/Wn.json",
       "n_series": 87,
-      "n_sessions": 163,
+      "n_sessions": 164,
       "first_epoch": "2024-09-18T12:00:00Z",
-      "last_epoch": "2026-10-14T00:00:00Z"
+      "last_epoch": "2026-11-04T00:00:00Z"
     },
     {
       "code": "Ws",
       "name": "WETTZ13S",
       "file": "series/station/Ws.json",
       "n_series": 113,
-      "n_sessions": 1509,
+      "n_sessions": 1511,
       "first_epoch": "2020-01-09T18:00:00Z",
-      "last_epoch": "2026-11-19T17:30:00Z"
+      "last_epoch": "2026-11-20T17:30:00Z"
     },
     {
       "code": "Yg",
       "name": "YARRA12M",
       "file": "series/station/Yg.json",
       "n_series": 78,
-      "n_sessions": 47,
+      "n_sessions": 48,
       "first_epoch": "2024-12-04T12:00:00Z",
-      "last_epoch": "2026-10-14T00:00:00Z"
+      "last_epoch": "2026-11-04T00:00:00Z"
     },
     {
       "code": "Yj",
       "name": "RAEGYEB",
       "file": "series/station/Yj.json",
       "n_series": 117,
-      "n_sessions": 221,
+      "n_sessions": 222,
       "first_epoch": "2020-02-20T18:00:00Z",
-      "last_epoch": "2026-10-29T17:30:00Z"
+      "last_epoch": "2026-11-04T00:00:00Z"
     }
   ],
   "global": {
