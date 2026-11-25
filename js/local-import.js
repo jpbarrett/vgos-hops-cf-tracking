@@ -125,10 +125,6 @@ export function lastHistoricalPoint(points, local, sessionById, types) {
   const ownId = local.session.exportedId;
   for (let i = points.s.length - 1; i >= 0; i--) {
     const session = sessionById.get(points.s[i]);
-    // a point of a session the export does not list has no date to compare
-    if (session === undefined) {
-      continue;
-    }
     let wanted;
     if (ownId !== null) {
       wanted = points.s[i] === ownId;
