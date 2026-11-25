@@ -1,8 +1,8 @@
 {
   "schema_version": 3,
   "name": "VGOS",
-  "generated_at": "2026-11-24T18:05:59Z",
-  "data_hash": "sha256:a69a753d7a19e811635be7cba2cdfebd58c9f20b0b0e5b6f03ce9c5ed8423231",
+  "generated_at": "2026-11-25T14:45:30Z",
+  "data_hash": "sha256:b08d5a1f1ebe01a54dcf0e320699825d1b2e509c5991ed4fc9229128ddbdd80f",
   "source": {
     "commit": "f31360537295ad64200267c4544663e23f5ae2a4",
     "dirty": false
@@ -10,16 +10,16 @@
   "coverage": {
     "first_epoch": "2020-01-07T18:30:00Z",
     "last_epoch": "2026-11-23T17:30:00Z",
-    "n_sessions": 2149,
+    "n_sessions": 2151,
     "n_stations": 22,
     "n_series": 2019,
-    "n_points": 541574,
-    "n_control_files": 2149,
+    "n_points": 542062,
+    "n_control_files": 2151,
     "n_sessions_by_type": {
       "VGOS-24INT-S": 13,
       "VGOS-INT-A": 1104,
-      "VGOS-INT-B": 196,
-      "VGOS-INT-C": 206,
+      "VGOS-INT-B": 197,
+      "VGOS-INT-C": 207,
       "VGOS-INT-D": 14,
       "VGOS-INT-G": 109,
       "VGOS-INT-M": 121,
@@ -46,7 +46,7 @@
       "skip"
     ],
     "overridden_rows": 7135,
-    "per_baseline_rows": 7907,
+    "per_baseline_rows": 7913,
     "off_plan_sessions": [
       "20220317-vr2202",
       "20231116-vr2304",
