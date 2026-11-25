@@ -32,19 +32,41 @@ async function pickControl(file) {
   pending.control = { name: file.name, text: await file.text() };
 }
 
-/** Take a file as the station file, which fills in the session if it names one. */
-async function pickStation(file) {
-  const text = await file.text();
+/** Take text as the control file; none at all means no control file. */
+function setControlText(name, text) {
+  pending.error = null;
+  if (text.trim() === '') {
+    pending.control = null;
+  } else {
+    pending.control = { name: name, text: text };
+  }
+}
+
+/**
+ * Take text as the station file, which fills in the session if it names one.
+ * Text that is not a station file is an error, and no station file.
+ */
+function setStationText(name, text) {
+  pending.station = null;
+  if (text.trim() === '') {
+    pending.error = null;
+    return;
+  }
   try {
     const parsed = parseStationIds(text);
-    pending.station = { name: file.name, text: text };
+    pending.station = { name: name, text: text };
+    pending.error = null;
     if (!pending.sessionTyped) {
       pending.session = parsed.session ?? '';
     }
   } catch (err) {
-    pending.station = null;
-    pending.error = `${file.name}: ${err.message}`;
+    pending.error = `${name}: ${err.message}`;
   }
+}
+
+/** Take a file as the station file. */
+async function pickStation(file) {
+  setStationText(file.name, await file.text());
 }
 
 /** Files dropped on the page, which say for themselves which is which. */
@@ -59,8 +81,8 @@ async function addFiles(fileList) {
   }
 }
 
-/** One line of the form: a file chooser for this place, and what it holds. */
-function fileRow(label, chosen, pick, page) {
+/** One line of the form: a file chooser for this place, what it holds, and a box to paste it in. */
+function fileRow(label, chosen, pick, page, textarea) {
   const chooser = el('input', {
     type: 'file', 'aria-label': label,
     onchange: async (ev) => {
@@ -77,7 +99,25 @@ function fileRow(label, chosen, pick, page) {
     name = chosen.name;
   }
   return el('tr', {}, el('th', {}, label),
-            el('td', { class: 'wrap' }, el('label', { class: 'file-choice' }, chooser, 'Choose file'), ' ', name));
+            el('td', { class: 'wrap' }, el('label', { class: 'file-choice' }, chooser, 'Choose file'), ' ', name,
+                    el('div', {}, textarea)));
+}
+
+/**
+ * A box to paste a file's text into, showing what is pending for it. Typing
+ * does not rerender the page, which would take the focus away: `typed` says
+ * what the text now is, and the form updates itself.
+ */
+function pasteBox(label, chosen, typed) {
+  const box = el('textarea', {
+    rows: 6, wrap: 'off', spellcheck: 'false', class: 'paste-box',
+    'aria-label': `${label}, pasted`, placeholder: `…or paste the ${label.toLowerCase()} here`,
+    oninput: (ev) => typed(ev.target.value),
+  });
+  if (chosen !== null) {
+    box.value = chosen.text;
+  }
+  return box;
 }
 
 /** The form that chooses the two files and the session. */
@@ -90,9 +130,9 @@ function importForm(page) {
       pending.sessionTyped = ev.target.value.trim() !== '';
     },
   });
-  const ready = pending.control !== null && pending.station !== null;
+  const error = el('p', { class: 'error' });
   const button = el('button', {
-    type: 'button', class: 'action', disabled: !ready,
+    type: 'button', class: 'action',
     onclick: async () => {
       button.disabled = true;
       button.textContent = 'Parsing…';
@@ -100,15 +140,32 @@ function importForm(page) {
     },
   }, 'Import');
 
+  // what typing in a box changes of the rest of the form
+  const refresh = () => {
+    button.disabled = pending.control === null || pending.station === null;
+    error.hidden = pending.error === null;
+    error.textContent = pending.error ?? '';
+    sessionInput.value = pending.session;
+  };
+  const controlBox = pasteBox('Control file', pending.control, (text) => {
+    setControlText('pasted control file', text);
+    refresh();
+  });
+  const stationBox = pasteBox('Station codes file', pending.station, (text) => {
+    setStationText('pasted station codes', text);
+    refresh();
+  });
+  refresh();
+
   return el('section', { class: 'import-form' },
     el('p', { class: 'note' },
       'The station codes file can be either a station_ids.tsv or a HOPS/difx2mark station.codes file. You can also drop the files ' +
-      'anywhere on this page. This data is processed client-side, not uploaded. Unless specified, the session is treated as today\'s date.'),
+      'anywhere on this page, or paste their text into the boxes. This data is processed client-side, not uploaded. Unless specified, the session is treated as today\'s date.'),
     el('table', {}, el('tbody', {},
-      fileRow('Control file', pending.control, pickControl, page),
-      fileRow('Station codes file', pending.station, pickStation, page),
+      fileRow('Control file', pending.control, pickControl, page, controlBox),
+      fileRow('Station codes file', pending.station, pickStation, page, stationBox),
       el('tr', {}, el('th', {}, 'Session'), el('td', {}, sessionInput)))),
-    pending.error !== null && el('p', { class: 'error' }, pending.error),
+    error,
     button);
 }
 
