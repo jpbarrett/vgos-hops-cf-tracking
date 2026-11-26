@@ -6,7 +6,7 @@
       "name": "GGAO12M",
       "file": "series/station/Gs.json",
       "n_series": 79,
-      "n_sessions": 217,
+      "n_sessions": 218,
       "first_epoch": "2020-01-09T18:00:00Z",
       "last_epoch": "2026-11-11T00:00:00Z"
     },
@@ -15,7 +15,7 @@
       "name": "HOBART12",
       "file": "series/station/Hb.json",
       "n_series": 89,
-      "n_sessions": 89,
+      "n_sessions": 90,
       "first_epoch": "2022-01-20T18:00:00Z",
       "last_epoch": "2026-11-11T00:00:00Z"
     },
@@ -24,7 +24,7 @@
       "name": "HARTVGS",
       "file": "series/station/Hv.json",
       "n_series": 76,
-      "n_sessions": 70,
+      "n_sessions": 71,
       "first_epoch": "2024-11-06T12:00:00Z",
       "last_epoch": "2026-11-11T00:00:00Z"
     },
@@ -51,7 +51,7 @@
       "name": "KATH12M",
       "file": "series/station/Ke.json",
       "n_series": 87,
-      "n_sessions": 83,
+      "n_sessions": 84,
       "first_epoch": "2022-12-14T18:00:00Z",
       "last_epoch": "2026-11-11T00:00:00Z"
     },
@@ -69,16 +69,16 @@
       "name": "MACGO12M",
       "file": "series/station/Mg.json",
       "n_series": 78,
-      "n_sessions": 354,
+      "n_sessions": 356,
       "first_epoch": "2020-01-21T18:00:00Z",
-      "last_epoch": "2026-11-24T19:45:00Z"
+      "last_epoch": "2026-11-25T17:30:00Z"
     },
     {
       "code": "Nn",
       "name": "NYALE13N",
       "file": "series/station/Nn.json",
       "n_series": 78,
-      "n_sessions": 194,
+      "n_sessions": 195,
       "first_epoch": "2022-08-18T18:00:00Z",
       "last_epoch": "2026-11-16T05:30:00Z"
     },
@@ -96,7 +96,7 @@
       "name": "ONSA13NE",
       "file": "series/station/Oe.json",
       "n_series": 81,
-      "n_sessions": 650,
+      "n_sessions": 651,
       "first_epoch": "2020-01-07T18:30:00Z",
       "last_epoch": "2026-11-22T11:30:00Z"
     },
@@ -105,7 +105,7 @@
       "name": "ONSA13SW",
       "file": "series/station/Ow.json",
       "n_series": 92,
-      "n_sessions": 554,
+      "n_sessions": 555,
       "first_epoch": "2020-01-07T18:30:00Z",
       "last_epoch": "2026-11-22T11:30:00Z"
     },
@@ -123,7 +123,7 @@
       "name": "RAEGSMAR",
       "file": "series/station/Sa.json",
       "n_series": 77,
-      "n_sessions": 140,
+      "n_sessions": 141,
       "first_epoch": "2023-01-25T18:00:00Z",
       "last_epoch": "2026-11-12T17:30:00Z"
     },
@@ -159,7 +159,7 @@
       "name": "WESTFORD",
       "file": "series/station/Wf.json",
       "n_series": 82,
-      "n_sessions": 211,
+      "n_sessions": 212,
       "first_epoch": "2020-01-09T18:00:00Z",
       "last_epoch": "2026-11-11T00:00:00Z"
     },
@@ -168,7 +168,7 @@
       "name": "WETTZ13N",
       "file": "series/station/Wn.json",
       "n_series": 87,
-      "n_sessions": 165,
+      "n_sessions": 166,
       "first_epoch": "2024-09-18T12:00:00Z",
       "last_epoch": "2026-11-11T00:00:00Z"
     },
@@ -177,16 +177,16 @@
       "name": "WETTZ13S",
       "file": "series/station/Ws.json",
       "n_series": 113,
-      "n_sessions": 1515,
+      "n_sessions": 1517,
       "first_epoch": "2020-01-09T18:00:00Z",
-      "last_epoch": "2026-11-24T19:45:00Z"
+      "last_epoch": "2026-11-25T17:30:00Z"
     },
     {
       "code": "Yg",
       "name": "YARRA12M",
       "file": "series/station/Yg.json",
       "n_series": 78,
-      "n_sessions": 49,
+      "n_sessions": 50,
       "first_epoch": "2024-12-04T12:00:00Z",
       "last_epoch": "2026-11-11T00:00:00Z"
     },
@@ -195,7 +195,7 @@
       "name": "RAEGYEB",
       "file": "series/station/Yj.json",
       "n_series": 117,
-      "n_sessions": 223,
+      "n_sessions": 224,
       "first_epoch": "2020-02-20T18:00:00Z",
       "last_epoch": "2026-11-11T00:00:00Z"
     }
